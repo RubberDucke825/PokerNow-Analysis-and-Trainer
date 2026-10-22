@@ -72,7 +72,7 @@ def leaks_cmd(
     top: Annotated[int, typer.Option(help="Rows to show")] = 20,
     db: Annotated[str | None, typer.Option("--db", help="SQLite path (env PN_DB).")] = None,
 ) -> None:
-    """Spots ranked by expected blunders per 100 hands, with their drill weights."""
+    """Spots ranked by importance priority (freq x pot x (1 - score)^3), with their drill weights."""
     from pn.ingest import db as ingest_db
     from pn.solve.cache import cache_dir
     from pn.train.leaks import Leaks

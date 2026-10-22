@@ -1,10 +1,9 @@
-# Flop sizing table: texture bucket (tree::texture::class_key) -> flop bet sizes (% pot).
+# Flop sizing table: texture bucket (pn.solve.flops.bucket_of) -> flop bet sizes (% pot).
 # Each entry: 1..=2 sizes from {25, 33, 50, 100}.
 #
-# PLACEHOLDER: hand-authored heuristics. The auto-derive job (stream H) will replace
-# this file with sizes chosen by solving each bucket with all 4 sizes and keeping the
-# top 2 by usage/EV. Bucket definitions: crates/tree/TEXTURES.md.
-# The tree crate embeds this file at compile time for `flop_bets = "auto"`.
+# Hand-authored heuristics. pn.solve.texas reads this file at solve time when a spot's
+# flop_bets is "auto" (the DEFAULT_SIZES value): the board's bucket entry, else [default]
+# (_auto_flop_bets). The library preset keeps only the first size of the entry.
 
 [default]
 flop_bets = [33, 100]
