@@ -59,7 +59,7 @@ def load_messages(
 
 def ingest(
     source: str,
-    db_path: str = db.DEFAULT_DB,
+    db_path: str | None = None,
     *,
     cache_dir: str = "data/raw",
     names: dict[str, list[str]] | None = None,

@@ -78,3 +78,24 @@ def test_empty_web_port_and_host_fall_back(monkeypatch) -> None:
     monkeypatch.setenv("PN_WEB_HOST", "")
     assert settings.web_port() == settings.DEFAULT_WEB_PORT
     assert settings.web_host() == settings.DEFAULT_WEB_HOST
+
+
+def test_ingest_connect_honors_pn_db(
+    clean_env: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Ingest's db.connect() with no explicit path must read PN_DB, like every
+    other command, rather than the hardcoded data/pn.sqlite default."""
+    from pn.ingest import db
+
+    target = tmp_path / "ingest.sqlite"
+    clean_env.setenv("PN_DB", str(target))
+
+    conn = db.connect()
+    try:
+        # The connection should point at the PN_DB path, not the literal default.
+        (db_file,) = (row[2] for row in conn.execute("PRAGMA database_list"))
+    finally:
+        conn.close()
+    assert target.exists()
+    assert Path(db_file).samefile(target)
+    assert Path(db_file).name == target.name

@@ -12,6 +12,7 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
+from pn import settings
 from pn.ingest import db
 from pn.ingest.parse import session_events
 from pn.ingest.pipeline import IngestResult, find_ledger, ingest
@@ -27,7 +28,9 @@ app.add_typer(hands_app, name="hands")
 app.add_typer(hand_app, name="hand")
 console = Console()
 
-DbOpt = Annotated[str, typer.Option("--db", help="SQLite database path.")]
+DbOpt = Annotated[
+    str | None, typer.Option("--db", help="SQLite database path (env PN_DB).")
+]
 NameOpt = Annotated[
     list[str] | None,
     typer.Option(
@@ -48,8 +51,10 @@ def _parse_names(values: list[str] | None) -> dict[str, list[str]]:
     return dict(out)
 
 
-def _existing_db(db_path: str) -> str:
+def _existing_db(db_path: str | None) -> str:
     """Read-only commands must not create an empty database (db.opened creates one)."""
+    if db_path is None:
+        db_path = settings.db()
     if db_path != ":memory:" and not Path(db_path).exists():
         console.print(f"[red]database not found: {db_path}[/red] (run `pn fetch` or pass --db)")
         raise typer.Exit(1)
@@ -129,7 +134,7 @@ def fetch(
         str, typer.Argument(help="PokerNow game URL or id, or a local log .json file.")
     ],
     name: NameOpt = None,
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
     cache_dir: Annotated[str, typer.Option(help="Raw page cache directory.")] = "data/raw",
     ledger: Annotated[str | None, typer.Option(help="Ledger CSV for the net cross-check.")] = None,
     no_ledger: Annotated[
@@ -158,7 +163,7 @@ def import_csv(
         Path, typer.Argument(exists=True, dir_okay=False, help="PokerNow full-log CSV export.")
     ],
     name: NameOpt = None,
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
     game_id: Annotated[str | None, typer.Option(help="Game id if not in the filename.")] = None,
     hero: Annotated[
         str | None, typer.Option(help="Player id of the exporting player ('Your hand is').")
@@ -184,7 +189,7 @@ def import_csv(
 @app.command()
 def validate(
     game_id: str,
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
     ledger: Annotated[
         str | None, typer.Option(help="Ledger CSV (default: data/raw or data/fixtures).")
     ] = None,
@@ -230,7 +235,7 @@ def alias_merge(
     id1: str,
     id2: str,
     name: Annotated[str, typer.Option("--name", help="Full name for the merged player.")],
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
 ) -> None:
     """Treat two PokerNow player ids as the same person."""
     with db.opened(db_path) as conn:
@@ -243,7 +248,7 @@ def alias_merge(
 def alias_assign(
     name: Annotated[str, typer.Argument(help="The person's full name.")],
     refs: Annotated[list[str], typer.Argument(help="Player ids or usernames to attach.")],
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
 ) -> None:
     """Attach player ids / usernames to a person (merging with that name's existing ids)."""
     with db.opened(db_path) as conn:
@@ -258,7 +263,7 @@ def alias_assign(
 
 @alias_app.command("unnamed")
 def alias_unnamed(
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
     game_id: Annotated[
         str | None, typer.Option("--game", help="Only players seen in this game.")
     ] = None,
@@ -280,7 +285,7 @@ def alias_unnamed(
 
 
 @alias_app.command("list")
-def alias_list(db_path: DbOpt = db.DEFAULT_DB) -> None:
+def alias_list(db_path: DbOpt = None) -> None:
     """Show canonical players and their PokerNow ids."""
     with db.opened(db_path) as conn:
         groups = db.alias_groups(conn)
@@ -297,7 +302,7 @@ def hands_list(
     player: Annotated[str | None, typer.Option(help="Player id (any alias of the person).")] = None,
     game: Annotated[str | None, typer.Option(help="Game id.")] = None,
     limit: Annotated[int, typer.Option(help="Max rows (newest first).")] = 20,
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
 ) -> None:
     """List hands, newest first."""
     where, args = [], []
@@ -348,7 +353,7 @@ def hands_list(
 @hand_app.command("show")
 def hand_show(
     hand_id: str,
-    db_path: DbOpt = db.DEFAULT_DB,
+    db_path: DbOpt = None,
     as_json: Annotated[bool, typer.Option("--json", help="Print normalized JSON.")] = False,
 ) -> None:
     """Pretty replay of one hand."""
