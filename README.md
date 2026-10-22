@@ -122,6 +122,14 @@ Runtime data (`data/pn.sqlite`, `data/solves/`) is created on first use and git-
 `./poker.sh test` runs ruff and pytest (or, in `pn/`: `uv run --frozen pytest -q`). Tests that
 need the TexasSolver binary skip when it is not built; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Contributing
+
+Contributions are welcome. Open work is tracked in the
+[issue list](https://github.com/RubberDucke825/PokerNow-Analysis-and-Trainer/issues); issues
+labelled `good first issue` are self-contained and need no solver re-runs. Read
+[CONTRIBUTING.md](CONTRIBUTING.md) first: it explains the solve-cache rule that most changes have
+to respect.
+
 ## Licence
 
 This repository's own code is MIT-licensed ([LICENSE](LICENSE)). TexasSolver, vendored in

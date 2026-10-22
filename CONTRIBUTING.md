@@ -1,5 +1,10 @@
 # Contributing
 
+Pick something from the [issue list](https://github.com/RubberDucke825/PokerNow-Analysis-and-Trainer/issues).
+`good first issue` items are small and safe; `research` items need a measurement before code;
+`solver` and `data` items usually change cache keys, so say in the issue how the library would be
+re-solved. Open an issue before a large change so the approach can be agreed first.
+
 ## Setup
 
 Prerequisites: [uv](https://docs.astral.sh/uv/getting-started/installation/), cmake and a C++17
