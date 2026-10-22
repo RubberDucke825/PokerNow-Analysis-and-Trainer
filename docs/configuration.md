@@ -15,7 +15,7 @@ directory. An empty `PN_HERO`, `PN_TEXAS`, `PN_TEXAS_RESOURCES`, `PN_CONFIG_DIR`
 
 | variable | default | controls | read in |
 |---|---|---|---|
-| `PN_DB` | `data/pn.sqlite` | the SQLite database (hands, players, trainer history) | `settings.py:27-28`, through `default_db()` (`pn/pn/profile/source.py:21-22`) in every command except ingest (see note); `poker.sh:19` |
+| `PN_DB` | `data/pn.sqlite` | the SQLite database (hands, players, trainer history) | `settings.py:27-28`, through `default_db()` (`pn/pn/profile/source.py:21-22`) in study and solve commands and through `settings.db()` in ingest commands (`pn/pn/ingest/db.py:20-22`); `poker.sh:19` |
 | `PN_HERO` | none (see note) | your player id for `poker.sh` ingest, study and solve, `pn live`, `pn ev summary` | `settings.py:31-32`; `pn/pn/cli/solve_cmds.py:45-49`, `pn/pn/cli/ev_cmds.py:115-117`; `poker.sh:18` |
 | `PN_TEXAS` | `third_party/texassolver/build/console_solver` | the TexasSolver binary (may include arguments) | `settings.py:35-36`; `pn/pn/solve/texas.py:51-58` |
 | `PN_TEXAS_RESOURCES` | `<binary dir>/../resources`, else `third_party/texassolver/resources` | solver lookup tables (`-r`) | `settings.py:39-40`; `pn/pn/solve/texas.py:61-69` |
@@ -37,11 +37,10 @@ Notes:
 - `PN_WEB_PORT` / `PN_WEB_HOST` only set the defaults of `pn web --port` / `--host`; the flags win
   (`pn/pn/cli/web_cmds.py:19-20`). Empty means the default (`settings.py:60-65`).
 - `PN_DB` default is relative. Run `pn` from the repo root, where `data/pn.sqlite` resolves
-  (`poker.sh` changes there, `poker.sh:16`). Ingest commands (`pn fetch`, `pn import-csv`, ...) do
-  not read `PN_DB`: their `--db` defaults to the literal `data/pn.sqlite`
-  (`pn/pn/cli/ingest_cmds.py:30`, `pn/pn/ingest/db.py:17`). `./poker.sh ingest` passes
-  `--db "$PN_DB"` (`poker.sh:43-44`); when calling `pn` yourself with a custom `PN_DB`, pass `--db`
-  to ingest commands too.
+  (`poker.sh` changes there, `poker.sh:16`). Ingest commands (`pn fetch`, `pn import-csv`, `pn alias`,
+  `pn hands list`, `pn hand show`, `pn validate`) read `PN_DB` too: their `--db` defaults to it
+  (`pn/pn/cli/ingest_cmds.py:31-33`, `pn/pn/ingest/db.py:20-22`) and an explicit `--db` wins.
+  `./poker.sh ingest` still passes `--db "$PN_DB"` (`poker.sh:43-44`).
 - Cloud fill scripts read their own variables: `PN_FILL_REPO` (`<owner>/<repo>` of the public fill
   mirror) and `PN_FILL_DIR` (its local checkout), both required with no default
   (`tools/gha_fill.sh:14,18-19`; `tools/cloud_fill.sh bootstrap` needs `PN_FILL_REPO`,
