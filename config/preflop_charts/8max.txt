@@ -1,0 +1,10 @@
+# 8-max 100bb cash RFI (raise first in to 3x BB). Pure ranges (no weights).
+# LJ..SB have the same number of players behind as in 6-max -> same ranges as 6max.txt.
+open UTG  = 66+,A9s+,A5s,KTs+,QTs+,JTs,T9s,AJo+,KQo
+open UTG1 = 55+,A8s+,A5s-A4s,K9s+,QTs+,JTs,T9s,98s,87s,AJo+,KJo+
+open UTG2 = 44+,A7s+,A5s-A3s,K9s+,Q9s+,J9s+,T9s,98s,ATo+,KQo
+open LJ   = 33+,A2s+,K9s+,Q9s+,J9s+,T9s,98s,87s,ATo+,KQo
+open HJ   = 22+,A2s+,K7s+,Q9s+,J9s+,T8s+,98s,87s,76s,ATo+,KJo+,QJo
+open CO   = 22+,A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,87s,76s,65s,A9o+,K9o+,QTo+,JTo
+open BTN  = 22+,A2s+,K2s+,Q5s+,J6s+,T6s+,96s+,85s+,75s+,64s+,54s,A2o+,K8o+,Q9o+,J9o+,T9o,98o
+open SB   = 22+,A2s+,K3s+,Q6s+,J7s+,T7s+,97s+,86s+,75s+,65s,54s,A2o+,K9o+,Q9o+,J9o+,T9o

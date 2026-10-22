@@ -1,0 +1,32 @@
+# Heads-up flop for the texas backend (adapter_hu_flop.toml without the lock).
+[game]
+street = "flop"
+board = ["Kd","Ah","5h"]
+pot = 1500
+max_iterations = 300
+target_exploitability = 0.5
+time_limit_sec = 60
+threads = 8
+last_aggressor = "BTN"
+
+[[players]]
+name = "hero"
+position = "BB"
+stack = 9800
+range = "22+,A2s+,K9s+,Q9s+,J9s+,T8s+,97s+,86s+,75s+,64s+,54s,A8o+,KTo+,QTo+,JTo"
+hero = true
+
+[[players]]
+name = "villain"
+position = "BTN"
+stack = 14700
+range = "22+,A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,86s+,75s+,65s,54s,A7o+,K9o+,QTo+,JTo:0.5,KhQh:0.3"
+
+[sizes]
+flop_bets = [33, 100]
+turn_bets = [75]
+river_bets = [150]
+raise = [100]
+max_bets_per_street = 3
+allin_threshold = 0.67
+donk = true

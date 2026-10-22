@@ -1,0 +1,50 @@
+name: CI
+
+# python: lint + tests without TexasSolver (the tests that need the binary skip); fast.
+# solver: builds third_party/texassolver (cached on the vendored tree's hash) and runs the full
+# suite, so the real-solver tests (test_ev_real.py, test_solve_texas.py) execute.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pn
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: pn/uv.lock
+      - run: uv sync --all-extras --frozen
+      - run: uv run --frozen ruff check pn tests
+      - run: uv run --frozen pytest -q
+
+  solver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: tree
+        run: echo "hash=$(git rev-parse HEAD:third_party/texassolver)" >> "$GITHUB_OUTPUT"
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          path: third_party/texassolver/build/console_solver
+          key: texassolver-${{ runner.os }}-${{ steps.tree.outputs.hash }}-${{ hashFiles('tools/build_texassolver.sh') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake libomp-dev python3-dev
+          tools/build_texassolver.sh
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: pn/uv.lock
+      - working-directory: pn
+        run: uv sync --all-extras --frozen
+      - working-directory: pn
+        run: uv run --frozen pytest -q

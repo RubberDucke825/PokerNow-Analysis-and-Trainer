@@ -1,0 +1,36 @@
+set_pot 650
+set_effective_stack 9700
+set_board Kd,2c,Kh
+set_range_oop 88,77,66,55,44,33,22,ATo,A9s,A9o,A8s,A8o,A7s,A7o,A6s,A6o,A5s,A5o,A4s,A4o,A3s,A2s,KJo,KTo,K9s,K9o,K8s,K8o,K7s,K7o,K6s,K6o,K5s,K4s,K3s,K2s,QJo,QTo,Q9s,Q9o,Q8s,Q8o,Q7s,Q7o,Q6s,Q5s,Q4s,Q3s,Q2s,JTo,J9s,J9o,J8s,J8o,J7s,J7o,J6s,J6o,J5s,J4s,J3s,J2s,T9s,T9o,T8s,T8o,T7s,T7o,T6s,T6o,T5s,T4s,T3s,T2s,98s,98o,97s,97o,96s,96o,95s,94s,93s,92s,87s,87o,86s,86o,85s,84s,83s,82s,76o,72s,62s
+set_range_ip AA,KK,QQ,JJ,TT,99,88,77,66,55,44,33,22,AKs,AKo,AQs,AQo,AJs,AJo,ATs,ATo,A9s,A9o,A8s,A8o,A7s,A7o,A6s,A6o,A5s,A5o,A4s,A4o,A3s,A3o,A2s,A2o,KQs,KQo,KJs,KJo,KTs,KTo,K9s,K9o,K8s,K8o,K7s,K7o,K6s,K5s,K4s,K3s,K2s,QJs,QJo,QTs,QTo,Q9s,Q9o,Q8s,Q8o,Q7s,Q6s,Q5s,Q4s,Q3s,Q2s,JTs,JTo,J9s,J9o,J8s,J8o,J7s,J6s,T9s,T9o,T8s,T8o,T7s,T6s,98s,98o,97s,97o,96s,87s,87o,86s,85s,76s,76o,75s,74s,65s,64s,54s,53s,43s,32s
+set_bet_sizes oop,flop,bet,33
+set_bet_sizes oop,flop,raise,100
+set_bet_sizes oop,flop,allin
+set_bet_sizes ip,flop,bet,33
+set_bet_sizes ip,flop,raise,100
+set_bet_sizes ip,flop,allin
+set_bet_sizes oop,turn,bet,75
+set_bet_sizes oop,turn,raise,100
+set_bet_sizes oop,turn,donk,75
+set_bet_sizes oop,turn,allin
+set_bet_sizes ip,turn,bet,75
+set_bet_sizes ip,turn,raise,100
+set_bet_sizes ip,turn,allin
+set_bet_sizes oop,river,bet,150
+set_bet_sizes oop,river,raise,100
+set_bet_sizes oop,river,donk,150
+set_bet_sizes oop,river,allin
+set_bet_sizes ip,river,bet,150
+set_bet_sizes ip,river,raise,100
+set_bet_sizes ip,river,allin
+set_allin_threshold 0.67
+set_raise_limit 3
+build_tree
+set_thread_num 8
+set_accuracy 0.5
+set_max_iteration 300
+set_print_interval 10
+set_use_isomorphism 1
+start_solve
+set_dump_rounds 1
+dump_result dump.json

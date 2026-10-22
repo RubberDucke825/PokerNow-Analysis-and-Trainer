@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas"></meta>
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"></link>
+<style>
+body { margin: 0; background: #e9eaee; }
+a { color: #3a3f4b; }
+a:hover { color: #11131a; }
+</style>
+</helmet>
+<div style="padding: 40px; display: flex; flex-direction: column; gap: 24px; font-family: Geist, system-ui, sans-serif; color: #11131a;">
+  <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px;">
+    <h1 style="margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em;">{{ title }}</h1>
+    <span style="font-size: 13px; color: #4a4f5c;">375 · 768 · 1440 wide, real CSS from css/. Change screen, state and theme in Tweaks.</span>
+  </div>
+  <div style="display: flex; gap: 32px; align-items: flex-start;">
+    <sc-for list="{{ frames }}" as="f" hint-placeholder-count="3">
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px;">
+        <figcaption style="font: 500 12px Geist Mono, monospace; color: #4a4f5c;">{{ f.label }}</figcaption>
+        <div style="{{ f.box }}">
+          <iframe src="{{ f.src }}" title="{{ f.label }}" style="{{ f.frame }}"></iframe>
+        </div>
+      </figure>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;screen&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Train&quot;, &quot;Strategy&quot;, &quot;Screens&quot;], &quot;default&quot;: &quot;Train&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;amber&quot;, &quot;iris&quot;], &quot;default&quot;: &quot;amber&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;query&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;state=blunder&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const screen = this.props.screen ?? "Train";
+    const theme = this.props.theme ?? "dark";
+    const accent = this.props.accent ?? "amber";
+    const extra = this.props.query ?? "state=blunder";
+    const sizes = [[1440, 900, 0.62], [768, 1024, 0.55], [375, 812, 0.69]];
+    const q = `mode=${theme}&acc=${accent}${extra ? "&" + extra : ""}`;
+    return {
+      title: `${screen} · ${theme}`,
+      frames: sizes.map(([w, h, s]) => ({
+        key: w, label: `${w} × ${h}`, src: `${screen}.dc.html?${q}`,
+        box: { width: `${Math.round(w * s)}px`, height: `${Math.round(h * s)}px`, overflow: "hidden", borderRadius: "10px", boxShadow: "0 0 0 1px rgb(0 0 0 / 0.12), 0 20px 40px -20px rgb(0 0 0 / 0.35)", background: "#000" },
+        frame: { width: `${w}px`, height: `${h}px`, border: 0, transform: `scale(${s})`, transformOrigin: "0 0", display: "block" },
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

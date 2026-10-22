@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<a class="skip" href="#app">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="#">pn study</a>
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href="#" data-nav="train" aria-current="page">Train</a>
+    <a href="#" data-nav="strategy">Strategy</a>
+    <a href="#" data-nav="hands">Hands</a>
+    <a href="#" data-nav="players">Players</a>
+    <a href="#" data-nav="review">Review</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-label="Menu" aria-controls="main-nav" aria-expanded="false">≡</button>
+</header>
+<main id="app" tabindex="-1">
+  <div class="page train-page">
+    <header class="page-head">
+      <div><span class="label">Trainer</span><h1>Play</h1></div>
+      <div class="rng-holder">
+        <sc-if value="{{ hasRng }}" hint-placeholder-val="{{ true }}">
+          <div class="rng fresh" role="status"><span class="label">RNG</span><b>{{ rng }}</b></div>
+        </sc-if>
+      </div>
+      <div class="train-head-tools">
+        <a href="#" class="pf-link">Performance</a>
+        <button type="button" class="btn ghost new-session">New session</button>
+      </div>
+      <p class="page-meta">
+        <span class="roll">last 100 hands</span>
+        <span class="roll neg">blunders 6%</span>
+        <span class="roll">mixed 18%</span>
+        <span class="roll">best 76%</span>
+        <span class="roll">RNG match 71%</span>
+      </p>
+    </header>
+    <div class="train-surface">
+      <div class="two-col">
+        <div class="main-col">
+          <div>
+            <div class="train-table">
+              <div class="train-felt"></div>
+              <div class="train-center">
+                <span class="cards">
+                  <sc-for list="{{ board }}" as="c" hint-placeholder-count="3"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for>
+                </span>
+                <p class="train-pot">POT <b>{{ pot }}</b> bb</p>
+                <sc-if value="{{ isOver }}" hint-placeholder-val="{{ false }}">
+                  <div class="train-result" role="status">
+                    <p class="train-result-big pos">+7.8 bb</p>
+                    <p class="muted">Showdown · BB wins 15.1 bb</p>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-for list="{{ seats }}" as="s" hint-placeholder-count="6">
+                <div class="{{ s.cls }}" style="{{ s.style }}">
+                  <sc-if value="{{ s.hasCards }}"><span class="cards"><sc-for list="{{ s.cards }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span></sc-if>
+                  <sc-if value="{{ s.back }}"><span class="card-back" aria-hidden="true"></span></sc-if>
+                  <div class="seat-plate">
+                    <span class="pos-tag">{{ s.pos }}</span>
+                    <span class="seat-name">{{ s.name }}</span>
+                    <span class="seat-stack">{{ s.stack }}</span>
+                  </div>
+                  <sc-if value="{{ s.hasAct }}"><span class="{{ s.actCls }}">{{ s.act }}</span></sc-if>
+                </div>
+                <sc-if value="{{ s.dealer }}"><span class="dealer" style="{{ s.dealerStyle }}" title="Dealer button">D</span></sc-if>
+                <sc-if value="{{ s.hasBet }}"><span class="bet-tag" style="{{ s.betStyle }}">{{ s.bet }}</span></sc-if>
+              </sc-for>
+            </div>
+          </div>
+          <div class="train-actions" role="group" aria-label="Your action" tabindex="-1">
+            <sc-for list="{{ actions }}" as="a" hint-placeholder-count="4">
+              <button type="button" class="{{ a.cls }}" style="{{ a.style }}" disabled="{{ a.disabled }}" aria-keyshortcuts="{{ a.keys }}" onClick="{{ a.onClick }}">
+                <span class="act-name">{{ a.name }}<sc-if value="{{ a.hasSub }}"><span class="act-sub">{{ a.sub }}</span></sc-if></span>
+                <kbd>{{ a.kbd }}</kbd>
+              </button>
+            </sc-for>
+            <sc-if value="{{ hasWait }}" hint-placeholder-val="{{ false }}">
+              <p class="train-wait"><span class="dot" aria-hidden="true"></span>{{ waitText }}</p>
+            </sc-if>
+            <sc-if value="{{ isOver }}" hint-placeholder-val="{{ false }}">
+              <div class="train-next-row">
+                <button type="button" class="btn train-next is-counting" aria-keyshortcuts="N Space">
+                  <span class="next-drain" style="--cd: 3s" aria-hidden="true"></span>
+                  <span class="next-label">Next hand in 3s</span>
+                  <kbd class="kbd-inv" aria-hidden="true">N</kbd>
+                  <kbd class="kbd-inv" aria-hidden="true">Space</kbd>
+                </button>
+                <label class="auto-deal" title="Deal the next hand automatically after a short pause"><input type="checkbox" checked="{{ true }}"></input>Auto-deal</label>
+              </div>
+            </sc-if>
+          </div>
+          <sc-if value="{{ hasVerdict }}" hint-placeholder-val="{{ false }}">
+            <div class="verdict-holder">
+              <div class="{{ verdict.cls }}" role="status">
+                <span class="verdict-status">{{ verdict.status }}</span>
+                <span class="verdict-chosen">{{ verdict.chosen }}</span>
+                <span class="verdict-detail">{{ verdict.detail }}</span>
+                <span class="verdict-tools">
+                  <sc-if value="{{ verdict.retry }}"><button type="button" class="verdict-btn is-retry" aria-keyshortcuts="Z">Retry spot<kbd class="kbd-soft" aria-hidden="true">Z</kbd></button></sc-if>
+                  <button type="button" class="verdict-btn">Why →</button>
+                </span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasRanges }}" hint-placeholder-val="{{ false }}">
+            <div class="ranges-holder">
+              <section class="tr-ranges" aria-label="Ranges at this decision">
+                <div class="tr-ranges-head">
+                  <span class="label">Ranges at this decision</span>
+                  <span class="tr-ranges-meta">T · Ks 7d 2c 9h</span>
+                </div>
+                <div class="seg tr-modes" role="group" aria-label="Range view">
+                  <button type="button" class="seg-opt" aria-pressed="true">Now</button>
+                  <button type="button" class="seg-opt" aria-pressed="false">Flop line</button>
+                  <button type="button" class="seg-opt" aria-pressed="false">This street</button>
+                </div>
+                <div class="tr-ranges-body">
+                  <div class="tr-ranges-grids">
+                    <sc-for list="{{ rangeGrids }}" as="g" hint-placeholder-count="2">
+                      <figure class="tr-range">
+                        <figcaption class="tr-range-head"><span class="tr-range-who">{{ g.who }}</span><span class="tr-range-stats">{{ g.stats }}</span></figcaption>
+                        <div class="grid13 gw" role="grid" aria-label="{{ g.who }} range">
+                          <sc-for list="{{ g.rows }}" as="r">
+                            <div class="grid-row" role="row">
+                              <sc-for list="{{ r.cells }}" as="c"><div class="{{ c.cls }}" role="gridcell" style="{{ c.style }}"><span class="cell-name">{{ c.name }}</span></div></sc-for>
+                            </div>
+                          </sc-for>
+                        </div>
+                        <ul class="legend tr-legend">
+                          <sc-for list="{{ g.legend }}" as="l"><li class="{{ l.cls }}"><span class="swatch" style="{{ l.style }}"></span>{{ l.name }}<b>{{ l.n }}</b></li></sc-for>
+                        </ul>
+                      </figure>
+                    </sc-for>
+                  </div>
+                  <p class="note">Ranges reaching this decision, before your action · cell shade = share of the class's combos in range · your hand is outlined.</p>
+                </div>
+              </section>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showHint }}" hint-placeholder-val="{{ true }}">
+            <p class="train-hint">Press the letter on a button, or <kbd class="kbd-soft">1</kbd>–<kbd class="kbd-soft">9</kbd> in order. <kbd class="kbd-soft">?</kbd> lists every shortcut.</p>
+          </sc-if>
+        </div>
+        <aside class="side-col train-feedback" aria-label="Decision feedback">
+          <div class="side-tabs" role="tablist" aria-label="Side panel">
+            <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+              <button type="button" role="tab" class="view-tab side-tab" aria-selected="{{ t.sel }}" onClick="{{ t.onClick }}">{{ t.label }}<sc-if value="{{ t.dot }}"><span class="{{ t.dotCls }}" aria-hidden="true"></span></sc-if></button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ tabFeedback }}" hint-placeholder-val="{{ true }}">
+            <div class="side-panel" role="tabpanel">
+              <div class="fb-panel">
+                <div class="fb-hand">
+                  <div class="fb-hand-head"><span class="label">This hand</span><span class="fb-hand-count">{{ decCount }}</span></div>
+                  <sc-if value="{{ hasDecs }}" hint-placeholder-val="{{ true }}">
+                    <div class="fb-pills" role="group" aria-label="Decisions this hand">
+                      <sc-for list="{{ pills }}" as="p"><button type="button" class="fb-pill" aria-pressed="{{ p.sel }}"><span class="{{ p.dot }}" aria-hidden="true"></span>{{ p.label }}</button></sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ noDecs }}" hint-placeholder-val="{{ false }}">
+                    <p class="fb-rng-note">Act once to see how the solver plays your hand here.</p>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ hasDecs }}" hint-placeholder-val="{{ true }}">
+                  <div class="fb-head">
+                    <div class="fb-head-row"><span class="label">{{ fb.where }}</span><span class="{{ fb.statusCls }}">{{ fb.status }}</span></div>
+                    <p class="fb-verdict"><span class="chosen">{{ fb.chosen }}</span><span class="best">{{ fb.best }}</span><span class="{{ fb.freqCls }}">{{ fb.freq }}</span></p>
+                  </div>
+                  <div class="fb-dist">
+                    <div class="fb-bar" role="img" aria-label="RNG buckets">
+                      <sc-for list="{{ fb.bar }}" as="b"><span style="{{ b.style }}"></span></sc-for>
+                      <span class="rng-marker" data-n="{{ fb.rng }}" style="{{ fb.markerStyle }}"></span>
+                    </div>
+                    <p class="fb-rng-note">RNG {{ fb.rng }} landed in <b style="{{ fb.rngActStyle }}">{{ fb.rngAct }}</b> · <span class="{{ fb.matchCls }}">{{ fb.match }}</span></p>
+                  </div>
+                  <ul class="fb-actions fb-freqs">
+                    <li class="head"><span></span><span>Action</span><span class="num">Freq</span></li>
+                    <sc-for list="{{ fb.rows }}" as="o">
+                      <li class="{{ o.cls }}"><span class="swatch" style="{{ o.style }}"></span><span class="name">{{ o.name }}<sc-if value="{{ o.you }}"><small> · you</small></sc-if></span><span class="{{ o.numCls }}">{{ o.freq }}</span></li>
+                    </sc-for>
+                  </ul>
+                  <div class="fb-grid-wrap">
+                    <button type="button" class="btn ghost">Strategy grid <span class="fb-grid-keys"><kbd class="kbd-soft" aria-hidden="true">G</kbd><span class="mono" aria-hidden="true">+</span></span></button>
+                  </div>
+                </sc-if>
+                <div class="fb-session">
+                  <h3 class="label">This session</h3>
+                  <p class="fb-totals">14 hands · 22 graded decisions · <span class="neg">1 blunder</span> · 3 mixed</p>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ tabLeaks }}" hint-placeholder-val="{{ false }}">
+            <div class="side-panel" role="tabpanel">
+              <div class="leaks-side">
+                <div class="imp-tools">
+                  <div class="imp-p">
+                    <div class="imp-p-head"><label class="label" for="imp-p">Opponent model weight</label><output class="imp-p-out">0.60</output></div>
+                    <input id="imp-p" type="range" min="0" max="1" step="0.05" value="0.6"></input>
+                  </div>
+                  <div class="seg imp-seg" role="group" aria-label="Group by">
+                    <button type="button" class="seg-opt" aria-pressed="false">Formations</button>
+                    <button type="button" class="seg-opt" aria-pressed="true">Textures</button>
+                    <button type="button" class="seg-opt" aria-pressed="false">Spots</button>
+                  </div>
+                </div>
+                <div class="head"><span class="label">Top spots</span><span class="leaks-side-hint">blunders per 100 hands</span></div>
+                <ul class="leaks-side-list imp-list">
+                  <li class="cols"><span></span><span>Spot</span><span class="num">Pot</span><span class="num">/100</span><span class="num">Score</span><span class="num">Prio</span></li>
+                  <sc-for list="{{ leaks }}" as="l">
+                    <li class="{{ l.cls }}"><button type="button" class="leak-row"><span class="swatch"></span><span class="leak-label">{{ l.name }}<span class="imp-sub">{{ l.sub }}</span></span><span class="num">{{ l.pot }}</span><span class="num per100">{{ l.per }}</span><span class="num imp-score">{{ l.score }}<span class="n">n {{ l.n }}</span></span><span class="{{ l.prioCls }}">{{ l.prio }}<span class="imp-bar"><span class="imp-bar-fill" style="{{ l.barStyle }}"></span></span></span></button></li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ tabProgress }}" hint-placeholder-val="{{ false }}">
+            <div class="side-panel" role="tabpanel">
+              <div class="train-progress">
+                <div class="prog-tools"><span class="label">Window</span>
+                  <div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="false">50</button><button type="button" class="seg-opt" aria-pressed="true">100</button><button type="button" class="seg-opt" aria-pressed="false">500</button><button type="button" class="seg-opt" aria-pressed="false">All</button></div>
+                </div>
+                <div class="prog-body">
+                  <div class="kpis kpi-grid">
+                    <div class="kpi"><span class="label">Hands</span><b>100</b></div>
+                    <div class="kpi"><span class="label">Blunders</span><b class="neg">6.1%</b></div>
+                    <div class="kpi"><span class="label">Mixed</span><b>18.0%</b></div>
+                    <div class="kpi"><span class="label">Best</span><b>75.9%</b></div>
+                    <div class="kpi"><span class="label">RNG match</span><b>71%</b></div>
+                    <div class="kpi"><span class="label">Decisions</span><b>164</b></div>
+                  </div>
+                  <figure class="spark">
+                    <svg class="sparkline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                      <line class="spark-zero" x1="0" y1="36" x2="100" y2="36"></line>
+                      <polyline class="spark-line" points="2,14 18,18 34,12 50,22 66,20 82,26 98,28"></polyline>
+                      <line class="spark-dot neg" x1="98" y1="28" x2="98" y2="28"></line>
+                    </svg>
+                    <figcaption class="note">Blunder rate · 7 slices of up to 100 hands, oldest left · scale 0 to 12% · dashed line = 0 · latest <span>4.2%</span></figcaption>
+                  </figure>
+                  <div class="prog-table">
+                    <h3 class="label fb-sub">By street</h3>
+                    <div class="table-wrap">
+                      <table class="data">
+                        <thead><tr><th>Street</th><th class="num">n</th><th class="num">Best</th><th class="num">Mixed</th><th class="num">Blunder</th></tr></thead>
+                        <tbody>
+                          <tr><th>Flop</th><td class="num">71</td><td class="num">79%</td><td class="num">16%</td><td class="num neg">5%</td></tr>
+                          <tr><th>Turn</th><td class="num">54</td><td class="num">74%</td><td class="num">19%</td><td class="num neg">7%</td></tr>
+                          <tr><th>River</th><td class="num">39</td><td class="num">72%</td><td class="num">21%</td><td class="num neg">8%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;state&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;act&quot;, &quot;pressed&quot;, &quot;solving&quot;, &quot;best&quot;, &quot;villain&quot;, &quot;blunder&quot;, &quot;over&quot;], &quot;default&quot;: &quot;act&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Trainer&quot;}, &quot;seats&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;6&quot;, &quot;8&quot;], &quot;default&quot;: &quot;6&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Trainer&quot;}, &quot;tab&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;feedback&quot;, &quot;leaks&quot;, &quot;progress&quot;], &quot;default&quot;: &quot;feedback&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Trainer&quot;}, &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;amber&quot;, &quot;iris&quot;], &quot;default&quot;: &quot;amber&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;suits&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;4&quot;, &quot;2&quot;], &quot;default&quot;: &quot;4&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;version&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;after&quot;, &quot;before&quot;], &quot;default&quot;: &quot;after&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { m: null, tab: null, pressed: null };
+  componentDidMount() {
+    import(new URL("./mock.js", location.href).href).then((m) => { this.setState({ m }); this.env(m); });
+  }
+  componentDidUpdate() { if (this.state.m) this.env(this.state.m); }
+  opt(k, d) { const m = this.state.m; const alias = { theme: "mode", accent: "acc" }[k] || k; return (m && m.param(alias)) ?? this.props[k] ?? d; }
+  env(m) { m.applyEnv({ theme: this.opt("theme", "dark"), accent: this.opt("accent", "amber"), suits: this.opt("suits", "4"), version: this.opt("version", "after") }); }
+
+  renderVals() {
+    const m = this.state.m;
+    const S = this.opt("state", "act");
+    const n = Number(this.opt("seats", "6"));
+    const tab = this.state.tab || this.opt("tab", "feedback");
+    if (!m) return { board: [], seats: [], actions: [], tabs: [], pills: [], leaks: [], rangeGrids: [], fb: { bar: [], rows: [] }, verdict: {}, tabFeedback: true };
+    const AC = m.AC;
+    const turn = ["best", "villain", "blunder", "over"].includes(S);
+    const over = S === "over";
+    const board = m.cards(over ? "Ks 7d 2c 9h 4s" : turn ? "Ks 7d 2c 9h" : "Ks 7d 2c");
+    const pot = over ? "15.1" : turn ? "9.1" : S === "solving" ? "9.1" : "5.5";
+
+    const names = { UTG: "nit_92", UTG1: "GTO", LJ: "rex", HJ: "GTO", CO: "Marta", BTN: "GTO", SB: "callstation" };
+    const order = n === 8 ? ["BB", "UTG", "UTG1", "LJ", "HJ", "CO", "BTN", "SB"] : ["BB", "UTG", "HJ", "CO", "BTN", "SB"];
+    const heroAct = { act: "check", pressed: "check", solving: "call", best: "", villain: "check", blunder: "bet 6.8", over: "check" }[S];
+    const btnAct = { act: "bet 1.8", pressed: "bet 1.8", solving: "bet 1.8", best: "", villain: "", blunder: "", over: "check" }[S];
+    const heroStack = { act: 97.5, pressed: 97.5, solving: 95.7, best: 95.7, villain: 95.7, blunder: 88.9, over: 92.7 }[S];
+    const btnStack = { act: 95.7, pressed: 95.7, solving: 95.7, best: 95.7, villain: 95.7, blunder: 95.7, over: 92.7 }[S];
+    const seats = order.map((p) => {
+      if (p === "BB") return { pos: p, hero: true, stack: over ? 92.7 + 15.1 : heroStack, cards: "Ah Qd", act: heroAct, acting: ["act", "pressed", "best"].includes(S), bet: S === "blunder" ? 6.8 : 0 };
+      if (p === "BTN") return { pos: p, name: names[p], stack: btnStack, cards: over ? "Qc Jc" : null, act: btnAct, acting: ["villain", "blunder"].includes(S), bet: ["act", "pressed"].includes(S) ? 1.8 : 0 };
+      return { pos: p, name: names[p], stack: p === "SB" ? 99.5 : 100, folded: true, act: "fold" };
+    });
+
+    const flopActs = [
+      { name: "Fold", kbd: "F", color: AC.fold }, { name: "Call", sub: "1.8 bb", kbd: "C", color: AC.call },
+      { name: "Raise", sub: "7.2 bb", kbd: "R", color: AC.r2 }, { name: "All-in", sub: "97.5 bb", kbd: "A", color: AC.allin }];
+    const turnActs = [
+      { name: "Check", kbd: "X", color: AC.check }, { name: "Bet 33%", sub: "3.0 bb", kbd: "B", color: AC.r1 },
+      { name: "Bet 75%", sub: "6.8 bb", kbd: "V", color: AC.r4 }, { name: "All-in", sub: "95.7 bb", kbd: "A", color: AC.allin }];
+    let actions = [];
+    const showBar = S === "act" || S === "pressed" || S === "best";
+    if (showBar) {
+      const src = S === "best" ? turnActs : flopActs;
+      const pressed = this.state.pressed || (S === "pressed" ? "Call" : null);
+      actions = src.map((a, k) => ({
+        key: a.name, name: a.name, sub: a.sub || "", hasSub: !!a.sub, kbd: a.kbd, keys: `${a.kbd.toLowerCase()} ${k + 1}`,
+        style: { "--act": a.color }, disabled: !!pressed,
+        cls: ["action-btn", pressed === a.name && "is-pressed", pressed && pressed !== a.name && "is-dimmed"].filter(Boolean).join(" "),
+        onClick: () => { this.setState({ pressed: a.name }); setTimeout(() => this.setState({ pressed: null }), 1400); },
+      }));
+    }
+    const waitText = { solving: "you: call · solving the turn… 4s", villain: "you: check · BTN to act…", blunder: "you: bet 6.8 · BTN to act…" }[S] || "";
+
+    const V = {
+      solving: { cls: "train-verdict lvl-ok", status: "● best", chosen: "Call", detail: "solver plays this 64%, its top action", retry: false },
+      best: { cls: "train-verdict lvl-ok", status: "● best", chosen: "Call", detail: "solver plays this 64%, its top action", retry: false },
+      villain: { cls: "train-verdict lvl-ok", status: "● best", chosen: "Check", detail: "solver plays this 78%, its top action", retry: false },
+      blunder: { cls: "train-verdict lvl-bad", status: "● blunder", chosen: "Bet 75%", detail: "solver 4% · best Check 78%", retry: true },
+      over: { cls: "train-verdict lvl-warn", status: "● mixed", chosen: "Check", detail: "solver 41% · best Bet 33% 52%", retry: true },
+    }[S];
+
+    // ranges (blunder state)
+    let rangeGrids = [];
+    if (S === "blunder") {
+      const vg = m.grid((i, j) => { const s = m.strength(i, j); const w = s > 0.42 ? Math.min(1, (s - 0.42) * 2.6 + m.noise(i * 31 + j) * 0.3) : 0; return w > 0.08 ? { weight: w, segments: [{ freq: 1, color: "#7d8aa3" }] } : null; });
+      const hActs = [{ color: AC.check, band: [0.2, 0.62] }, { color: AC.r1, band: [0.55, 0.78] }, { color: AC.r4, band: [0.78, 0.92] }, { color: AC.allin, band: [0.9, 1.1] }];
+      const hg = m.grid((i, j) => { const s = m.strength(i, j); const w = s > 0.3 ? Math.min(1, (s - 0.3) * 2 + m.noise(i * 7 + j * 3) * 0.4) : 0; return w > 0.1 ? { weight: w, segments: m.bands(i, j, hActs) } : null; }, { hero: "AQo" });
+      const hn = ["Check", "Bet 33%", "Bet 75%", "All-in"];
+      rangeGrids = [
+        { key: "v", who: "BTN · GTO", stats: `${Math.round(vg.combos)} combos`, rows: vg.rows, legend: [{ key: "in", cls: "", style: { background: "#7d8aa3" }, name: "In range", n: Math.round(vg.combos) }] },
+        { key: "h", who: "You · BB", stats: `${Math.round(hg.combos)} combos`, rows: hg.rows,
+          legend: hn.map((nm, k) => ({ key: nm, cls: nm === "Bet 75%" ? "is-taken" : "", style: { background: hActs[k].color }, name: nm === "Bet 75%" ? `▸ ${nm}` : nm, n: m.fmt(hg.totals[k] || 0) })) },
+      ];
+    }
+
+    // feedback panel
+    const decs = { act: [], pressed: [], solving: [["Flop · Call", "ok"]], best: [["Flop · Call", "ok"]], villain: [["Flop · Call", "ok"], ["Turn · Check", "ok"]], blunder: [["Flop · Call", "ok"], ["Turn · Bet 75%", "bad"]], over: [["Flop · Call", "ok"], ["Turn · Check", "ok"], ["River · Check", "warn"]] }[S];
+    const pills = decs.map(([label, lvl], k) => ({ key: label, label, dot: `fb-dot lvl-${lvl}`, sel: String(k === decs.length - 1) }));
+    const FB = {
+      flop: { where: "flop · BB · AQo", status: "● best", statusCls: "fb-status", chosen: "Call", best: "solver's top action", freq: "64%", freqCls: "freq grade-ok",
+        opts: [["Fold", AC.fold, 0.12], ["Call", AC.call, 0.64], ["Raise", AC.r2, 0.21], ["All-in", AC.allin, 0.03]], chosenName: "Call", bestName: "Call", rng: 47 },
+      turnCheck: { where: "turn · BB · AQo", status: "● best", statusCls: "fb-status", chosen: "Check", best: "solver's top action", freq: "78%", freqCls: "freq grade-ok",
+        opts: [["Check", AC.check, 0.78], ["Bet 33%", AC.r1, 0.14], ["Bet 75%", AC.r4, 0.04], ["All-in", AC.allin, 0.04]], chosenName: "Check", bestName: "Check", rng: 31 },
+      turnBet: { where: "turn · BB · AQo", status: "● blunder", statusCls: "fb-status bad", chosen: "Bet 75%", best: "best Check 78%", freq: "4%", freqCls: "freq grade-bad",
+        opts: [["Check", AC.check, 0.78], ["Bet 33%", AC.r1, 0.14], ["Bet 75%", AC.r4, 0.04], ["All-in", AC.allin, 0.04]], chosenName: "Bet 75%", bestName: "Check", rng: 82 },
+      river: { where: "river · BB · AQo", status: "● mixed", statusCls: "fb-status warn", chosen: "Check", best: "best Bet 33% 52%", freq: "41%", freqCls: "freq grade-warn",
+        opts: [["Check", AC.check, 0.41], ["Bet 33%", AC.r1, 0.52], ["Bet 75%", AC.r4, 0.07]], chosenName: "Check", bestName: "Bet 33%", rng: 64 },
+    }[{ solving: "flop", best: "flop", villain: "turnCheck", blunder: "turnBet", over: "river" }[S] || "flop"];
+    let acc = 0; let rngAct = FB.opts[0];
+    FB.opts.forEach((o) => { if (FB.rng >= acc * 100 && FB.rng < (acc + o[2]) * 100) rngAct = o; acc += o[2]; });
+    const matched = rngAct[0] === FB.chosenName;
+    const fb = {
+      ...FB, rngAct: rngAct[0], rngActStyle: { color: rngAct[1] }, match: matched ? "matched" : "missed", matchCls: matched ? "pos" : "missed",
+      markerStyle: { left: `${FB.rng - 0.5}%` },
+      bar: FB.opts.map((o) => ({ key: o[0], style: { flexGrow: o[2], background: o[1] } })),
+      rows: FB.opts.map((o) => ({ key: o[0], name: o[0], you: o[0] === FB.chosenName, cls: o[0] === FB.chosenName ? "is-chosen" : "", style: { background: o[1] }, freq: m.pct(o[2], 1), numCls: o[0] === FB.bestName ? "num is-best" : "num" })),
+    };
+    const lastLvl = decs.length ? decs[decs.length - 1][1] : null;
+    const tabs = [["feedback", "Feedback"], ["leaks", "Spot importance"], ["progress", "Progress"]].map(([k, label]) => ({
+      key: k, label, sel: String(tab === k), dot: k === "feedback" && !!lastLvl, dotCls: `tab-dot lvl-${lastLvl}`, onClick: () => this.setState({ tab: k }) }));
+    const leaks = [
+      ["BB vs BTN · flop", "dry K-high", "5.5", "3.1", "0.82", 214, 1, true],
+      ["SB vs BB · turn", "paired", "7.0", "2.4", "0.61", 96, 0.74, false],
+      ["BB vs CO · flop", "monotone", "5.5", "1.9", "0.48", 132, 0.58, false],
+      ["BTN vs BB · river", "4-straight", "18.2", "1.2", "0.33", 41, 0.4, false],
+      ["BB vs SB · flop", "low connected", "6.0", "0.9", "0.21", 77, 0.26, false],
+    ].map(([name, sub, pot, per, score, nn, p, pin], k) => ({ key: name, name, sub, pot, per, score, n: nn, prio: m.fmt(p, 2), cls: pin ? "is-pinned" : k === 1 ? "is-drilled" : "", prioCls: k === 0 ? "num imp-prio is-top" : "num imp-prio", barStyle: { "--p": p } }));
+
+    return {
+      hasRng: showBar, rng: S === "best" ? 82 : 47, board, pot, isOver: over, seats: m.ring(seats, "BTN"),
+      actions, hasWait: !!waitText, waitText, hasVerdict: !!V, verdict: V || {}, hasRanges: S === "blunder", rangeGrids,
+      showHint: S === "act", tabs, tabFeedback: tab === "feedback", tabLeaks: tab === "leaks", tabProgress: tab === "progress",
+      decCount: decs.length ? `${decs.length} decision${decs.length === 1 ? "" : "s"}` : "", hasDecs: decs.length > 0, noDecs: decs.length === 0, pills, fb, leaks,
+    };
+  }
+}
+</script>
+</body>
+</html>

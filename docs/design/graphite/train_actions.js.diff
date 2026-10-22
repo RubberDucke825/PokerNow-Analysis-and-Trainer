@@ -1,0 +1,10 @@
+--- a/pn/pn/web/static/js/views/train_actions.js
++++ b/pn/pn/web/static/js/views/train_actions.js
+@@
+-import { actionColors } from "../grid.js";
++import { actionColors, actionKind } from "../grid.js";
+@@
+   const nodes = legal.map((a, k) => {
+     const isPressed = ui.pressed === a.token;
+-    const cls = ["action-btn", isPressed && "is-pressed", ui.pressed && !isPressed && "is-dimmed"].filter(Boolean).join(" ");
++    const cls = ["action-btn", `act-${actionKind(a.token)}`, isPressed && "is-pressed", ui.pressed && !isPressed && "is-dimmed"].filter(Boolean).join(" ");

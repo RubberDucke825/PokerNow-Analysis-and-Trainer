@@ -1,0 +1,391 @@
+{
+  "_meta": {
+    "source": "seed",
+    "description": "SEED VALUES, not measured: typical live low-stakes (1/2-2/5 NLHE, 6-9 handed) population tendencies compiled from common HUD-reference ranges. Replace with `pn priors rebuild` once the DB has enough players. `k` = prior pseudo-count (Beta/Dirichlet strength); seed k = m(1-m)/sd^2 - 1 for an assumed between-player SD (see pn/pn/profile/PRIORS.md). af_* means are on the aggression-factor scale (bets+raises)/calls.",
+    "updated_at": "2026-10-01T00:00:00Z",
+    "min_hands": null,
+    "n_players": 0
+  },
+  "stats": {
+    "vpip": {
+      "mean": 0.28,
+      "k": 20,
+      "sd": 0.098
+    },
+    "pfr": {
+      "mean": 0.17,
+      "k": 28,
+      "sd": 0.07
+    },
+    "rfi": {
+      "mean": 0.2,
+      "k": 24,
+      "sd": 0.08
+    },
+    "three_bet": {
+      "mean": 0.06,
+      "k": 60,
+      "sd": 0.03
+    },
+    "four_bet": {
+      "mean": 0.12,
+      "k": 25,
+      "sd": 0.064
+    },
+    "fold_to_three_bet": {
+      "mean": 0.55,
+      "k": 16,
+      "sd": 0.121
+    },
+    "limp": {
+      "mean": 0.22,
+      "k": 16,
+      "sd": 0.101
+    },
+    "cold_call": {
+      "mean": 0.15,
+      "k": 20,
+      "sd": 0.078
+    },
+    "steal": {
+      "mean": 0.3,
+      "k": 20,
+      "sd": 0.1
+    },
+    "squeeze": {
+      "mean": 0.05,
+      "k": 40,
+      "sd": 0.034
+    },
+    "fold_to_squeeze": {
+      "mean": 0.55,
+      "k": 14,
+      "sd": 0.13
+    },
+    "call_vs_squeeze": {
+      "mean": 0.38,
+      "k": 15,
+      "sd": 0.12
+    },
+    "cbet_flop": {
+      "mean": 0.62,
+      "k": 16,
+      "sd": 0.118
+    },
+    "cbet_turn": {
+      "mean": 0.5,
+      "k": 15,
+      "sd": 0.125
+    },
+    "cbet_river": {
+      "mean": 0.45,
+      "k": 12,
+      "sd": 0.138
+    },
+    "fold_to_cbet_flop": {
+      "mean": 0.48,
+      "k": 16,
+      "sd": 0.121
+    },
+    "fold_to_cbet_turn": {
+      "mean": 0.42,
+      "k": 14,
+      "sd": 0.127
+    },
+    "fold_to_cbet_river": {
+      "mean": 0.4,
+      "k": 12,
+      "sd": 0.136
+    },
+    "check_raise_flop": {
+      "mean": 0.08,
+      "k": 30,
+      "sd": 0.049
+    },
+    "donk_flop": {
+      "mean": 0.1,
+      "k": 25,
+      "sd": 0.059
+    },
+    "probe_turn": {
+      "mean": 0.25,
+      "k": 15,
+      "sd": 0.108
+    },
+    "af_flop": {
+      "mean": 1.8,
+      "k": 20,
+      "sd": 0.105
+    },
+    "af_turn": {
+      "mean": 1.6,
+      "k": 20,
+      "sd": 0.107
+    },
+    "af_river": {
+      "mean": 1.4,
+      "k": 20,
+      "sd": 0.107
+    },
+    "wtsd": {
+      "mean": 0.32,
+      "k": 55,
+      "sd": 0.062
+    },
+    "wsd": {
+      "mean": 0.5,
+      "k": 60,
+      "sd": 0.064
+    },
+    "wwsf": {
+      "mean": 0.44,
+      "k": 50,
+      "sd": 0.069
+    },
+    "fold_to_four_bet": {
+      "mean": 0.45,
+      "k": 14,
+      "sd": 0.13
+    },
+    "fold_to_steal": {
+      "mean": 0.6,
+      "k": 16,
+      "sd": 0.12
+    },
+    "raise_cbet_flop": {
+      "mean": 0.08,
+      "k": 28,
+      "sd": 0.05
+    },
+    "raise_cbet_turn": {
+      "mean": 0.06,
+      "k": 27,
+      "sd": 0.045
+    },
+    "raise_cbet_river": {
+      "mean": 0.05,
+      "k": 29,
+      "sd": 0.04
+    },
+    "bet_vs_missed_cbet_flop": {
+      "mean": 0.45,
+      "k": 14,
+      "sd": 0.13
+    },
+    "bet_vs_missed_cbet_turn": {
+      "mean": 0.4,
+      "k": 13,
+      "sd": 0.13
+    },
+    "float_turn": {
+      "mean": 0.4,
+      "k": 11,
+      "sd": 0.14
+    },
+    "agg_freq_flop": {
+      "mean": 0.38,
+      "k": 23,
+      "sd": 0.1
+    },
+    "agg_freq_turn": {
+      "mean": 0.33,
+      "k": 21,
+      "sd": 0.1
+    },
+    "agg_freq_river": {
+      "mean": 0.3,
+      "k": 20,
+      "sd": 0.1
+    },
+    "five_bet": {
+      "mean": 0.2,
+      "k": 10,
+      "sd": 0.13
+    },
+    "fold_to_five_bet": {
+      "mean": 0.5,
+      "k": 8,
+      "sd": 0.17
+    },
+    "six_bet": {
+      "mean": 0.1,
+      "k": 8,
+      "sd": 0.1
+    },
+    "fold_to_six_bet": {
+      "mean": 0.4,
+      "k": 8,
+      "sd": 0.17
+    }
+  },
+  "by_position": {
+    "UTG": {
+      "vpip": 0.18,
+      "pfr": 0.12,
+      "rfi": 0.12,
+      "limp": 0.16,
+      "three_bet": 0.04,
+      "cold_call": 0.1
+    },
+    "UTG1": {
+      "vpip": 0.19,
+      "pfr": 0.13,
+      "rfi": 0.13,
+      "limp": 0.16,
+      "three_bet": 0.04,
+      "cold_call": 0.11
+    },
+    "UTG2": {
+      "vpip": 0.2,
+      "pfr": 0.14,
+      "rfi": 0.14,
+      "limp": 0.17,
+      "three_bet": 0.045,
+      "cold_call": 0.11
+    },
+    "LJ": {
+      "vpip": 0.21,
+      "pfr": 0.15,
+      "rfi": 0.15,
+      "limp": 0.17,
+      "three_bet": 0.05,
+      "cold_call": 0.12
+    },
+    "HJ": {
+      "vpip": 0.23,
+      "pfr": 0.17,
+      "rfi": 0.18,
+      "limp": 0.18,
+      "three_bet": 0.05,
+      "cold_call": 0.13
+    },
+    "CO": {
+      "vpip": 0.27,
+      "pfr": 0.2,
+      "rfi": 0.24,
+      "limp": 0.19,
+      "three_bet": 0.06,
+      "cold_call": 0.15,
+      "steal": 0.24
+    },
+    "BTN": {
+      "vpip": 0.35,
+      "pfr": 0.26,
+      "rfi": 0.35,
+      "limp": 0.2,
+      "three_bet": 0.07,
+      "cold_call": 0.18,
+      "steal": 0.35
+    },
+    "SB": {
+      "vpip": 0.32,
+      "pfr": 0.15,
+      "rfi": 0.25,
+      "limp": 0.35,
+      "three_bet": 0.07,
+      "cold_call": 0.12,
+      "steal": 0.25
+    },
+    "BB": {
+      "vpip": 0.3,
+      "pfr": 0.08,
+      "three_bet": 0.08,
+      "cold_call": 0.3
+    },
+    "STR": {
+      "vpip": 0.3,
+      "pfr": 0.1,
+      "rfi": 0.2,
+      "three_bet": 0.06,
+      "cold_call": 0.25
+    }
+  },
+  "actions": {
+    "preflop:first": {
+      "fold": 0.62,
+      "call": 0.15,
+      "raise": 0.23,
+      "k": 15
+    },
+    "preflop:facing_bet": {
+      "fold": 0.62,
+      "call": 0.29,
+      "raise": 0.09,
+      "k": 15
+    },
+    "preflop:facing_raise": {
+      "fold": 0.5,
+      "call": 0.35,
+      "raise": 0.15,
+      "k": 10
+    },
+    "flop:first": {
+      "check": 0.62,
+      "bet": 0.38,
+      "k": 15
+    },
+    "flop:facing_bet": {
+      "fold": 0.45,
+      "call": 0.43,
+      "raise": 0.12,
+      "k": 15
+    },
+    "flop:facing_raise": {
+      "fold": 0.45,
+      "call": 0.42,
+      "raise": 0.13,
+      "k": 10
+    },
+    "turn:first": {
+      "check": 0.65,
+      "bet": 0.35,
+      "k": 15
+    },
+    "turn:facing_bet": {
+      "fold": 0.44,
+      "call": 0.48,
+      "raise": 0.08,
+      "k": 15
+    },
+    "turn:facing_raise": {
+      "fold": 0.4,
+      "call": 0.5,
+      "raise": 0.1,
+      "k": 10
+    },
+    "river:first": {
+      "check": 0.68,
+      "bet": 0.32,
+      "k": 15
+    },
+    "river:facing_bet": {
+      "fold": 0.48,
+      "call": 0.45,
+      "raise": 0.07,
+      "k": 15
+    },
+    "river:facing_raise": {
+      "fold": 0.45,
+      "call": 0.47,
+      "raise": 0.08,
+      "k": 10
+    }
+  },
+  "fold_vs_size": {
+    "k": 12,
+    "flop": {
+      "25": 0.3,
+      "33": 0.36,
+      "50": 0.43,
+      "100": 0.52
+    },
+    "turn": {
+      "75": 0.45,
+      "150": 0.55
+    },
+    "river": {
+      "75": 0.47,
+      "150": 0.56
+    }
+  }
+}

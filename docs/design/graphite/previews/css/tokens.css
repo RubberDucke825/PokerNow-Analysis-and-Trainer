@@ -1,0 +1,166 @@
+/* pn study — design tokens, direction 3: "Graphite".
+   Cool graphite surfaces, one restrained accent (amber by default, iris as the cool alternative),
+   Geist + Geist Mono. Dark is the default; light follows prefers-color-scheme or [data-theme="light"] on <html>.
+   Optional switches on <html>: data-accent="iris" (cool accent), data-suits="2" (two-colour deck).
+   Every token name from the Ledger set is kept so the view CSS and JS keep resolving. */
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: dark;
+
+  /* surfaces: five steps of cool graphite (hue 264, chroma under 0.01), lighter = closer to the user */
+  --bg-0: oklch(16.5% 0.006 264);   /* page */
+  --bg-1: oklch(18.8% 0.007 264);   /* side column, sheets, inset wells */
+  --bg-2: oklch(21.8% 0.008 264);   /* panels, plates, buttons */
+  --bg-3: oklch(25.5% 0.009 264);   /* hover, raised rows, pair cells */
+  --bg-4: oklch(30% 0.010 264);     /* pressed, selected segment */
+  --line: oklch(27.5% 0.008 264);   /* solid rule (tables, grout) */
+  --line-2: oklch(35% 0.010 264);   /* stronger rule, input hover */
+  --hair: oklch(100% 0 0 / 0.07);   /* translucent hairline that edges layered surfaces */
+
+  /* ink: ink-3 holds 4.5:1 on bg-0 to bg-3, so small labels pass AA; ink-4 is for disabled / folded only */
+  --ink: oklch(95.5% 0.004 264);
+  --ink-2: oklch(79% 0.008 264);
+  --ink-3: oklch(66% 0.010 264);
+  --ink-4: oklch(48% 0.010 264);
+
+  /* accent: hero, RNG, best action, primary button. Same lightness and chroma family for both options */
+  --amber: oklch(80% 0.115 76);
+  --iris: oklch(77% 0.100 286);
+  --accent: var(--amber);
+  --accent-ink: oklch(19% 0.02 76);   /* text on accent */
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, transparent);
+  --accent-line: color-mix(in oklab, var(--accent) 50%, transparent);
+  --accent-fill: var(--accent);          /* primary button / filled accent surfaces */
+  --accent-fill-ink: var(--accent-ink);
+
+  /* semantics: grades and stat deviations, kept apart from the action hues by lightness */
+  --good: oklch(77% 0.140 152);
+  --warn: oklch(84% 0.130 94);
+  --bad:  oklch(71% 0.160 27);
+  --hi: oklch(72% 0.150 27);  --hi-bg: oklch(72% 0.150 27 / 0.12);    /* above GTO */
+  --lo: oklch(75% 0.110 250); --lo-bg: oklch(75% 0.110 250 / 0.12);   /* below GTO */
+
+  /* action colours — GTO Wizard mapping, do not change (grid.js ACTION_COLORS owns the JS copy) */
+  --act-fold: #4a86d9;
+  --act-check: #3fa66a;
+  --act-call: #3fa66a;
+  --act-raise-1: #e8705f;
+  --act-raise-2: #d4483f;
+  --act-raise-3: #b3302f;
+  --act-raise-4: #922326;
+  --act-allin: #6e1220;
+
+  /* table */
+  --felt-shadow: rgb(0 0 0 / 0.8);
+  --felt-1: oklch(26% 0.012 230);   /* centre of the vignette */
+  --felt-2: oklch(20.5% 0.010 240); /* edge */
+  --rail: oklch(19% 0.007 264);
+  --glow: oklch(96% 0.01 264);      /* player-to-act ring */
+
+  /* cards: light face, 4-colour suits */
+  --card-bg: oklch(97.5% 0.004 95); --card-ink: oklch(21% 0.012 264);
+  --suit-s: oklch(22% 0.012 264); --suit-h: oklch(54% 0.190 27); --suit-d: oklch(51% 0.150 256); --suit-c: oklch(50% 0.130 150);
+  --suit-s-ink: oklch(95.5% 0.004 264); --suit-h-ink: oklch(72% 0.160 25); --suit-d-ink: oklch(74% 0.120 252); --suit-c-ink: oklch(76% 0.130 152);
+  --card-back: oklch(31% 0.014 264); --card-back-line: oklch(42% 0.016 264);
+
+  /* 13x13 grid: cells sit on dark grout so the matrix reads as one object */
+  --cell-bg: oklch(23% 0.008 264);
+  --cell-pair: oklch(26.5% 0.009 264);
+  --cell-grout: oklch(15% 0.006 264);
+
+  /* type: Geist for text and labels, Geist Mono for numbers that line up in columns */
+  --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-label: var(--font-body);   /* small uppercase labels: sans, not mono */
+  --text-2xs: 0.6875rem;  /* 11  labels, grid subs */
+  --text-xs: 0.75rem;     /* 12  meta, chips, table heads */
+  --text-sm: 0.8125rem;   /* 13  secondary body */
+  --text-base: 0.875rem;  /* 14  body */
+  --text-md: 0.9375rem;   /* 15  buttons, emphasised body */
+  --text-lg: 1.375rem;    /* 22  page title */
+  --text-xl: 1.75rem;     /* 28  verdict, RNG */
+  --text-num: 2rem;       /* 32  hero numbers */
+  --track: 0.06em;        /* uppercase labels */
+
+  /* space: 4px base, 8px rhythm */
+  --s1: 0.25rem; --s2: 0.5rem; --s3: 0.75rem; --s4: 1rem; --s5: 1.5rem; --s6: 2rem; --s7: 3rem;
+  --gutter: clamp(16px, 2.4vw, 32px);
+
+  /* shape */
+  --radius-sm: 6px;    /* chips, kbd, small controls */
+  --radius: 8px;       /* buttons, inputs, segments */
+  --radius-lg: 12px;   /* panels, surfaces, tables */
+  --radius-card: 6px;  /* playing cards */
+  --rule: 3px;
+
+  /* elevation: hairline + soft shadow instead of heavy borders */
+  --shadow-1: inset 0 0 0 1px var(--hair), 0 1px 2px rgb(0 0 0 / 0.35);
+  --shadow-2: inset 0 0 0 1px var(--hair), 0 2px 6px -2px rgb(0 0 0 / 0.45), 0 12px 28px -12px rgb(0 0 0 / 0.6);
+  --shadow-3: inset 0 0 0 1px var(--hair), 0 24px 64px -16px rgb(0 0 0 / 0.75);
+  --shadow-card: 0 1px 1px rgb(0 0 0 / 0.25), 0 6px 14px -6px rgb(0 0 0 / 0.7);
+  --shadow-disc: inset 0 0 0 1px var(--hair), 0 40px 80px -40px rgb(0 0 0 / 0.9);
+  --focus: 0 0 0 2px var(--bg-0), 0 0 0 4px var(--accent);
+
+  /* motion: ease-out, no overshoot */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 160ms;
+  --dur-2: 220ms;
+
+  /* layout */
+  --topbar-h: 56px;
+  --side-w: 400px;
+  --table-max: 860px;
+  --grid-max: 600px;
+}
+
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { color-scheme: light;
+  --bg-0: oklch(97.2% 0.003 264); --bg-1: oklch(98.6% 0.002 264); --bg-2: oklch(100% 0 0); --bg-3: oklch(95.6% 0.004 264); --bg-4: oklch(92.4% 0.006 264);
+  --line: oklch(91.5% 0.005 264); --line-2: oklch(85% 0.007 264); --hair: oklch(25% 0.02 264 / 0.09);
+  --ink: oklch(21% 0.012 264); --ink-2: oklch(40% 0.012 264); --ink-3: oklch(50% 0.012 264); --ink-4: oklch(68% 0.010 264);
+  --amber: oklch(55% 0.120 68); --iris: oklch(52% 0.140 286); --accent-ink: oklch(99% 0.003 264);
+  --accent-fill: oklch(80% 0.135 78); --accent-fill-ink: oklch(23% 0.03 70);   /* light amber fills stay bright with dark ink */
+  --good: oklch(51% 0.130 152); --warn: oklch(56% 0.115 75); --bad: oklch(53% 0.170 27);
+  --hi: oklch(53% 0.170 27); --hi-bg: oklch(53% 0.170 27 / 0.09); --lo: oklch(51% 0.140 255); --lo-bg: oklch(51% 0.140 255 / 0.09);
+  --felt-shadow: oklch(25% 0.03 264 / 0.22); --felt-1: oklch(96% 0.008 220); --felt-2: oklch(91.5% 0.010 228); --rail: oklch(99% 0.002 264); --glow: oklch(30% 0.02 264);
+  --card-bg: oklch(100% 0 0); --card-back: oklch(86% 0.012 264); --card-back-line: oklch(76% 0.014 264);
+  --suit-s-ink: oklch(21% 0.012 264); --suit-h-ink: oklch(53% 0.170 27); --suit-d-ink: oklch(51% 0.140 255); --suit-c-ink: oklch(50% 0.130 150);
+  --cell-bg: oklch(100% 0 0); --cell-pair: oklch(96.4% 0.004 264); --cell-grout: oklch(88% 0.006 264);
+  --shadow-1: inset 0 0 0 1px var(--hair), 0 1px 2px oklch(25% 0.03 264 / 0.08);
+  --shadow-2: inset 0 0 0 1px var(--hair), 0 2px 6px -2px oklch(25% 0.03 264 / 0.12), 0 12px 28px -12px oklch(25% 0.03 264 / 0.2);
+  --shadow-3: inset 0 0 0 1px var(--hair), 0 24px 64px -16px oklch(25% 0.03 264 / 0.3);
+  --shadow-card: 0 0 0 1px oklch(25% 0.03 264 / 0.1), 0 6px 14px -8px oklch(25% 0.03 264 / 0.35);
+  --shadow-disc: inset 0 0 0 1px var(--hair), 0 30px 60px -36px oklch(25% 0.03 264 / 0.35);
+  --focus: 0 0 0 2px var(--bg-1), 0 0 0 4px var(--accent);
+} }
+:root[data-theme="light"] { color-scheme: light;
+  --bg-0: oklch(97.2% 0.003 264); --bg-1: oklch(98.6% 0.002 264); --bg-2: oklch(100% 0 0); --bg-3: oklch(95.6% 0.004 264); --bg-4: oklch(92.4% 0.006 264);
+  --line: oklch(91.5% 0.005 264); --line-2: oklch(85% 0.007 264); --hair: oklch(25% 0.02 264 / 0.09);
+  --ink: oklch(21% 0.012 264); --ink-2: oklch(40% 0.012 264); --ink-3: oklch(50% 0.012 264); --ink-4: oklch(68% 0.010 264);
+  --amber: oklch(55% 0.120 68); --iris: oklch(52% 0.140 286); --accent-ink: oklch(99% 0.003 264);
+  --accent-fill: oklch(80% 0.135 78); --accent-fill-ink: oklch(23% 0.03 70);   /* light amber fills stay bright with dark ink */
+  --good: oklch(51% 0.130 152); --warn: oklch(56% 0.115 75); --bad: oklch(53% 0.170 27);
+  --hi: oklch(53% 0.170 27); --hi-bg: oklch(53% 0.170 27 / 0.09); --lo: oklch(51% 0.140 255); --lo-bg: oklch(51% 0.140 255 / 0.09);
+  --felt-shadow: oklch(25% 0.03 264 / 0.22); --felt-1: oklch(96% 0.008 220); --felt-2: oklch(91.5% 0.010 228); --rail: oklch(99% 0.002 264); --glow: oklch(30% 0.02 264);
+  --card-bg: oklch(100% 0 0); --card-back: oklch(86% 0.012 264); --card-back-line: oklch(76% 0.014 264);
+  --suit-s-ink: oklch(21% 0.012 264); --suit-h-ink: oklch(53% 0.170 27); --suit-d-ink: oklch(51% 0.140 255); --suit-c-ink: oklch(50% 0.130 150);
+  --cell-bg: oklch(100% 0 0); --cell-pair: oklch(96.4% 0.004 264); --cell-grout: oklch(88% 0.006 264);
+  --shadow-1: inset 0 0 0 1px var(--hair), 0 1px 2px oklch(25% 0.03 264 / 0.08);
+  --shadow-2: inset 0 0 0 1px var(--hair), 0 2px 6px -2px oklch(25% 0.03 264 / 0.12), 0 12px 28px -12px oklch(25% 0.03 264 / 0.2);
+  --shadow-3: inset 0 0 0 1px var(--hair), 0 24px 64px -16px oklch(25% 0.03 264 / 0.3);
+  --shadow-card: 0 0 0 1px oklch(25% 0.03 264 / 0.1), 0 6px 14px -8px oklch(25% 0.03 264 / 0.35);
+  --shadow-disc: inset 0 0 0 1px var(--hair), 0 30px 60px -36px oklch(25% 0.03 264 / 0.35);
+  --focus: 0 0 0 2px var(--bg-1), 0 0 0 4px var(--accent);
+}
+
+/* cool accent: iris is the one hue no action, grade or stat colour uses */
+:root[data-accent="iris"] { --accent: var(--iris); --accent-ink: oklch(18% 0.03 286); --accent-fill: var(--accent); --accent-fill-ink: var(--accent-ink); }
+@media (prefers-color-scheme: light) { :root[data-accent="iris"]:not([data-theme="dark"]) { --accent-ink: oklch(99% 0.003 264); } }
+:root[data-accent="iris"][data-theme="light"] { --accent-ink: oklch(99% 0.003 264); }
+
+/* two-colour deck: diamonds take the heart colour, clubs the spade colour */
+:root[data-suits="2"] {
+  --suit-d: var(--suit-h); --suit-c: var(--suit-s);
+  --suit-d-ink: var(--suit-h-ink); --suit-c-ink: var(--suit-s-ink);
+}

@@ -1,0 +1,50 @@
+# Responses to raises, shared by 6-max and 8-max (coarse: grouped by opener position).
+# Pure ranges (no weights): hands mixed >= 50% in the source charts are included.
+# Hero groups: IP = any non-blind seat behind the opener; SB; BB (STR uses BB charts).
+# Opener groups: EP = UTG,UTG1,UTG2,LJ | MP = HJ | CO | BTN | SB.
+
+# ---- vs open (3bet / flat)
+3bet IP vs EP  = QQ+,AKs,AKo,AQs,A5s,KQs
+call IP vs EP  = JJ-66,AJs-ATs,AQo,KJs,QJs,JTs,T9s,98s
+3bet IP vs MP  = JJ+,AQs+,AKo,A5s-A4s,KQs
+call IP vs MP  = TT-55,AJs-ATs,AQo,KJs-KTs,QTs+,JTs,T9s,98s,87s
+3bet IP vs CO  = TT+,AJs+,AQo+,KQs,A5s-A2s,KJs,65s,54s
+call IP vs CO  = 99-22,ATs-A6s,AJo,KTs-K9s,KQo,Q9s+,J9s+,T8s+,98s,87s,76s
+
+3bet SB vs EP  = QQ+,AKs,AKo,AQs,A5s,KQs
+call SB vs EP  = JJ-TT
+3bet SB vs MP  = JJ+,AQs+,AKo,A5s-A4s,KQs
+call SB vs MP  = TT-99,AJs
+3bet SB vs CO  = TT+,ATs+,AQo+,KQs-KJs,A5s-A3s,QJs
+call SB vs CO  = 99-77,A9s,KTs,JTs
+3bet SB vs BTN = 88+,A8s+,A5s-A2s,KTs+,QTs+,JTs,AJo+,KQo,T9s,98s
+call SB vs BTN = 77-55,A7s-A6s,K9s,Q9s,J9s
+
+3bet BB vs EP  = QQ+,AKs,AKo,AQs,A5s-A4s
+call BB vs EP  = JJ-22,AJs-A6s,A3s-A2s,AQo-AJo,K9s+,KQo,Q9s+,J9s+,T8s+,97s+,86s+,75s+,64s+,54s
+3bet BB vs MP  = JJ+,AQs+,AKo,A5s-A4s,KQs
+call BB vs MP  = TT-22,AJs-A6s,A3s-A2s,AQo-ATo,KJs-K8s,KJo+,Q9s+,QJo,J9s+,T8s+,97s+,86s+,75s+,64s+,54s
+3bet BB vs CO  = TT+,AJs+,AQo+,KQs,A5s-A2s,K9s,76s,65s
+call BB vs CO  = 99-22,ATs-A6s,AJo-A8o,KJs-KTs,K8s-K5s,KTo+,Q8s+,QTo+,J8s+,JTo,T7s+,96s+,85s+,75s,64s,53s+,43s
+3bet BB vs BTN = 99+,ATs+,AJo+,KJs+,A5s-A2s,K9s,QJs,76s,65s,54s,KQo
+call BB vs BTN = 88-22,A9s-A6s,ATo-A2o,KTs,K8s-K2s,KJo-K8o,QTs-Q4s,Q8o+,J6s+,J8o+,T6s+,T8o+,95s+,97o+,85s+,87o,75s-74s,76o,64s-63s,53s-52s,42s+
+3bet BB vs SB  = 88+,A8s+,A5s-A2s,KTs+,QTs+,JTs,ATo+,KJo+,QJo,76s,65s
+call BB vs SB  = 77-22,A7s-A6s,A9o-A2o,K9s-K2s,KTo-K5o,Q9s-Q2s,QTo-Q7o,J9s-J4s,J7o+,T5s+,T7o+,96s+,97o+,85s+,86o+,75s-74s,76o,64s-63s,65o,52s+,42s+
+
+# ---- opener facing a 3bet (4bet / flat), by opener group
+4bet vs3bet EP  = KK+,AKs,A5s
+call vs3bet EP  = QQ-99,AKo,AQs,AJs,KQs
+4bet vs3bet MP  = QQ+,AKs,AKo,A5s
+call vs3bet MP  = JJ-88,AQs-AJs,KQs
+4bet vs3bet CO  = QQ+,AKs,AKo,A5s-A4s
+call vs3bet CO  = JJ-77,AQs-ATs,KQs-KJs,QJs,JTs,T9s,AQo
+4bet vs3bet BTN = JJ+,AKs,AKo,AQs,A5s-A3s
+call vs3bet BTN = TT-55,AJs-A6s,AQo-AJo,K9s+,KQo,Q9s+,J9s+,T8s+,98s,87s,76s
+4bet vs3bet SB  = JJ+,AKs,AKo,AQs,A5s-A4s
+call vs3bet SB  = TT-44,AJs-A6s,AQo-ATo,K9s+,KQo,Q9s+,J9s+,T9s,98s,87s
+
+# ---- 3bettor facing a 4bet (5bet = all-in at 100bb / flat), by 4bettor (opener) group
+5bet vs4bet EP   = KK+,AKs
+call vs4bet EP   = QQ,AKo
+5bet vs4bet LATE = QQ+,AKs,AKo
+call vs4bet LATE = JJ-TT,AQs,AJs,KQs

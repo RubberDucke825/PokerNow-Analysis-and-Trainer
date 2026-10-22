@@ -1,0 +1,35 @@
+# Contract example (contracts/tree_config.md) with concrete ranges.
+# BB defends vs a BTN open (Plan 7: no node locks).
+[game]
+street = "flop"
+board = ["Kd","Ah","5h"]
+pot = 1500
+mode = "depth_limited"
+leaf_model = "equity_realization"
+max_iterations = 1000
+target_exploitability = 0.5
+time_limit_sec = 300
+threads = 8
+last_aggressor = "BTN"
+
+[[players]]
+name = "hero"
+position = "BB"
+stack = 9800
+range = "22+,A2s+,K9s+,Q9s+,J9s+,T8s+,97s+,86s+,75s+,64s+,54s,A8o+,KTo+,QTo+,JTo"
+hero = true
+
+[[players]]
+name = "hal @ hal0000001"
+position = "BTN"
+stack = 14700
+range = "22+,A2s+,K5s+,Q8s+,J8s+,T8s+,97s+,86s+,75s+,65s,54s,A7o+,K9o+,QTo+,JTo"
+
+[sizes]
+flop_bets = [33, 100]
+turn_bets = [75]
+river_bets = [150]
+raise = [100]
+max_bets_per_street = 3
+allin_threshold = 0.67
+donk = true

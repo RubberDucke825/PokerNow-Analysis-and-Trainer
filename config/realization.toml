@@ -1,0 +1,21 @@
+# Leaf realization factors for depth_limited solves (contracts/tree_config.md "Plan 5 additions").
+# Used when a spot sets [leaf_model] realization = "config/realization.toml".
+# Written by `pn solve calibrate`; these shipped values are R = 1 everywhere (pure equity).
+#
+#   payoff_i = pot * (eq_i * R_i) / sum_j (eq_j * R_j)   over players still in at the leaf
+#   R_i = max(0.2, base[context] - multiway_penalty * (n_in - 2)) * (1 + sum of hand features)
+# All-in runouts use true equity (R ignored).
+
+[base]                 # position context of player i at the leaf
+ip = 1.00              # last to act postflop among those still in (not a blind)
+oop = 1.00             # not last to act, not a blind
+sb = 1.00              # the small blind (takes precedence over ip/oop)
+bb = 1.00              # the big blind (takes precedence over ip/oop)
+multiway_penalty = 0.00   # subtracted per extra player beyond 2 still in
+
+[hand]                 # coefficients added to 1.0 when player i's hand class has the feature
+pair = 0.00
+suited = 0.00          # non-pair suited
+connected = 0.00       # non-pair with gap 0 or 1 (ranks differ by 1 or 2; A2 is not connected)
+high_card = 0.00       # multiplied by (rank - 2) / 12 of the higher card (A = 1, 2 = 0)
+broadway2 = 0.00       # both cards T or higher (pairs included)

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<header class="topbar">
+  <a class="brand" href="#">pn study</a>
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href="#" data-nav="train">Train</a>
+    <a href="#" data-nav="strategy" aria-current="page">Strategy</a>
+    <a href="#" data-nav="hands">Hands</a>
+    <a href="#" data-nav="players">Players</a>
+    <a href="#" data-nav="review">Review</a>
+  </nav>
+  <button class="menu-btn" type="button" aria-label="Menu" aria-controls="main-nav" aria-expanded="false">≡</button>
+</header>
+<main id="app" tabindex="-1">
+  <sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <div class="lib-head">
+        <header class="page-head"><div><span class="label">Strategy</span><h1>Solve library</h1></div></header>
+        <a href="#" class="btn new-btn">+ New spot</a>
+      </div>
+      <section class="panel lib-panel" aria-label="Saved solves">
+        <div class="lib-top">
+          <div class="lib-filters">
+            <div class="field"><span>Street</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">All</button><button type="button" class="seg-opt" aria-pressed="false">Flop</button><button type="button" class="seg-opt" aria-pressed="false">Turn</button><button type="button" class="seg-opt" aria-pressed="false">River</button></div></div>
+            <div class="field"><span>Pot</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">All</button><button type="button" class="seg-opt" aria-pressed="false">SRP</button><button type="button" class="seg-opt" aria-pressed="false">3-bet</button><button type="button" class="seg-opt" aria-pressed="false">4-bet+</button></div></div>
+            <label class="field" for="lib-pos"><span>Position</span><select id="lib-pos"><option>Any</option><option>BTN vs BB</option><option>CO vs BB</option></select></label>
+            <div class="field tex-field"><span>Board texture</span>
+              <div class="chips" role="group" aria-label="Board texture">
+                <sc-for list="{{ textures }}" as="t" hint-placeholder-count="8"><button type="button" class="chip" aria-pressed="{{ t.on }}">{{ t.name }}</button></sc-for>
+              </div>
+            </div>
+          </div>
+          <span class="muted mono">24 solves</span>
+        </div>
+        <div class="lib-list" role="list">
+          <sc-for list="{{ lib }}" as="r" hint-placeholder-count="6">
+            <div class="lib-row" role="listitem">
+              <div class="lib-board"><span class="cards"><sc-for list="{{ r.board }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span></div>
+              <div class="lib-main">
+                <a href="#"><span class="lib-match"><b>{{ r.ip }}</b><span class="muted"> vs </span><b>{{ r.oop }}</b></span></a>
+                <span class="lib-sub"><span class="{{ r.stCls }}">{{ r.street }}</span> {{ r.sub }}</span>
+              </div>
+              <div class="lib-num"><span class="label">Exploit.</span><span class="{{ r.xCls }}">{{ r.x }}</span></div>
+              <div class="lib-num hide-sm"><span class="label">Iter.</span><span>{{ r.iter }}</span></div>
+              <div class="lib-num hide-sm"><span class="label">Engine</span><span>{{ r.engine }}</span></div>
+              <div class="lib-date"><time>{{ r.date }}</time></div>
+              <button type="button" class="lib-del">Delete</button>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isNew }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><a class="back-link" href="#">← Library</a><h1>New spot</h1></div></header>
+      <div class="build-grid">
+        <div class="build-main">
+          <section class="build-step">
+            <header class="step-head"><span class="step-n mono">01</span><h2>Line</h2></header>
+            <div class="inline-form">
+              <div class="field"><span>Format</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">6-max</button><button type="button" class="seg-opt" aria-pressed="false">8-max</button></div></div>
+              <div class="field"><span>Depth</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">100 bb</button><button type="button" class="seg-opt" aria-pressed="false">200 bb</button></div></div>
+              <label class="field grow"><span>Preflop line</span><select><option>BTN open 2.5 · BB call (SRP)</option></select></label>
+            </div>
+          </section>
+          <section class="build-step">
+            <header class="step-head"><span class="step-n mono">02</span><h2>Ranges</h2></header>
+            <div class="re-bar">
+              <div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">BB · OOP</button><button type="button" class="seg-opt" aria-pressed="false">BTN · IP</button></div>
+              <span class="badge is-edited">edited</span>
+              <button type="button" class="linkish">Reset to chart</button>
+            </div>
+            <div class="range-editor">
+              <div class="re-head"><span class="label">Paint to add, shift-paint to remove</span><span class="re-stat">BB · 412.5 combos · 31.1%</span></div>
+              <div class="grid13 re-grid" role="grid" aria-label="Range editor">
+                <sc-for list="{{ reRows }}" as="r" hint-placeholder-count="13">
+                  <div class="grid-row" role="row">
+                    <sc-for list="{{ r.cells }}" as="c"><div class="{{ c.cls }}" role="gridcell"><span class="re-fill" style="{{ c.fill }}"></span><span class="cell-name">{{ c.name }}</span></div></sc-for>
+                  </div>
+                </sc-for>
+              </div>
+              <textarea class="re-text" aria-label="Range as text">22+, A2s+, K2s+, Q4s+, J6s+, T6s+, 96s+, 85s+, 75s+, 64s+, 53s+, A2o+, K8o+, Q9o+, J9o+, T8o+, 98o</textarea>
+            </div>
+          </section>
+          <section class="build-step">
+            <header class="step-head"><span class="step-n mono">03</span><h2>Board</h2></header>
+            <div class="board-row">
+              <div class="board-slots" aria-live="polite">
+                <sc-for list="{{ slots }}" as="s" hint-placeholder-count="5">
+                  <button type="button" class="{{ s.cls }}">
+                    <sc-if value="{{ s.filled }}"><span class="{{ s.card.cls }}">{{ s.card.text }}</span></sc-if>
+                    <sc-if value="{{ s.empty }}"><span class="card-slot"></span></sc-if>
+                    <span class="label">{{ s.label }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <div class="board-btns"><button type="button" class="btn ghost">Random flop</button><button type="button" class="btn ghost">Clear</button></div>
+            </div>
+            <div class="deck" role="group" aria-label="Card picker">
+              <sc-for list="{{ deck }}" as="d" hint-placeholder-count="52"><button type="button" class="{{ d.cls }}" aria-pressed="{{ d.on }}" disabled="{{ d.off }}">{{ d.text }}</button></sc-for>
+            </div>
+          </section>
+          <section class="build-step">
+            <header class="step-head"><span class="step-n mono">04</span><h2>Tree</h2></header>
+            <div class="sizes">
+              <label class="field"><span>Flop bets</span><input type="text" value="33 75"></input></label>
+              <label class="field"><span>Flop raises</span><input type="text" value="3x"></input></label>
+              <label class="field"><span>Turn bets</span><input type="text" value="50 100"></input></label>
+              <label class="field"><span>River bets</span><input type="text" value="50 100 all-in"></input></label>
+              <p class="note">Sizes are % of pot; raises are multiples of the bet. The trainer only offers these sizes.</p>
+            </div>
+          </section>
+        </div>
+        <aside class="build-side">
+          <div class="ticket">
+            <span class="label">Spot</span>
+            <div class="ticket-body">
+              <p class="t-line">BTN vs BB · SRP</p>
+              <div class="t-board"><span class="cards"><sc-for list="{{ ticketBoard }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span></div>
+              <div class="t-row"><span class="label">Format</span><b>6-max · 100 bb</b></div>
+              <div class="t-row"><span class="label">Pot</span><b>5.5 bb</b></div>
+              <div class="t-row"><span class="label">Effective</span><b>97.5 bb</b></div>
+              <div class="t-row"><span class="label">Ranges</span><b>412 / 588</b></div>
+              <div class="t-row"><span class="label">Tree</span><b>33 75 · 3x</b></div>
+            </div>
+            <button type="button" class="btn solve-btn">Solve spot</button>
+            <div class="ticket-status">
+              <div class="job-panel" data-status="running">
+                <div class="job-head"><span class="job-chip">Running</span><button type="button" class="btn ghost job-cancel">Cancel</button></div>
+                <div class="job-stats">
+                  <div><span class="label">Iteration</span><span class="big">340<small> / 800</small></span></div>
+                  <div><span class="label">Exploit.</span><span class="big">0.84<small>%</small></span></div>
+                  <div><span class="label">Elapsed</span><span class="big">0:41</span></div>
+                </div>
+                <svg class="job-spark" viewBox="0 0 100 40" preserveAspectRatio="none" style="width: 100%; display: block;" aria-hidden="true">
+                  <line class="axis" x1="0" y1="39" x2="100" y2="39"></line>
+                  <line class="target" x1="0" y1="34" x2="100" y2="34"></line>
+                  <polyline points="0,2 10,12 20,19 30,24 40,27 50,29" style="fill: none; stroke: var(--accent); stroke-width: 1.5;"></polyline>
+                  <circle cx="50" cy="29" r="1.6"></circle>
+                </svg>
+                <div class="job-foot"><span class="muted">target 0.30% pot</span><span class="mono">~1 min left</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isBrowser }}" hint-placeholder-val="{{ true }}">
+    <div class="page browser">
+      <header class="page-head"><div><a class="back-link" href="#">← Library</a><h1>BTN vs BB · SRP · K♠ 7♦ 2♣</h1></div></header>
+      <div class="strat-surface">
+        <nav class="line-strip" aria-label="Line">
+          <button type="button" class="ln-back" title="Back one step (Backspace)" aria-label="Back one step"><span class="ln-back-arrow" aria-hidden="true">←</span><span class="ln-back-text">Back</span></button>
+          <button type="button" class="ln-card ln-board" title="Back to the root">
+            <span class="ln-head"><span class="label">Flop</span></span>
+            <span class="cards"><sc-for list="{{ flop }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span>
+            <span class="ln-stats"><span>POT <b>5.5</b></span><span>SPR <b>17.7</b></span></span>
+          </button>
+          <div class="ln-card">
+            <span class="ln-head"><span class="pos-tag">BB</span><span class="mono">97.5</span></span>
+            <ul class="ln-acts">
+              <li><span class="ln-act is-taken"><span>Check</span></span></li>
+              <li><span class="ln-act"><span>Bet</span><span class="mono">1.8</span></span></li>
+              <li><span class="ln-act"><span>Bet</span><span class="mono">4.1</span></span></li>
+            </ul>
+          </div>
+          <div class="ln-card is-current" aria-current="step">
+            <span class="ln-head"><span class="pos-tag">BTN</span><span class="mono">97.5</span></span>
+            <ul class="ln-acts">
+              <sc-for list="{{ nodeActs }}" as="a"><li><button type="button" class="ln-act" title="Play this action"><span>{{ a.name }}</span><span class="mono">{{ a.size }}</span></button></li></sc-for>
+            </ul>
+          </div>
+        </nav>
+        <div class="two-col">
+          <div class="main-col">
+            <div class="view-tabs">
+              <div role="tablist">
+                <button type="button" role="tab" class="view-tab" aria-selected="true">Strategy</button>
+                <button type="button" role="tab" class="view-tab" aria-selected="false">Ranges</button>
+                <button type="button" role="tab" class="view-tab" aria-selected="false">Breakdown</button>
+              </div>
+              <span class="tab-count mono">{{ comboCount }}<span class="tc-unit"> combos</span></span>
+            </div>
+            <div class="chips-box">
+              <div class="filter-chips"><span class="fchip"><span class="fchip-sw" style="background: #e8705f;"></span>Bet 33%<button type="button" class="fchip-x" aria-label="Clear filter">×</button></span><kbd>Esc</kbd></div>
+            </div>
+            <div class="grid-box">
+              <div class="grid13 gw" role="grid" aria-label="BTN strategy">
+                <sc-for list="{{ gridRows }}" as="r" hint-placeholder-count="13">
+                  <div class="grid-row" role="row">
+                    <sc-for list="{{ r.cells }}" as="c"><div class="{{ c.cls }}" role="gridcell" style="{{ c.style }}"><span class="cell-name">{{ c.name }}</span><span class="cell-sub">{{ c.sub }}</span></div></sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <ul class="legend">
+              <sc-for list="{{ legend }}" as="l"><li><span class="swatch" style="{{ l.style }}"></span>{{ l.name }}<b>{{ l.n }}</b></li></sc-for>
+            </ul>
+            <p class="st-hint">Hover a cell for its mix · click to pin it.</p>
+          </div>
+          <div class="side-col">
+            <section class="side-block acts-block" aria-label="Actions">
+              <div class="head"><span class="label">Actions</span><span class="keys muted"><kbd>←</kbd><kbd>→</kbd> select <kbd>Enter</kbd> play <kbd>⌫</kbd> back</span></div>
+              <div class="act-tiles" role="toolbar" aria-label="Actions">
+                <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4">
+                  <button type="button" class="{{ t.cls }}" style="{{ t.style }}" aria-pressed="{{ t.sel }}">
+                    <span class="act-name">{{ t.name }}<sc-if value="{{ t.hasSize }}"><span class="mono"> {{ t.size }}</span></sc-if><sc-if value="{{ t.hasPct }}"><small class="mono"> {{ t.pct }}</small></sc-if></span>
+                    <span class="act-freq mono">{{ t.freq }}</span>
+                    <span class="act-combos mono">{{ t.combos }}<small>combos</small></span>
+                  </button>
+                </sc-for>
+              </div>
+              <div class="act-stack" aria-hidden="true"><sc-for list="{{ tiles }}" as="t"><span style="{{ t.stack }}"></span></sc-for></div>
+              <button type="button" class="chip act-all" aria-pressed="false">All actions</button>
+            </section>
+            <section class="side-block eq-panel">
+              <div class="head"><span class="label">Range equity</span><span class="eq-where mono">K♠ 7♦ 2♣ · at this node</span></div>
+              <div class="eq-figs">
+                <span class="eq-fig p0"><span class="eq-who mono">OOP BB</span><b class="eq-v mono">43.6%</b><span class="eq-n mono">412 combos</span></span>
+                <span class="eq-fig p1"><span class="eq-who mono">IP BTN</span><b class="eq-v mono">56.4%</b><span class="eq-n mono">588 combos</span></span>
+              </div>
+              <div class="eq-bar" aria-hidden="true"><span class="a" style="width: 43.6%;"></span><span class="b"></span></div>
+              <div class="eq-chart">
+                <div class="eq-y mono" aria-hidden="true"><span>100</span><span>50</span><span>0</span></div>
+                <div class="eq-plot" role="img" aria-label="Equity distribution">
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <line class="eq-guide" x1="0" x2="100" y1="50" y2="50"></line>
+                    <line class="eq-guide" x1="50" x2="50" y1="0" y2="100"></line>
+                    <polyline class="eq-line p1" points="0,96 10,90 20,82 30,74 40,64 50,52 60,40 70,30 80,20 90,10 100,2"></polyline>
+                    <polyline class="eq-line p0" points="0,98 10,94 20,88 30,80 40,72 50,62 60,50 70,38 80,26 90,14 100,4"></polyline>
+                  </svg>
+                </div>
+                <span></span>
+                <div class="eq-x mono" aria-hidden="true"><span>weakest</span><span>50th pct</span><span>strongest</span></div>
+              </div>
+              <p class="eq-readout mono">Hover the chart to read a percentile.</p>
+            </section>
+            <section class="side-block hc-panel">
+              <div class="pair-head"><span class="label">Hand classes</span><span class="pair-pos p0">BB</span><span class="pair-pos">BTN</span></div>
+              <div class="pair-table">
+                <sc-for list="{{ pairs }}" as="p">
+                  <button type="button" class="{{ p.cls }}"><span class="pair-name">{{ p.name }}</span><span class="{{ p.c0 }}">{{ p.a }}</span><span class="{{ p.c1 }}">{{ p.b }}</span><span class="pair-bars"><i style="{{ p.w0 }}"></i><i class="b1" style="{{ p.w1 }}"></i></span></button>
+                </sc-for>
+              </div>
+            </section>
+            <div class="meta-row"><span>Exploit. <b>0.31% pot</b></span><span>Iter. <b>800</b></span><span>Engine <b>texas</b></span><span>Solved <b>2d ago</b></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;library&quot;, &quot;new&quot;, &quot;browser&quot;], &quot;default&quot;: &quot;browser&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Screen&quot;}, &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;amber&quot;, &quot;iris&quot;], &quot;default&quot;: &quot;amber&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;suits&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;4&quot;, &quot;2&quot;], &quot;default&quot;: &quot;4&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;version&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;after&quot;, &quot;before&quot;], &quot;default&quot;: &quot;after&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { m: null };
+  componentDidMount() { import(new URL("./mock.js", location.href).href).then((m) => { this.setState({ m }); this.env(m); }); }
+  componentDidUpdate() { if (this.state.m) this.env(this.state.m); }
+  opt(k, d) { const m = this.state.m; const alias = { theme: "mode", accent: "acc" }[k] || k; return (m && m.param(alias)) ?? this.props[k] ?? d; }
+  env(m) { m.applyEnv({ theme: this.opt("theme", "dark"), accent: this.opt("accent", "amber"), suits: this.opt("suits", "4"), version: this.opt("version", "after") }); }
+  renderVals() {
+    const m = this.state.m;
+    const view = this.opt("view", "browser");
+    const base = { isLibrary: view === "library", isNew: view === "new", isBrowser: view === "browser" };
+    if (!m) return { ...base, textures: [], lib: [], reRows: [], slots: [], deck: [], ticketBoard: [], flop: [], nodeActs: [], gridRows: [], legend: [], tiles: [], pairs: [] };
+    const AC = m.AC;
+    const textures = ["Dry", "Paired", "Monotone", "Two-tone", "Connected", "A-high", "K-high", "Low"].map((n, k) => ({ key: n, name: n, on: String(k === 6) }));
+    const lib = [
+      ["Ks 7d 2c", "BTN", "BB", "flop", "SRP", 0.31, 800, "texas", "2d"], ["Qh Jh 4c", "CO", "BB", "flop", "SRP", 0.28, 800, "texas", "3d"],
+      ["9s 8s 3d Kh", "BTN", "BB", "turn", "SRP", 0.52, 600, "texas", "5d"], ["Ad 7c 7h", "BB", "BTN", "flop", "3-bet", 0.19, 1000, "texas", "1w"],
+      ["6h 5h 2s Jd 2c", "SB", "BB", "river", "SRP", 1.42, 400, "wasm", "2w"], ["Tc 9d 8s", "HJ", "BB", "flop", "SRP", null, null, null, "queued"],
+    ].map(([b, ip, oop, st, pot, x, it, eng, date]) => ({ key: b, board: m.cards(b), ip, oop, street: st, stCls: `street-tag st-${st}`, sub: `${pot} · 100 bb · pot ${pot === "3-bet" ? "21.5" : "5.5"} bb`,
+      x: x === null ? "–" : `${x.toFixed(2)}%`, xCls: x === null ? "x-na" : x < 0.4 ? "x-good" : x < 1 ? "x-warn" : "x-bad", iter: it ?? "–", engine: eng ?? "–", date }));
+    // range editor
+    const reRows = [];
+    for (let i = 0; i < 13; i++) { const cells = []; for (let j = 0; j < 13; j++) { const s = m.strength(i, j); const w = s > 0.34 ? Math.min(1, (s - 0.34) * 3.2) : 0; const kind = i === j ? "pair" : i < j ? "suited" : "offsuit"; cells.push({ key: j, name: m.gridClass(i, j), cls: `cell ${kind}${w ? "" : " empty"}`, fill: { transform: `scaleY(${w.toFixed(2)})` } }); } reRows.push({ key: i, cells }); }
+    const chosen = ["Ks", "7d", "2c"];
+    const slots = ["Flop", "", "", "Turn", "River"].map((label, k) => ({ key: k, label: label || " ", cls: `slot${k < 3 ? " filled" : ""}${k === 3 ? " gap" : ""}`, filled: k < 3, empty: k >= 3, card: k < 3 ? m.card(chosen[k]) : {} }));
+    const G = { s: "♠", h: "♥", d: "♦", c: "♣" };
+    const deck = []; for (const su of "shdc") for (const r of m.RANKS) { const c = r + su; deck.push({ key: c, cls: `deck-card suit-${su}`, text: r + G[su], on: String(chosen.includes(c)), off: false }); }
+    // browser
+    const acts = [{ name: "Check", size: "", color: AC.check, band: [0.1, 0.55] }, { name: "Bet", size: "1.8", pct: "33%", color: AC.r1, band: [0.5, 0.76] }, { name: "Bet", size: "4.1", pct: "75%", color: AC.r4, band: [0.74, 0.92] }, { name: "All-in", size: "97.5", color: AC.allin, band: [0.92, 1.1] }];
+    const g = m.grid((i, j) => { const s = m.strength(i, j); const w = s > 0.36 ? Math.min(1, (s - 0.36) * 2.8 + m.noise(i * 5 + j) * 0.3) : 0; if (w < 0.08) return null; const segs = m.bands(i, j, acts, 0.22, 3); const tot = segs.reduce((a, x) => a + x.freq, 0); return { weight: w, segments: segs, sub: Math.round(100 * (segs[1].freq + segs[2].freq + segs[3].freq) / tot) || "" }; });
+    const tot = g.totals.reduce((a, x) => a + (x || 0), 0);
+    const tiles = acts.map((a, k) => ({ key: k, name: a.name, size: a.size, hasSize: !!a.size, pct: a.pct || "", hasPct: !!a.pct, cls: `act-tile${k === 1 ? " is-sel" : ""}`, sel: String(k === 1), style: { "--act": a.color },
+      freq: m.pct((g.totals[k] || 0) / tot, 1), combos: m.fmt(g.totals[k] || 0), stack: { flexGrow: String((g.totals[k] || 0) / tot), background: a.color } }));
+    const legend = acts.map((a, k) => ({ key: k, name: a.pct ? `${a.name} ${a.pct}` : a.name, style: { background: a.color }, n: m.fmt(g.totals[k] || 0) }));
+    const pairs = [["Top pair+", 0.142, 0.221], ["Second pair", 0.118, 0.094], ["Underpair", 0.096, 0.071], ["Draws", 0.054, 0.048], ["Ace high", 0.161, 0.188], ["Nothing", 0.429, 0.378]].map(([n, a, b], k) => ({
+      key: n, name: n, a: m.pct(a, 1), b: m.pct(b, 1), c0: `pair-v mono${a > b ? " is-hi0" : ""}`, c1: `pair-v p1 mono${b > a ? " is-hi1" : ""}`, cls: `pair-row${k === 0 ? " is-on" : ""}`, w0: { width: `${a * 220}%` }, w1: { width: `${b * 220}%` } }));
+    return { ...base, textures, lib, reRows, slots, deck, ticketBoard: m.cards("Ks 7d 2c"), flop: m.cards("Ks 7d 2c"),
+      nodeActs: acts.map((a, k) => ({ key: k, name: a.pct ? `${a.name} ${a.pct}` : a.name, size: a.size })),
+      gridRows: g.rows, comboCount: `${m.fmt(tot, 0)} of ${m.fmt(tot * 1.24, 0)}`, legend, tiles, pairs };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<main style="max-width: 1240px; margin: 0 auto; padding: 48px 32px 96px; display: flex; flex-direction: column; gap: 56px;">
+  <header style="display: flex; flex-direction: column; gap: 12px; max-width: 760px;">
+    <span class="label">pn study · direction 3</span>
+    <h1 style="font-size: 2.25rem; letter-spacing: -0.035em;">Graphite</h1>
+    <p style="margin: 0; color: var(--ink-2); font-size: 1rem; line-height: 1.6; text-wrap: pretty;">Cool graphite surfaces in five steps, one accent, Geist for text and Geist Mono for numbers that sit in columns. Surfaces are separated by lightness, a translucent hairline and a soft shadow rather than by borders. The action colours are fixed and only ever mean an action.</p>
+    <nav aria-label="Previews" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+      <a class="btn ghost" href="Train.dc.html" style="text-decoration: none;">Train</a>
+      <a class="btn ghost" href="Strategy.dc.html" style="text-decoration: none;">Strategy</a>
+      <a class="btn ghost" href="Screens.dc.html" style="text-decoration: none;">Hands, players, review, charts, performance</a>
+      <a class="btn ghost" href="Responsive.dc.html" style="text-decoration: none;">375 · 768 · 1440</a>
+    </nav>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="font-size: 1.125rem;">Accent</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+      <div class="panel">
+        <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 40px; height: 40px; border-radius: 10px; background: var(--amber);"></span><div><h3>Amber · default</h3><span class="note">oklch 80% 0.115 76 · light 55% 0.12 68</span></div></div>
+        <p style="margin: 0; color: var(--ink-2); font-size: var(--text-sm); text-wrap: pretty;">Continuity with Ledger, and the strongest outline on every action colour, so the hero cell stays findable in a red or green grid. It sits near the mixed grade; the grade colour is pushed yellower (hue 94) and grades always come with a word.</p>
+      </div>
+      <div class="panel">
+        <div style="display: flex; align-items: center; gap: 12px;"><span style="width: 40px; height: 40px; border-radius: 10px; background: var(--iris);"></span><div><h3>Iris · cool option</h3><span class="note">oklch 77% 0.10 286 · light 52% 0.14 286</span></div></div>
+        <p style="margin: 0; color: var(--ink-2); font-size: var(--text-sm); text-wrap: pretty;">The one hue no action, grade or stat uses, so nothing on screen shares a colour with anything else. Weaker as an outline on fold-blue cells. Turn it on with data-accent="iris" on html.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="font-size: 1.125rem;">Colour</h2>
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span class="label">{{ g.name }}</span>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 8px;">
+          <sc-for list="{{ g.items }}" as="t">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="{{ t.style }}"></div>
+              <span class="mono" style="font-size: var(--text-xs); color: var(--ink);">{{ t.name }}</span>
+              <span style="font-size: var(--text-2xs); color: var(--ink-3);">{{ t.use }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px;">
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="font-size: 1.125rem;">Type</h2>
+      <div class="panel" style="gap: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-num); font-family: var(--font-mono); font-weight: 500; letter-spacing: -0.03em;">+7.8 bb</span><span class="note">num 32 · mono 500</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-xl); font-weight: 600; letter-spacing: -0.03em;">Bet 75%</span><span class="note">xl 28 · verdict</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.025em;">Solve library</span><span class="note">lg 22 · page title</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-md); font-weight: 600;">Ranges at this decision</span><span class="note">md 15 · section, button</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-base);">Body text for notes and descriptions.</span><span class="note">base 14</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span style="font-size: var(--text-sm); color: var(--ink-2);">Secondary text, table cells.</span><span class="note">sm 13</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span class="mono" style="font-size: var(--text-xs);">97.5 · 64.2% · 1,642</span><span class="note">xs 12 · mono numerals</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span class="label">Kicker label</span><span class="note">2xs 11 · sans 500 caps</span></div>
+      </div>
+      <p class="note">Space Mono is gone. Labels are small sans caps; mono is only for numbers that line up (stacks, pots, bb, frequencies, EV, combos) and for kbd. Everything else is tabular Geist.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="font-size: 1.125rem;">Space, shape, elevation</h2>
+      <div class="panel" style="gap: 16px;">
+        <div style="display: flex; align-items: flex-end; gap: 10px;">
+          <sc-for list="{{ spaces }}" as="s"><div style="display: flex; flex-direction: column; align-items: center; gap: 6px;"><span style="{{ s.style }}"></span><span class="mono" style="font-size: var(--text-2xs); color: var(--ink-3);">{{ s.name }}</span></div></sc-for>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div style="width: 72px; height: 56px; border-radius: var(--radius-sm); background: var(--bg-3);"></div>
+          <div style="width: 72px; height: 56px; border-radius: var(--radius); background: var(--bg-3);"></div>
+          <div style="width: 72px; height: 56px; border-radius: var(--radius-lg); background: var(--bg-3);"></div>
+        </div>
+        <span class="note">radius-sm 6 chips · radius 8 controls · radius-lg 12 panels · cards 6</span>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 16px; border-radius: var(--radius); background: var(--bg-0);">
+          <div style="width: 96px; height: 56px; border-radius: 10px; background: var(--bg-2); box-shadow: var(--shadow-1);"></div>
+          <div style="width: 96px; height: 56px; border-radius: 10px; background: var(--bg-2); box-shadow: var(--shadow-2);"></div>
+          <div style="width: 96px; height: 56px; border-radius: 10px; background: var(--bg-2); box-shadow: var(--shadow-3);"></div>
+        </div>
+        <span class="note">shadow-1 panels · shadow-2 seats, popovers · shadow-3 sheets, tooltips</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 20px;">
+    <h2 style="font-size: 1.125rem;">Components</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px;">
+      <div class="panel"><span class="label">Buttons</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;"><button type="button" class="btn">Solve spot</button><button type="button" class="btn ghost">New session</button><button type="button" class="btn" disabled="{{ true }}">Disabled</button><button type="button" class="btn">Deal <kbd class="kbd-inv">N</kbd></button></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;"><button type="button" class="verdict-btn is-retry">Retry spot<kbd class="kbd-soft">Z</kbd></button><button type="button" class="verdict-btn">Why →</button><button type="button" class="linkish">Reset to chart</button></div>
+      </div>
+      <div class="panel"><span class="label">Segmented control · chips</span>
+        <div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">Now</button><button type="button" class="seg-opt" aria-pressed="false">Flop line</button><button type="button" class="seg-opt" aria-pressed="false">This street</button></div>
+        <div class="chips"><button type="button" class="chip" aria-pressed="false">Dry</button><button type="button" class="chip" aria-pressed="true">K-high</button><button type="button" class="chip" aria-pressed="false">Paired</button><span class="fchip"><span class="fchip-sw" style="background: #e8705f;"></span>Bet 33%<button type="button" class="fchip-x" aria-label="Clear">×</button></span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;"><span class="badge">showdown</span><span class="street-tag st-turn">turn</span><span class="arch arch-lag">lag</span><span class="verdict v-leak">leak</span><span class="ev-chip ev-ok">best</span><span class="ev-chip ev-warn">mixed 38%</span><span class="ev-chip ev-bad">blunder 4%</span><span class="ev-chip ev-na">not graded</span></div>
+      </div>
+      <div class="panel"><span class="label">Inputs</span>
+        <div class="filters">
+          <label class="field"><span>Position</span><select><option>BTN vs BB</option></select></label>
+          <label class="field"><span>Flop bets</span><input type="text" value="33 75"></input></label>
+          <label class="check-field"><input type="checkbox" checked="{{ true }}"></input>Auto-deal</label>
+        </div>
+      </div>
+      <div class="panel"><span class="label">Playing cards · deck picker</span>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+          <span class="cards"><sc-for list="{{ sampleCards }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span>
+          <span class="cards"><sc-for list="{{ sampleCards }}" as="c"><span class="{{ c.smCls }}">{{ c.text }}</span></sc-for></span>
+          <span class="card-back"></span>
+        </div>
+        <div class="deck" style="max-width: 420px;"><sc-for list="{{ deckRow }}" as="d"><button type="button" class="{{ d.cls }}" aria-pressed="{{ d.on }}">{{ d.text }}</button></sc-for></div>
+      </div>
+    </div>
+    <div class="panel" style="gap: 12px;"><span class="label">Trainer action bar · fold de-emphasised, sizes carry bb</span>
+      <div class="train-actions" style="max-width: 860px;">
+        <sc-for list="{{ bar }}" as="a"><button type="button" class="{{ a.cls }}" style="{{ a.style }}" aria-keyshortcuts="{{ a.keys }}"><span class="act-name">{{ a.name }}<sc-if value="{{ a.sub }}"><span class="act-sub">{{ a.sub }}</span></sc-if></span><kbd>{{ a.kbd }}</kbd></button></sc-for>
+      </div>
+      <div class="train-actions" style="max-width: 860px;"><p class="train-wait"><span class="dot" aria-hidden="true"></span>you: call · solving the turn… 4s</p></div>
+      <div class="train-verdict lvl-bad" style="max-width: 860px;"><span class="verdict-status">● blunder</span><span class="verdict-chosen">Bet 75%</span><span class="verdict-detail">solver 4% · best Check 78%</span><span class="verdict-tools"><button type="button" class="verdict-btn">Why →</button></span></div>
+      <div class="train-verdict lvl-ok" style="max-width: 860px;"><span class="verdict-status">● best</span><span class="verdict-chosen">Call</span><span class="verdict-detail">solver plays this 64%, its top action</span></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start;">
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>Spot</th><th class="num">n</th><th class="num">Best</th><th class="num">Blunder</th></tr></thead>
+          <tbody>
+            <tr><td>BB vs BTN · flop</td><td class="num">71</td><td class="num">79%</td><td class="num neg">5%</td></tr>
+            <tr><td>BTN vs BB · turn</td><td class="num">54</td><td class="num">74%</td><td class="num neg">7%</td></tr>
+            <tr><td>CO vs BB · river</td><td class="num">39</td><td class="num">72%</td><td class="num">0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sheet" style="animation: none;">
+        <div class="sheet-head"><p class="sheet-title">Keyboard shortcuts</p><button type="button" class="sheet-close">Close</button></div>
+        <div class="sheet-sec"><p class="sheet-kicker">Trainer</p>
+          <dl class="sheet-rows"><dt><kbd>F</kbd><kbd>C</kbd><kbd>R</kbd></dt><dd>Fold, call, raise</dd><dt><kbd>1</kbd>–<kbd>9</kbd></dt><dd>Actions in order</dd><dt><kbd>N</kbd><kbd>Space</kbd></dt><dd>Next hand</dd></dl>
+        </div>
+      </div>
+      <div class="tip" style="position: static; max-width: 260px;"><b>AKs</b><span class="muted"> · 4 combos · 100% weight</span>
+        <ul class="tip-list"><li><span class="swatch" style="background: #922326;"></span>Bet 75% 62.0%</li><li><span class="swatch" style="background: #e8705f;"></span>Bet 33% 30.5%</li><li><span class="swatch" style="background: #3fa66a;"></span>Check 7.5%</li></ul>
+      </div>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;amber&quot;, &quot;iris&quot;], &quot;default&quot;: &quot;amber&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;suits&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;4&quot;, &quot;2&quot;], &quot;default&quot;: &quot;4&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { m: null };
+  componentDidMount() { import(new URL("./mock.js", location.href).href).then((m) => { this.setState({ m }); this.env(m); }); }
+  componentDidUpdate() { if (this.state.m) this.env(this.state.m); }
+  opt(k, d) { const m = this.state.m; const alias = { theme: "mode", accent: "acc" }[k] || k; return (m && m.param(alias)) ?? this.props[k] ?? d; }
+  env(m) { m.applyEnv({ theme: this.opt("theme", "dark"), accent: this.opt("accent", "amber"), suits: this.opt("suits", "4"), version: "after" }); }
+  renderVals() {
+    const m = this.state.m;
+    const sw = (v) => ({ height: "56px", borderRadius: "10px", background: `var(${v})`, boxShadow: "inset 0 0 0 1px var(--hair)" });
+    const T = (name, use) => ({ key: name, name, use, style: sw(name) });
+    const groups = [
+      { key: "s", name: "Surfaces", items: [T("--bg-0", "page"), T("--bg-1", "side column, wells"), T("--bg-2", "panels, plates"), T("--bg-3", "hover, raised"), T("--bg-4", "pressed, selected"), T("--line", "rules, grout"), T("--line-2", "strong rule")] },
+      { key: "i", name: "Ink", items: [T("--ink", "primary"), T("--ink-2", "secondary"), T("--ink-3", "labels · 4.5:1"), T("--ink-4", "disabled, folded")] },
+      { key: "m", name: "Accent and semantics", items: [T("--accent", "hero, RNG, best"), T("--accent-fill", "primary button"), T("--good", "best, matched"), T("--warn", "mixed"), T("--bad", "blunder"), T("--hi", "above GTO"), T("--lo", "below GTO")] },
+      { key: "a", name: "Actions · fixed GTO Wizard mapping", items: [T("--act-fold", "fold"), T("--act-check", "check / call"), T("--act-raise-1", "smallest bet"), T("--act-raise-2", "bet"), T("--act-raise-3", "bet"), T("--act-raise-4", "largest bet"), T("--act-allin", "all-in")] },
+      { key: "c", name: "Table and cards", items: [T("--felt-1", "felt centre"), T("--felt-2", "felt edge"), T("--rail", "rail"), T("--card-bg", "card face"), T("--suit-h", "hearts"), T("--suit-d", "diamonds"), T("--suit-c", "clubs")] },
+    ];
+    const spaces = [["s1", 4], ["s2", 8], ["s3", 12], ["s4", 16], ["s5", 24], ["s6", 32], ["s7", 48]].map(([n, px]) => ({ key: n, name: `${n} ${px}`, style: { width: `${px}px`, height: `${px}px`, borderRadius: "3px", background: "var(--accent)" } }));
+    const AC = m ? m.AC : {};
+    const sampleCards = m ? m.cards("As Kh Qd Jc").map((c) => ({ ...c, smCls: `${c.cls} sm` })) : [];
+    const G = { s: "♠", h: "♥", d: "♦", c: "♣" };
+    const deckRow = m ? [...m.RANKS].map((r, k) => ({ key: r, cls: `deck-card suit-${"shdc"[k % 4]}`, text: r + G["shdc"[k % 4]], on: String(k === 1) })) : [];
+    const bar = [["Fold", "", "F", AC.fold], ["Call", "1.8 bb", "C", AC.call], ["Raise", "7.2 bb", "R", AC.r2], ["All-in", "97.5 bb", "A", AC.allin]].map(([name, sub, kbd, color], k) => ({
+      key: name, name, sub, kbd, keys: `${kbd.toLowerCase()} ${k + 1}`, cls: k === 1 ? "action-btn is-pressed" : k > 1 ? "action-btn" : "action-btn", style: { "--act": color } }));
+    return { groups, spaces, sampleCards, deckRow, bar };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,6069 @@
+[
+ {
+  "hand_id": "c01_open_fold",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 125,
+    "winners": [
+     {
+      "player_id": "pA",
+      "amount": 125,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pA",
+    "amount": 75
+   }
+  ],
+  "net": {
+   "pA": 75,
+   "pB": 0,
+   "pC": 0,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c02_cbet33_fold",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 85,
+    "to_amount": 85,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Kd",
+    "7s",
+    "2c"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Kd",
+      "7s",
+      "2c"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 275,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 275,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pC",
+    "amount": 85
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 150,
+   "pD": 0,
+   "pE": -25,
+   "pF": -125
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c03_3bet_fold",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 375,
+    "to_amount": 375,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 325,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 325,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pC",
+    "amount": 250
+   }
+  ],
+  "net": {
+   "pA": -125,
+   "pB": 0,
+   "pC": 200,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c04_4bet_5bet",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "raise",
+    "amount": 375,
+    "to_amount": 375,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 700,
+    "to_amount": 825,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 9,
+    "player_id": "pB",
+    "kind": "raise",
+    "amount": 4625,
+    "to_amount": 5000,
+    "allin": true,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 10,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 825,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 1725,
+    "winners": [
+     {
+      "player_id": "pB",
+      "amount": 1725,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pB",
+    "amount": 4175
+   }
+  ],
+  "net": {
+   "pA": -825,
+   "pB": 900,
+   "pC": 0,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c05_limp_iso_barrel",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 200,
+    "to_amount": 200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 150,
+    "to_amount": 200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 225,
+    "to_amount": 225,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 11,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 225,
+    "to_amount": 225,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 13,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 500,
+    "to_amount": 500,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 14,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "9h",
+    "8h",
+    "2s"
+   ],
+   "turn": "3d",
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "9h",
+      "8h",
+      "2s"
+     ],
+     "turn": "3d",
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 925,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 925,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pC",
+    "amount": 500
+   }
+  ],
+  "net": {
+   "pA": -425,
+   "pB": 0,
+   "pC": 500,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c06_limped_checkdown",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": [
+     "Qc",
+     "Ks"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": [
+     "Ah",
+     "Jh"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": [
+     "Tc",
+     "9c"
+    ],
+    "cards_source": "showdown"
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "call",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "call",
+    "amount": 25,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pE",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 11,
+    "player_id": "pB",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pE",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 14,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 15,
+    "player_id": "pB",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 16,
+    "player_id": "pE",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 17,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 18,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 19,
+    "player_id": "pB",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Jc",
+    "Tc",
+    "4d"
+   ],
+   "turn": "5h",
+   "river": "2d"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Jc",
+      "Tc",
+      "4d"
+     ],
+     "turn": "5h",
+     "river": "2d"
+    }
+   }
+  ],
+  "showdowns": [
+   {
+    "player_id": "pE",
+    "cards": [
+     "Ah",
+     "Jh"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pF",
+    "cards": [
+     "Tc",
+     "9c"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pA",
+    "cards": [
+     "Qc",
+     "Ks"
+    ],
+    "shown": true
+   }
+  ],
+  "pots": [
+   {
+    "amount": 200,
+    "winners": [
+     {
+      "player_id": "pE",
+      "amount": 200,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [],
+  "net": {
+   "pA": -50,
+   "pB": -50,
+   "pC": 0,
+   "pD": 0,
+   "pE": 150,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c07_steal_donk_raised",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 450,
+    "to_amount": 450,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "6s",
+    "5s",
+    "4d"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "6s",
+      "5s",
+      "4d"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 525,
+    "winners": [
+     {
+      "player_id": "pD",
+      "amount": 525,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pD",
+    "amount": 325
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": 275,
+   "pE": -25,
+   "pF": -250
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c08_sb_limp_bet",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "call",
+    "amount": 25,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pE",
+    "kind": "bet",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Ah",
+    "9d",
+    "3c"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Ah",
+      "9d",
+      "3c"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 100,
+    "winners": [
+     {
+      "player_id": "pE",
+      "amount": 100,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pE",
+    "amount": 50
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": 0,
+   "pE": 50,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c09_squeeze",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "call",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 550,
+    "to_amount": 550,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 9,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 450,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 450,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pC",
+    "amount": 425
+   }
+  ],
+  "net": {
+   "pA": -125,
+   "pB": -125,
+   "pC": 325,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c10_multiway_cbet_barrel",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "call",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "call",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "bet",
+    "amount": 150,
+    "to_amount": 150,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pD",
+    "kind": "call",
+    "amount": 150,
+    "to_amount": 150,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pA",
+    "kind": "bet",
+    "amount": 560,
+    "to_amount": 560,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Qh",
+    "Jd",
+    "3s"
+   ],
+   "turn": "8c",
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Qh",
+      "Jd",
+      "3s"
+     ],
+     "turn": "8c",
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 750,
+    "winners": [
+     {
+      "player_id": "pA",
+      "amount": 750,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pA",
+    "amount": 560
+   }
+  ],
+  "net": {
+   "pA": 475,
+   "pB": 0,
+   "pC": -125,
+   "pD": -275,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c11_check_raise",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 90,
+    "to_amount": 90,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "raise",
+    "amount": 360,
+    "to_amount": 360,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 11,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 90,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "8d",
+    "7d",
+    "2h"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "8d",
+      "7d",
+      "2h"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 455,
+    "winners": [
+     {
+      "player_id": "pF",
+      "amount": 455,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pF",
+    "amount": 270
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": -215,
+   "pD": 0,
+   "pE": -25,
+   "pF": 240
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c12_triple_barrel_sd",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": [
+     "Ah",
+     "Kd"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": [
+     "Qs",
+     "Qd"
+    ],
+    "cards_source": "showdown"
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pB",
+    "kind": "bet",
+    "amount": 180,
+    "to_amount": 180,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 180,
+    "to_amount": 180,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pB",
+    "kind": "bet",
+    "amount": 475,
+    "to_amount": 475,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 475,
+    "to_amount": 475,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 14,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 15,
+    "player_id": "pB",
+    "kind": "bet",
+    "amount": 1200,
+    "to_amount": 1200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 16,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 1200,
+    "to_amount": 1200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Ks",
+    "8h",
+    "4c"
+   ],
+   "turn": "2d",
+   "river": "9s"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Ks",
+      "8h",
+      "4c"
+     ],
+     "turn": "2d",
+     "river": "9s"
+    }
+   }
+  ],
+  "showdowns": [
+   {
+    "player_id": "pB",
+    "cards": [
+     "Ah",
+     "Kd"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pF",
+    "cards": [
+     "Qs",
+     "Qd"
+    ],
+    "shown": true
+   }
+  ],
+  "pots": [
+   {
+    "amount": 3985,
+    "winners": [
+     {
+      "player_id": "pB",
+      "amount": 3985,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [],
+  "net": {
+   "pA": 0,
+   "pB": 2005,
+   "pC": 0,
+   "pD": 0,
+   "pE": -25,
+   "pF": -1980
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c13_probe_turn",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 150,
+    "to_amount": 150,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pC",
+    "kind": "call",
+    "amount": 150,
+    "to_amount": 150,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 12,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 400,
+    "to_amount": 400,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 13,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Td",
+    "6c",
+    "3h"
+   ],
+   "turn": "Js",
+   "river": "2c"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Td",
+      "6c",
+      "3h"
+     ],
+     "turn": "Js",
+     "river": "2c"
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 575,
+    "winners": [
+     {
+      "player_id": "pF",
+      "amount": 575,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pF",
+    "amount": 400
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": -275,
+   "pD": 0,
+   "pE": -25,
+   "pF": 300
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c14_cbet100_fold",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 275,
+    "to_amount": 275,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "9c",
+    "5d",
+    "2s"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "9c",
+      "5d",
+      "2s"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 275,
+    "winners": [
+     {
+      "player_id": "pD",
+      "amount": 275,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pD",
+    "amount": 275
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": 150,
+   "pE": -25,
+   "pF": -125
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c15_cbet25_call",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 70,
+    "to_amount": 70,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 70,
+    "to_amount": 70,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 300,
+    "to_amount": 300,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 14,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "As",
+    "Ks",
+    "2h"
+   ],
+   "turn": "7c",
+   "river": "7d"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "As",
+      "Ks",
+      "2h"
+     ],
+     "turn": "7c",
+     "river": "7d"
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 415,
+    "winners": [
+     {
+      "player_id": "pF",
+      "amount": 415,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pF",
+    "amount": 300
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": -195,
+   "pD": 0,
+   "pE": -25,
+   "pF": 220
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c16_overbet_turn_fold",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 180,
+    "to_amount": 180,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 180,
+    "to_amount": 180,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 950,
+    "to_amount": 950,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "8s",
+    "6s",
+    "2d"
+   ],
+   "turn": "Kc",
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "8s",
+      "6s",
+      "2d"
+     ],
+     "turn": "Kc",
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 635,
+    "winners": [
+     {
+      "player_id": "pD",
+      "amount": 635,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pD",
+    "amount": 950
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": 330,
+   "pE": -25,
+   "pF": -305
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c17_overbet_turn_call_sd",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": [
+     "7h",
+     "6h"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": [
+     "Jc",
+     "Tc"
+    ],
+    "cards_source": "showdown"
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 90,
+    "to_amount": 90,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 90,
+    "to_amount": 90,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 680,
+    "to_amount": 680,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 680,
+    "to_amount": 680,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 14,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 15,
+    "player_id": "pD",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "9h",
+    "5c",
+    "2c"
+   ],
+   "turn": "Jd",
+   "river": "3s"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "9h",
+      "5c",
+      "2c"
+     ],
+     "turn": "Jd",
+     "river": "3s"
+    }
+   }
+  ],
+  "showdowns": [
+   {
+    "player_id": "pF",
+    "cards": [
+     "Jc",
+     "Tc"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pD",
+    "cards": [
+     "7h",
+     "6h"
+    ],
+    "shown": true
+   }
+  ],
+  "pots": [
+   {
+    "amount": 1815,
+    "winners": [
+     {
+      "player_id": "pF",
+      "amount": 1815,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": -895,
+   "pE": -25,
+   "pF": 920
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c18_river_raise_sd",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": [
+     "Kc",
+     "Jc"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": [
+     "Qh",
+     "Qd"
+    ],
+    "cards_source": "showdown"
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 10,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 12,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 200,
+    "to_amount": 200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 13,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 800,
+    "to_amount": 800,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 14,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 600,
+    "to_amount": 800,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Qc",
+    "8c",
+    "5h"
+   ],
+   "turn": "2s",
+   "river": "Ac"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Qc",
+      "8c",
+      "5h"
+     ],
+     "turn": "2s",
+     "river": "Ac"
+    }
+   }
+  ],
+  "showdowns": [
+   {
+    "player_id": "pC",
+    "cards": [
+     "Kc",
+     "Jc"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pF",
+    "cards": [
+     "Qh",
+     "Qd"
+    ],
+    "shown": true
+   }
+  ],
+  "pots": [
+   {
+    "amount": 1875,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 1875,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 950,
+   "pD": 0,
+   "pE": -25,
+   "pF": -925
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c19_walk",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 50,
+    "winners": [
+     {
+      "player_id": "pF",
+      "amount": 50,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pF",
+    "amount": 25
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 0,
+   "pC": 0,
+   "pD": 0,
+   "pE": -25,
+   "pF": 25
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c20_allin_pre_sd",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": [
+     "As",
+     "Ad"
+    ],
+    "cards_source": "showdown"
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": [
+     "Kh",
+     "Qh"
+    ],
+    "cards_source": "showdown"
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "raise",
+    "amount": 4950,
+    "to_amount": 5000,
+    "allin": true,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 4875,
+    "to_amount": 5000,
+    "allin": true,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "7c",
+    "7h",
+    "2d"
+   ],
+   "turn": "Kc",
+   "river": "4s"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "7c",
+      "7h",
+      "2d"
+     ],
+     "turn": "Kc",
+     "river": "4s"
+    }
+   }
+  ],
+  "showdowns": [
+   {
+    "player_id": "pA",
+    "cards": [
+     "As",
+     "Ad"
+    ],
+    "shown": true
+   },
+   {
+    "player_id": "pF",
+    "cards": [
+     "Kh",
+     "Qh"
+    ],
+    "shown": true
+   }
+  ],
+  "pots": [
+   {
+    "amount": 10025,
+    "winners": [
+     {
+      "player_id": "pA",
+      "amount": 10025,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [],
+  "net": {
+   "pA": 5025,
+   "pB": 0,
+   "pC": 0,
+   "pD": 0,
+   "pE": -25,
+   "pF": -5000
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c21_donk_multiway",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "call",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "call",
+    "amount": 75,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 8,
+    "player_id": "pF",
+    "kind": "bet",
+    "amount": 300,
+    "to_amount": 300,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pC",
+    "kind": "call",
+    "amount": 300,
+    "to_amount": 300,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 11,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "turn",
+    "seq": 12,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 13,
+    "player_id": "pF",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 14,
+    "player_id": "pC",
+    "kind": "bet",
+    "amount": 500,
+    "to_amount": 500,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "river",
+    "seq": 15,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "7s",
+    "6d",
+    "5c"
+   ],
+   "turn": "2h",
+   "river": "Ts"
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "7s",
+      "6d",
+      "5c"
+     ],
+     "turn": "2h",
+     "river": "Ts"
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 1000,
+    "winners": [
+     {
+      "player_id": "pC",
+      "amount": 1000,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pC",
+    "amount": 500
+   }
+  ],
+  "net": {
+   "pA": -125,
+   "pB": 0,
+   "pC": 575,
+   "pD": 0,
+   "pE": -25,
+   "pF": -425
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c22_3bet_call_cbet",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "raise",
+    "amount": 400,
+    "to_amount": 400,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 275,
+    "to_amount": 400,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 9,
+    "player_id": "pA",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pD",
+    "kind": "bet",
+    "amount": 300,
+    "to_amount": 300,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 11,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "Jh",
+    "9s",
+    "4d"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "Jh",
+      "9s",
+      "4d"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 875,
+    "winners": [
+     {
+      "player_id": "pD",
+      "amount": 875,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pD",
+    "amount": 300
+   }
+  ],
+  "net": {
+   "pA": -400,
+   "pB": 0,
+   "pC": 0,
+   "pD": 475,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c23_4bet_call_cbet",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "raise",
+    "amount": 125,
+    "to_amount": 125,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 375,
+    "to_amount": 375,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pB",
+    "kind": "raise",
+    "amount": 775,
+    "to_amount": 900,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "call",
+    "amount": 525,
+    "to_amount": 900,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 10,
+    "player_id": "pC",
+    "kind": "check",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 11,
+    "player_id": "pB",
+    "kind": "bet",
+    "amount": 600,
+    "to_amount": 600,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "flop",
+    "seq": 12,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [
+    "8c",
+    "4h",
+    "3d"
+   ],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [
+      "8c",
+      "4h",
+      "3d"
+     ],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 1875,
+    "winners": [
+     {
+      "player_id": "pB",
+      "amount": 1875,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pB",
+    "amount": 600
+   }
+  ],
+  "net": {
+   "pA": 0,
+   "pB": 975,
+   "pC": -900,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ },
+ {
+  "hand_id": "c24_limp_reraise",
+  "hand_no": 0,
+  "source": {
+   "kind": "pokernow_log",
+   "game_id": "fixture",
+   "fetched_at": "2026-10-01T00:00:00Z"
+  },
+  "started_at": "2026-10-01T00:00:00.000Z",
+  "variant": "NLHE",
+  "blinds": {
+   "sb": 25,
+   "bb": 50,
+   "ante": 0,
+   "straddle": 0
+  },
+  "button_seat": 4,
+  "players": [
+   {
+    "seat": 1,
+    "player_id": "pA",
+    "name": "alice",
+    "stack_start": 5000,
+    "position": "LJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 2,
+    "player_id": "pB",
+    "name": "bob",
+    "stack_start": 5000,
+    "position": "HJ",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 3,
+    "player_id": "pC",
+    "name": "carol",
+    "stack_start": 5000,
+    "position": "CO",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 4,
+    "player_id": "pD",
+    "name": "dave",
+    "stack_start": 5000,
+    "position": "BTN",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 5,
+    "player_id": "pE",
+    "name": "erin",
+    "stack_start": 5000,
+    "position": "SB",
+    "cards": null,
+    "cards_source": null
+   },
+   {
+    "seat": 6,
+    "player_id": "pF",
+    "name": "frank",
+    "stack_start": 5000,
+    "position": "BB",
+    "cards": null,
+    "cards_source": null
+   }
+  ],
+  "actions": [
+   {
+    "street": "preflop",
+    "seq": 0,
+    "player_id": "pE",
+    "kind": "post_sb",
+    "amount": 25,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 1,
+    "player_id": "pF",
+    "kind": "post_bb",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 2,
+    "player_id": "pA",
+    "kind": "call",
+    "amount": 50,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 3,
+    "player_id": "pB",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 4,
+    "player_id": "pC",
+    "kind": "raise",
+    "amount": 200,
+    "to_amount": 200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 5,
+    "player_id": "pD",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 0,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 6,
+    "player_id": "pE",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 25,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 7,
+    "player_id": "pF",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 50,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 8,
+    "player_id": "pA",
+    "kind": "raise",
+    "amount": 600,
+    "to_amount": 650,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   },
+   {
+    "street": "preflop",
+    "seq": 9,
+    "player_id": "pC",
+    "kind": "fold",
+    "amount": 0,
+    "to_amount": 200,
+    "allin": false,
+    "at": "2026-10-01T00:00:00.000Z"
+   }
+  ],
+  "board": {
+   "flop": [],
+   "turn": null,
+   "river": null
+  },
+  "runs": [
+   {
+    "board": {
+     "flop": [],
+     "turn": null,
+     "river": null
+    }
+   }
+  ],
+  "showdowns": [],
+  "pots": [
+   {
+    "amount": 475,
+    "winners": [
+     {
+      "player_id": "pA",
+      "amount": 475,
+      "hand_desc": null
+     }
+    ]
+   }
+  ],
+  "uncalled_returned": [
+   {
+    "player_id": "pA",
+    "amount": 450
+   }
+  ],
+  "net": {
+   "pA": 275,
+   "pB": 0,
+   "pC": -200,
+   "pD": 0,
+   "pE": -25,
+   "pF": -50
+  },
+  "flags": []
+ }
+]

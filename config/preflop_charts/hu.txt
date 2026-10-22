@@ -1,0 +1,8 @@
+# Heads-up 100bb (BTN = SB, opens 3x). Pure ranges (no weights). Overrides common.txt for the BTN-vs-BB spots.
+open BTN          = 22+,A2s+,K2s+,Q2s+,J2s+,T2s+,92s+,82s+,72s+,62s+,52s+,42s+,32s,A2o+,K2o+,Q2o+,J4o+,T6o+,96o+,86o+,75o+,65o,54o
+3bet BB vs BTN    = 88+,A7s+,A5s-A3s,K9s+,QTs+,JTs,A9o+,KJo+,QJo,T9s,65s
+call BB vs BTN    = 77-22,A6s,A2s,A8o-A2o,K8s-K2s,KTo-K2o,Q9s-Q2s,QTo-Q5o,J9s-J2s,J7o+,T8s-T2s,T7o+,92s+,97o+,82s+,86o+,72s+,76o,64s-62s,65o,52s+,54o,42s+,32s
+4bet vs3bet BTN   = QQ+,AKs,AKo,AQs,A5s-A4s
+call vs3bet BTN   = JJ-22,AJs-A6s,A3s-A2s,AQo-A5o,K8s+,KTo+,Q9s+,QTo+,J8s+,JTo,T7s+,97s+,86s+,75s+,64s+,54s
+5bet vs4bet LATE  = JJ+,AQs+,AKo
+call vs4bet LATE  = TT-88,AJs,KQs,AQo

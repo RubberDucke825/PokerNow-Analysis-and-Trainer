@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body { margin: 0; }
+</style>
+</helmet>
+<header class="topbar">
+  <a class="brand" href="#">pn study</a>
+  <nav id="main-nav" aria-label="Main navigation">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5"><a href="#" data-nav="{{ n.key }}" aria-current="{{ n.cur }}">{{ n.label }}</a></sc-for>
+  </nav>
+  <button class="menu-btn" type="button" aria-label="Menu" aria-controls="main-nav" aria-expanded="false">≡</button>
+</header>
+<main id="app" tabindex="-1">
+
+  <sc-if value="{{ v.hands }}" hint-placeholder-val="{{ true }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Hands</span><h1>Hand history</h1></div><p class="page-meta">1,284 PokerNow hands · 3 sessions imported</p></header>
+      <div class="filters" role="group" aria-label="Filters">
+        <label class="field"><span>Player</span><select><option>Anyone</option></select></label>
+        <label class="field"><span>Hero position</span><select><option>Any</option></select></label>
+        <label class="field"><span>Reached</span><select><option>Any street</option></select></label>
+        <label class="field"><span>Session</span><select><option>2026-10-14</option></select></label>
+      </div>
+      <div class="hands-out">
+        <div class="pager"><button type="button" class="btn ghost" disabled="{{ true }}">← Newer</button><span>1–25 of 1,284</span><button type="button" class="btn ghost">Older →</button></div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Hand</th><th>Started</th><th class="num">Players</th><th>Hero</th><th class="num">Net</th><th>Street</th><th class="num">Pot</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ hands }}" as="x" hint-placeholder-count="8">
+                <tr><td><a href="#">#{{ x.id }}</a></td><td class="muted">{{ x.at }}</td><td class="num">{{ x.n }}</td><td><span class="pos-tag">{{ x.pos }}</span> <span class="cards"><sc-for list="{{ x.cards }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span></td><td class="{{ x.netCls }}">{{ x.net }}</td><td>{{ x.street }}<sc-if value="{{ x.sd }}"><span class="badge">SD</span></sc-if></td><td class="num">{{ x.pot }}</td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.hand }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Hand #48213 · 2026-10-14 21:42</span><h1>BTN vs BB · single-raised pot</h1></div><p class="page-meta"><span class="badge">showdown</span><span class="badge">hero won</span></p></header>
+      <div class="board-strip"><span class="label">Board</span><span class="cards"><sc-for list="{{ board }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span></div>
+      <section class="panel"><h2 class="label panel-title">Players</h2>
+        <div class="table-wrap"><table class="data">
+          <thead><tr><th class="num">Seat</th><th>Pos</th><th>Player</th><th class="num">Stack</th><th>Cards</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1</td><td><span class="pos-tag">BTN</span></td><td>Marta</td><td class="num">104.0 bb</td><td><span class="cards"><span class="card suit-c">Q♣</span><span class="card suit-c">J♣</span></span></td></tr>
+            <tr><td class="num">3</td><td><span class="pos-tag">BB</span></td><td><b>hero</b></td><td class="num">100.0 bb</td><td><span class="cards"><span class="card suit-h">A♥</span><span class="card suit-d">Q♦</span></span></td></tr>
+            <tr><td class="num">2</td><td><span class="pos-tag">SB</span></td><td>callstation</td><td class="num">88.5 bb</td><td><span class="muted">—</span></td></tr>
+          </tbody>
+        </table></div>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Replay</h2>
+        <sc-for list="{{ replay }}" as="st" hint-placeholder-count="4">
+          <section class="replay-street">
+            <header class="street-head"><h3>{{ st.street }}</h3><span class="cards"><sc-for list="{{ st.cards }}" as="c"><span class="{{ c.cls }}">{{ c.text }}</span></sc-for></span><span class="muted">pot {{ st.pot }}</span></header>
+            <ol class="actions">
+              <sc-for list="{{ st.acts }}" as="a">
+                <li class="{{ a.cls }}"><span class="who">{{ a.who }}</span><span class="what">{{ a.what }}<sc-if value="{{ a.to }}"><span class="muted"> to {{ a.to }}</span></sc-if><sc-if value="{{ a.chip }}"><span class="{{ a.chipCls }}">{{ a.chip }}</span></sc-if></span><span class="num muted">{{ a.after }}</span></li>
+              </sc-for>
+            </ol>
+          </section>
+        </sc-for>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Pots</h2><ul class="pots"><li>Main pot 15.1 bb · won by hero (A♥ Q♦, ace high)</li></ul></section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.players }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Players</span><h1>Opponent profiles</h1></div><p class="page-meta">Posterior % with opportunities · red = 90% CI above GTO, blue = below</p></header>
+      <div class="table-wrap">
+        <table class="data matrix">
+          <thead><tr><th><button class="sort" type="button">Player</button></th><th class="num"><button class="sort" type="button">Hands ↓</button></th><th class="num">VPIP</th><th class="num">PFR</th><th class="num">3-bet</th><th class="num">Fold to 3-bet</th><th class="num">C-bet</th><th>Type</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ players }}" as="p" hint-placeholder-count="6">
+              <tr><th><a href="#">{{ p.name }}</a></th><td class="num">{{ p.hands }}</td>
+                <sc-for list="{{ p.stats }}" as="s"><td class="{{ s.cls }}"><span class="v">{{ s.v }}</span><span class="n"> {{ s.n }}</span></td></sc-for>
+                <td><span class="{{ p.archCls }}">{{ p.arch }}</span></td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.player }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Player</span><h1>callstation</h1></div><p class="page-meta"><span class="arch arch-calling_station">calling station</span><span>1,204 hands · 6 sessions</span></p></header>
+      <section class="panel"><h2 class="label panel-title">Exploits</h2>
+        <ul class="tips"><li>Value-bet thinner on turns and rivers: calls the turn 71% vs GTO 52%.</li><li>Cut bluffs on paired boards; folds to river bets 24% of the time.</li><li>Isolate wider from late position: limps 18% from the SB.</li></ul>
+      </section>
+      <section class="panel"><h2 class="label panel-title">By position</h2>
+        <p class="note">Posterior % with opportunities; <span class="hi">red</span> = 90% CI above GTO, <span class="lo">blue</span> = below (n ≥ 10). IP/OOP columns are postflop.</p>
+        <div class="table-wrap"><table class="data matrix">
+          <thead><tr><th>stat</th><sc-for list="{{ posCols }}" as="c"><th class="num">{{ c }}</th></sc-for></tr></thead>
+          <tbody>
+            <tr class="group-row"><th colspan="7">Preflop</th></tr>
+            <sc-for list="{{ posRows }}" as="r"><tr><th>{{ r.stat }}</th><sc-for list="{{ r.cells }}" as="s"><td class="{{ s.cls }}"><span class="v">{{ s.v }}</span><span class="n"> {{ s.n }}</span><span class="g">{{ s.g }}</span></td></sc-for></tr></sc-for>
+          </tbody>
+        </table></div>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Leaks</h2>
+        <p class="note">Ranked by deviation from GTO; positional cells only.</p>
+        <ol class="leaks">
+          <li class="leak hi"><div class="leak-head"><strong>Turn call</strong><span class="spot">BB vs BTN</span><span class="leak-num">71% vs GTO 52%<span class="muted"> · n 84 · pop 58%</span></span></div><p class="exploit">Bet turns for value with second pair and better; size up on draw-completing cards.</p></li>
+          <li class="leak lo"><div class="leak-head"><strong>Fold to river bet</strong><span class="spot">any vs any</span><span class="leak-num">24% vs GTO 41%<span class="muted"> · n 61 · pop 37%</span></span></div><p class="exploit">River bluffs lose money here; give up missed draws.</p></li>
+          <li class="leak hi"><div class="leak-head"><strong>SB limp</strong><span class="spot">SB</span><span class="leak-num">18% vs GTO 0%<span class="muted"> · n 132 · pop 6%</span></span></div></li>
+        </ol>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Archetype scores</h2>
+        <dl class="scores"><dt>calling station</dt><dd><span class="bar" style="width: 64%;"></span>64%</dd><dt>loose passive</dt><dd><span class="bar" style="width: 22%;"></span>22%</dd><dt>tag</dt><dd><span class="bar" style="width: 9%;"></span>9%</dd><dt>nit</dt><dd><span class="bar" style="width: 5%;"></span>5%</dd></dl>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.review }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Review</span><h1>Hero's deviations</h1></div></header>
+      <form class="inline-form"><label for="hero">Hero</label><select id="hero"><option>hero (1,284 hands)</option></select><button type="submit" class="btn">Review</button></form>
+      <section class="panel"><h2 class="label panel-title">Blunders</h2>
+        <p class="note">Solver grade of every decision: best, mixed or blunder by the frequency of the action taken.</p>
+        <div class="ev-body">
+          <div class="ev-totals">
+            <p class="ev-big">7<span class="muted"> blunders in 164 graded decisions</span></p>
+            <p class="muted">best 121 · mixed 36 · blunder 7</p>
+            <p class="muted">12 decisions not graded: multiway or off-tree sizes</p>
+          </div>
+          <div class="ev-grid">
+            <div><h3 class="label ev-sub">By street</h3><div class="table-wrap"><table class="data ev-table"><thead><tr><th>street</th><th class="num">graded</th><th class="num">best</th><th class="num">mixed</th><th class="num">blunders</th><th class="num">rate</th></tr></thead><tbody>
+              <tr><td>flop</td><td class="num">71 / 74</td><td class="num">56</td><td class="num">13</td><td class="num neg">2</td><td class="num">2.8%</td></tr>
+              <tr><td>turn</td><td class="num">54 / 58</td><td class="num">39</td><td class="num">12</td><td class="num neg">3</td><td class="num">5.6%</td></tr>
+              <tr><td>river</td><td class="num">39 / 44</td><td class="num">26</td><td class="num">11</td><td class="num neg">2</td><td class="num">5.1%</td></tr>
+            </tbody></table></div></div>
+            <div><h3 class="label ev-sub">By spot</h3><div class="table-wrap"><table class="data ev-table"><thead><tr><th>spot</th><th class="num">graded</th><th class="num">blunders</th><th class="num">rate</th></tr></thead><tbody>
+              <tr><td>BB vs BTN</td><td class="num">48 / 50</td><td class="num neg">3</td><td class="num">6.3%</td></tr>
+              <tr><td>BTN vs BB</td><td class="num">41 / 43</td><td class="num neg">2</td><td class="num">4.9%</td></tr>
+              <tr><td>CO vs BB</td><td class="num">22 / 22</td><td class="num">0</td><td class="num">0%</td></tr>
+            </tbody></table></div></div>
+            <div><h3 class="label ev-sub">Hands with the most blunders</h3><ol class="ev-top"><li>#48213 · 2</li><li>#47920 · 1</li><li>#47811 · 1</li></ol></div>
+          </div>
+        </div>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Deviations from GTO</h2>
+        <div class="table-wrap"><table class="data review">
+          <thead><tr><th>spot</th><th>stat</th><th>verdict</th><th class="num">you</th><th class="num">GTO</th><th class="num">n</th><th class="num">cost</th><th>reason</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ devs }}" as="d"><tr><td><span class="spot">{{ d.spot }}</span></td><td>{{ d.stat }}</td><td><span class="{{ d.vCls }}">{{ d.verdict }}</span></td><td class="num">{{ d.you }}</td><td class="num muted">{{ d.gto }}</td><td class="num">{{ d.n }}</td><td class="num">{{ d.cost }}</td><td class="reason"><button type="button" class="linkish" aria-expanded="false">{{ d.reason }}</button></td></tr></sc-for>
+          </tbody>
+        </table></div>
+        <p class="note">cost = CI-aware deviation from GTO × opportunities.</p>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.charts }}" hint-placeholder-val="{{ false }}">
+    <div class="page">
+      <header class="page-head"><div><span class="label">Charts</span><h1>Preflop charts</h1></div></header>
+      <section class="panel"><h2 class="label panel-title">GTO Wizard mixed strategy</h2>
+        <div class="filters"><label class="field" for="gtow-spot"><span>Spot</span><select id="gtow-spot"><option>100bb · RFI · BTN</option></select></label></div>
+        <div class="chart-block">
+          <p class="chart-title">100bb · open · UTG → HJ → CO → BTN · actor BTN</p>
+          <div class="grid-and-legend">
+            <div class="grid13" role="grid" aria-label="BTN open">
+              <sc-for list="{{ chartRows }}" as="r" hint-placeholder-count="13"><div class="grid-row" role="row"><sc-for list="{{ r.cells }}" as="c"><div class="{{ c.cls }}" role="gridcell" style="{{ c.style }}"><span class="cell-name">{{ c.name }}</span></div></sc-for></div></sc-for>
+            </div>
+            <ul class="legend"><sc-for list="{{ chartLegend }}" as="l"><li><span class="swatch" style="{{ l.style }}"></span>{{ l.name }}<b>{{ l.n }}</b></li></sc-for></ul>
+          </div>
+        </div>
+      </section>
+      <section class="panel"><h2 class="label panel-title">Range text</h2>
+        <form class="inline-form"><label for="range-text">Range</label><input id="range-text" type="text" value="22+, A2s+, KTs+, QTs+, JTs, ATo+, KJo+"></input><button type="submit" class="btn">Show</button></form>
+        <p class="range-text">22+, A2s+, KTs+, QTs+, JTs, ATo+, KJo+ · 214 combos · 16.1% of hands</p>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ v.performance }}" hint-placeholder-val="{{ false }}">
+    <div class="page pf-page">
+      <header class="page-head"><div><span class="label">Trainer</span><h1>Performance</h1></div><p class="page-meta"><a href="#">← Back to the trainer</a><span>graded decisions from 412 trainer hands</span></p></header>
+      <div class="filters pf-filters">
+        <div class="pf-filter"><span class="label">Window</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="false">100</button><button type="button" class="seg-opt" aria-pressed="true">500</button><button type="button" class="seg-opt" aria-pressed="false">All</button></div></div>
+        <div class="pf-filter"><span class="label">Street</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">All</button><button type="button" class="seg-opt" aria-pressed="false">Flop</button><button type="button" class="seg-opt" aria-pressed="false">Turn</button><button type="button" class="seg-opt" aria-pressed="false">River</button></div></div>
+        <div class="pf-filter"><span class="label">Format</span><div class="seg" role="group"><button type="button" class="seg-opt" aria-pressed="true">6-max</button><button type="button" class="seg-opt" aria-pressed="false">8-max</button></div></div>
+      </div>
+      <div class="pf-body">
+        <div class="kpis pf-kpis">
+          <div class="kpi"><span class="label">GTO closeness</span><b class="pf-kpi-main">83.4%</b></div>
+          <div class="kpi"><span class="label">Graded</span><b>1,642</b></div>
+          <div class="kpi"><span class="label">Best</span><b>74.1%</b></div>
+          <div class="kpi"><span class="label">Mixed</span><b>20.2%</b></div>
+          <div class="kpi"><span class="label">Blunders</span><b class="neg">5.7%</b></div>
+        </div>
+        <figure class="pf-trend">
+          <ul class="legend pf-trend-legend"><li><span class="pf-key-line pf-s-close" aria-hidden="true"></span>GTO closeness<b>83%</b></li><li><span class="pf-key-line pf-s-blunder" aria-hidden="true"></span>Blunder rate<b>5.7%</b></li></ul>
+          <div class="pf-plot">
+            <div class="pf-yaxis" aria-hidden="true"><span>100%</span><span>50%</span><span>0%</span></div>
+            <svg class="pf-trend-svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Trend">
+              <line class="pf-grid" x1="0" x2="100" y1="0" y2="0"></line><line class="pf-grid" x1="0" x2="100" y1="50" y2="50"></line><line class="pf-grid" x1="0" x2="100" y1="100" y2="100"></line>
+              <polyline class="pf-line pf-s-close" points="0,28 12.5,26 25,24 37.5,25 50,21 62.5,19 75,18 87.5,17 100,16.6"></polyline>
+              <polyline class="pf-line pf-s-blunder" points="0,90 12.5,91 25,92 37.5,91 50,93 62.5,93 75,94 87.5,94 100,94.3"></polyline>
+            </svg>
+          </div>
+          <figcaption class="note">9 buckets of about 180 graded decisions, oldest left · latest values in the key</figcaption>
+        </figure>
+        <div class="pf-heat-wrap" tabindex="-1">
+          <table class="pf-heat" role="grid" aria-label="GTO closeness by position and spot family">
+            <thead>
+              <tr class="pf-groups"><th class="pf-corner" scope="col"><span class="visually-hidden">Position</span></th><th scope="colgroup" colspan="3" class="pf-group">Single-raised</th><th scope="colgroup" colspan="3" class="pf-group">3-bet pots</th></tr>
+              <tr class="pf-fams"><th class="pf-corner" scope="col" aria-hidden="true"></th><sc-for list="{{ fams }}" as="f"><th scope="col" class="{{ f.cls }}">{{ f.name }}</th></sc-for></tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ heat }}" as="r" hint-placeholder-count="6"><tr><th scope="row" class="pf-pos">{{ r.pos }}</th><sc-for list="{{ r.cells }}" as="c"><td class="{{ c.cls }}" role="gridcell"><span class="pf-v">{{ c.v }}</span><span class="pf-n">{{ c.n }}</span></td></sc-for></tr></sc-for>
+            </tbody>
+          </table>
+        </div>
+        <div class="pf-legend" role="group" aria-label="Colour key"><span class="label">GTO closeness</span>
+          <ol class="pf-steps"><li><span class="pf-swatch pf-b0"></span>&lt; 60%</li><li><span class="pf-swatch pf-b1"></span>60–70%</li><li><span class="pf-swatch pf-b2"></span>70–80%</li><li><span class="pf-swatch pf-b3"></span>80–90%</li><li><span class="pf-swatch pf-b4"></span>≥ 90%</li></ol>
+          <span class="pf-key"><span class="pf-swatch is-thin"></span>striped: fewer than 20 graded decisions</span>
+        </div>
+        <div class="pf-detail-holder" role="region" aria-label="Cell detail">
+          <div class="pf-detail">
+            <div class="pf-detail-head"><h3 class="pf-detail-title">BB · facing c-bet</h3><span class="muted mono">212 decisions · 204 graded · closeness 71%</span></div>
+            <ul class="pf-spots">
+              <sc-for list="{{ spots }}" as="s"><li class="pf-spot"><div class="pf-spot-name"><span>{{ s.name }}</span><small class="muted mono">{{ s.sub }}</small></div><span class="pf-close"><span class="pf-close-bar" aria-hidden="true"><i style="{{ s.w }}"></i></span><b>{{ s.c }}</b></span><span class="pf-split" role="img"><span class="s-best" style="{{ s.b }}"></span><span class="s-mixed" style="{{ s.m }}"></span><span class="s-blunder" style="{{ s.x }}"></span></span><span class="mono pf-spot-counts">{{ s.counts }}</span><button type="button" class="btn ghost pf-drill">Drill this spot</button></li></sc-for>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;view&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;hands&quot;, &quot;hand&quot;, &quot;players&quot;, &quot;player&quot;, &quot;review&quot;, &quot;charts&quot;, &quot;performance&quot;], &quot;default&quot;: &quot;hands&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Screen&quot;}, &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;amber&quot;, &quot;iris&quot;], &quot;default&quot;: &quot;amber&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;suits&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;4&quot;, &quot;2&quot;], &quot;default&quot;: &quot;4&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}, &quot;version&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;after&quot;, &quot;before&quot;], &quot;default&quot;: &quot;after&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}}">
+class Component extends DCLogic {
+  state = { m: null };
+  componentDidMount() { import(new URL("./mock.js", location.href).href).then((m) => { this.setState({ m }); this.env(m); }); }
+  componentDidUpdate() { if (this.state.m) this.env(this.state.m); }
+  opt(k, d) { const m = this.state.m; const alias = { theme: "mode", accent: "acc" }[k] || k; return (m && m.param(alias)) ?? this.props[k] ?? d; }
+  env(m) { m.applyEnv({ theme: this.opt("theme", "dark"), accent: this.opt("accent", "amber"), suits: this.opt("suits", "4"), version: this.opt("version", "after") }); }
+  renderVals() {
+    const m = this.state.m;
+    const view = this.opt("view", "hands");
+    const v = Object.fromEntries(["hands", "hand", "players", "player", "review", "charts", "performance"].map((k) => [k, view === k]));
+    const navKey = { hand: "hands", player: "players", charts: "strategy", performance: "train" }[view] || view;
+    const nav = [["train", "Train"], ["strategy", "Strategy"], ["hands", "Hands"], ["players", "Players"], ["review", "Review"]].map(([key, label]) => ({ key, label, cur: key === navKey ? "page" : null }));
+    if (!m) return { v, nav, hands: [], board: [], replay: [], players: [], posCols: [], posRows: [], devs: [], chartRows: [], chartLegend: [], fams: [], heat: [], spots: [] };
+    const AC = m.AC;
+    const hands = [
+      [48213, "21:42", 6, "BB", "Ah Qd", 7.8, "river", true, 15.1], [48212, "21:41", 6, "SB", "9c 9d", -3.0, "flop", false, 8.5], [48211, "21:40", 6, "BTN", "Kh Js", 1.5, "preflop", false, 1.5],
+      [48210, "21:39", 6, "CO", "7s 6s", -11.2, "turn", false, 24.6], [48209, "21:38", 5, "HJ", "Ad Kc", 22.4, "river", true, 48.3], [48208, "21:37", 6, "UTG", "Td 4c", 0, "preflop", false, 2.5],
+      [48207, "21:36", 6, "BB", "5h 5s", -1.0, "preflop", false, 3.5], [48206, "21:35", 6, "SB", "Qs Ts", 4.2, "turn", false, 9.0],
+    ].map(([id, at, n, pos, c, net, street, sd, pot]) => ({ key: id, id, at: `2026-10-14 ${at}`, n, pos, cards: m.cards(c), net: net === 0 ? "0.0" : `${net > 0 ? "+" : "−"}${Math.abs(net).toFixed(1)}`, netCls: `num ${net > 0 ? "pos" : net < 0 ? "neg" : "muted"}`, street, sd, pot: `${pot.toFixed(1)} bb` }));
+    const A = (who, kind, what, to, after, chip, lvl) => ({ key: who + what + after, who, cls: `act act-${kind}`, what, to: to || "", chip: chip || "", chipCls: `ev-chip ev-${lvl || "ok"}`, after });
+    const replay = [
+      { key: "p", street: "Preflop", cards: [], pot: "1.5 bb", acts: [A("nit_92", "fold", "fold", "", "pot 1.5 · stack 100.0"), A("Marta", "raise", "raise 2.5", "2.5", "pot 4.0 · stack 101.5"), A("callstation", "fold", "fold", "", "pot 4.0 · stack 88.0"), A("hero", "call", "call 1.5", "", "pot 5.5 · stack 97.5", "best", "ok")] },
+      { key: "f", street: "Flop", cards: m.cards("Ks 7d 2c"), pot: "5.5 bb", acts: [A("hero", "check", "check", "", "pot 5.5 · stack 97.5", "best", "ok"), A("Marta", "bet", "bet 1.8", "1.8", "pot 7.3 · stack 99.7"), A("hero", "call", "call 1.8", "", "pot 9.1 · stack 95.7", "best", "ok")] },
+      { key: "t", street: "Turn", cards: m.cards("9h"), pot: "9.1 bb", acts: [A("hero", "check", "check", "", "pot 9.1 · stack 95.7", "best", "ok"), A("Marta", "bet", "bet 3.0", "3.0", "pot 12.1 · stack 96.7"), A("hero", "call", "call 3.0", "", "pot 15.1 · stack 92.7", "mixed 38%", "warn")] },
+      { key: "r", street: "River", cards: m.cards("4s"), pot: "15.1 bb", acts: [A("hero", "check", "check", "", "pot 15.1 · stack 92.7", "best", "ok"), A("Marta", "check", "check", "", "pot 15.1 · stack 96.7")] },
+    ];
+    const st = (v, n, g, hi) => ({ key: v + "" + n, v, n, g, cls: `stat num${hi === 1 ? " hi" : hi === -1 ? " lo" : ""}` });
+    const players = [
+      ["callstation", 1204, [st("41.2", 1204, 0, 1), st("9.8", 1204, 0, -1), st("2.1", 380, 0, -1), st("38", 44, 0, 0), st("52", 120, 0, 0)], "calling station", "arch-calling_station"],
+      ["Marta", 2310, [st("24.5", 2310, 0, 0), st("19.9", 2310, 0, 0), st("8.4", 640, 0, 0), st("54", 96, 0, 0), st("63", 410, 0, 0)], "tag", "arch-tag"],
+      ["nit_92", 860, [st("14.2", 860, 0, -1), st("11.0", 860, 0, -1), st("3.0", 220, 0, -1), st("71", 31, 0, 1), st("70", 140, 0, 1)], "nit", "arch-nit"],
+      ["rex", 412, [st("33.0", 412, 0, 1), st("27.1", 412, 0, 1), st("12.9", 140, 0, 1), st("41", 18, 0, 0), st("74", 88, 0, 1)], "lag", "arch-lag"],
+      ["punter", 98, [st("52.0", 98, 0, 1), st("4.1", 98, 0, -1), st("1.0", 30, 0, 0), st("—", 2, 0, 0), st("33", 12, 0, 0)], "punching bag", "arch-punching_bag"],
+    ].map(([name, hands, stats, arch, ac]) => ({ key: name, name, hands, stats, arch, archCls: `arch ${ac}` }));
+    const posCols = ["UTG", "HJ", "CO", "BTN", "SB", "BB"];
+    const posRows = [["VPIP", [22, 25, 31, 44, 58, 61], [16, 20, 26, 41, 38, 52]], ["PFR", [8, 9, 11, 14, 6, 4], [16, 20, 26, 41, 31, 10]], ["Limp", [9, 11, 12, 18, 28, 0], [0, 0, 0, 0, 0, 0]], ["Fold to steal", [null, null, null, null, 44, 38], [null, null, null, null, 61, 52]]].map(([stat, a, g]) => ({
+      key: stat, stat, cells: a.map((x, k) => x === null ? { key: k, cls: "num empty-cell", v: "·", n: "", g: "" } : { key: k, v: `${x}.0`, n: 40 + k * 23, g: `g ${g[k]}`, cls: `stat num${x - g[k] > 8 ? " hi" : g[k] - x > 8 ? " lo" : ""}` }) }));
+    const devs = [["BB vs BTN", "Fold to c-bet", "leak", "v-leak", "48%", "34%", 62, "4.21", "Folds too many backdoor draws"], ["BTN vs BB", "C-bet flop", "justified", "v-justified", "81%", "64%", 77, "1.90", "Opponent folds 61% vs bets"], ["SB vs BB", "Limp", "leak", "v-leak", "12%", "0%", 40, "1.12", "Off-strategy action"], ["CO vs BTN", "3-bet", "unknown", "v-unknown", "6%", "9%", 14, "0.42", "Thin sample"]]
+      .map(([spot, stat, verdict, vCls, you, gto, n, cost, reason]) => ({ key: spot + stat, spot, stat, verdict, vCls: `verdict ${vCls}`, you, gto, n, cost, reason }));
+    const cacts = [{ color: AC.fold, band: [0, 0.4] }, { color: AC.call, band: [0.42, 0.55] }, { color: AC.r2, band: [0.5, 1.2] }];
+    const cg = m.grid((i, j) => ({ weight: 1, segments: m.bands(i, j, cacts, 0.2, 7) }), { full: false });
+    const chartLegend = ["Fold", "Call", "Raise 2.5"].map((n, k) => ({ key: n, name: n, style: { background: cacts[k].color }, n: m.fmt(cg.totals[k] || 0) }));
+    const famNames = ["IP c-bet", "OOP vs c-bet", "Turn barrel", "IP c-bet", "OOP vs c-bet", "Turn barrel"];
+    const fams = famNames.map((name, k) => ({ key: k, name, cls: `pf-fam${k === 3 ? " pf-gstart" : ""}` }));
+    const band = (c) => c < 0.6 ? 0 : c < 0.7 ? 1 : c < 0.8 ? 2 : c < 0.9 ? 3 : 4;
+    const heat = ["UTG", "HJ", "CO", "BTN", "SB", "BB"].map((pos, r) => ({ key: pos, pos, cells: famNames.map((f, k) => {
+      const nn = Math.round(8 + m.noise(r * 11 + k) * 140); const c = 0.55 + m.noise(r * 7 + k * 3 + 1) * 0.42; const empty = (r < 2 && k === 1) || (r === 5 && k === 0);
+      if (empty) return { key: k, cls: `pf-cell is-empty${k === 3 ? " pf-gstart" : ""}`, v: "", n: "" };
+      const thin = nn < 20;
+      return { key: k, v: `${Math.round(c * 100)}%`, n: nn, cls: `pf-cell pf-b${band(c)}${thin ? " is-thin" : ""}${k === 3 ? " pf-gstart" : ""}${r === 5 && k === 1 ? " is-selected" : ""}` }; }) }));
+    const spots = [["BB vs BTN · dry K-high", 0.64, 41, 22, 6], ["BB vs BTN · monotone", 0.71, 30, 14, 2], ["BB vs CO · paired", 0.78, 26, 9, 1], ["BB vs SB · low connected", 0.82, 21, 7, 0]].map(([name, c, b, mx, x]) => ({
+      key: name, name, sub: `${b + mx + x} · last 2026-10-14`, c: `${Math.round(c * 100)}%`, w: { width: `${Math.round(c * 100)}%` }, b: { flexGrow: b }, m: { flexGrow: mx }, x: { flexGrow: x }, counts: `${b} · ${mx} · ${x}` }));
+    return { v, nav, hands, board: m.cards("Ks 7d 2c 9h 4s"), replay, players, posCols, posRows, devs, chartRows: cg.rows, chartLegend, fams, heat, spots };
+  }
+}
+</script>
+</body>
+</html>

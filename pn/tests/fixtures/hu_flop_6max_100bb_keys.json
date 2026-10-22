@@ -1,0 +1,528 @@
+{
+ "00ca266bc7ea8b15": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "0fe045d270247cdc1add4e4f7c6bb6428dd1b6c510e518c5b91ec9d12466f807",
+  "key_798b5c4": "7a57e1893fb0eb64a09054f8a78253a8e62482d64f667988801a69fd1aa0ca61",
+  "line": "CO raise, BTN raise, CO raise, BTN call"
+ },
+ "0449d081e103fb7e": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "1342c04dcc6a26b52db875f164798d1b648e0e836435e23258aab5de5d2fe1ad",
+  "line": "LJ call, BB raise, LJ call"
+ },
+ "1042c9f331eeb417": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "4064ec291ec0be65511a247212cd6690e84ab72ab1fdb8071a2f50ddd3537ff4",
+  "line": "LJ raise, SB raise, BB call"
+ },
+ "10607fdb4b85124d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "119e62c2be1ef7aa1d26bc6e9557bba0f0d66e36c3aafe2467b20759dea6e13f",
+  "line": "HJ raise, CO call"
+ },
+ "16497b96f6a38202": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "15050021ad0e0d8c725ad7aadb6b9c658ac8938c3d6fe826b171d4471a8e1a17",
+  "line": "LJ raise, BTN raise, LJ call"
+ },
+ "19b8ec32d7987875": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "dbbe0e8884f83887b2d95cf0c106f907483abcb8fa06ce37999897a7fc7d85f9",
+  "line": "HJ raise, BTN raise, HJ call"
+ },
+ "1ab0312f5acd786e": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "2ddc7d6720572253a528cec420552a21b5d2f1f5ab600311ecea52eb461fc41d",
+  "line": "HJ call, BTN raise, HJ call"
+ },
+ "1fc007901854ec5f": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "7e3b6329be95c4a9e7a64e59b8453f7cf1baee7aab743948d47b0be2eda93a2f",
+  "key_798b5c4": "06ff6e3377bd13c29aadcd332c4a15ef3ca13ddb19b847d41eb43945b078e84c",
+  "line": "LJ raise, BB raise, LJ raise, BB call"
+ },
+ "2201fda9370c2ff1": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "84f460acc0a1a0666f515c4c3050e3c4250f2c3782c8578b3a584430c4d0ea3a",
+  "line": "LJ call, CO raise, LJ call"
+ },
+ "22bdd96fa6e601be": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "67264f8d32b34d52c47204d21d896a7d602dc77a07a37a8cd20ee3e35680f33c",
+  "line": "BTN call, SB raise, BTN call"
+ },
+ "238859bede230e5c": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "2798265ee3417f78277923592ce0ecee3af452d0c39d06208fc8b6eb98eaf4bf",
+  "key_798b5c4": "6ab42d7d0a3cfc3d53ab02a21d60c44ecf97b7d9210d224d46424831a57861e3",
+  "line": "HJ raise, SB raise, HJ raise, SB call"
+ },
+ "30b241ece168ff5b": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "eef9af520b5b662f65a23366ec236e78220278239943e0ede7501bbcb354bcd5",
+  "line": "LJ raise, CO call"
+ },
+ "34cb3d5e18c7c531": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "1341b5eaed7bc3220c1d825ece87e78b050b2714941a48a1cfe2f5c54fc5cd63",
+  "line": "LJ raise, CO raise, LJ call"
+ },
+ "350778114096367f": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "47879626249c3e539060ed134671978cf405b5af563c93cd1e9d5f2e1bba56d6",
+  "line": "BTN call, BB raise, BTN call"
+ },
+ "35e3e76410c4a945": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "a4901d9e084cdb85c35ae945c4c10b3091c0cf16f1c365da6ef83a57cc8938e4",
+  "line": "LJ call, SB raise, LJ call"
+ },
+ "3aa9d3f8e4224c6d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "63b8a2d8c1a53536ad1b70a15f9a284073ed650356034df4795a3b9ef3fc281e",
+  "line": "LJ raise, BTN raise, BB call"
+ },
+ "3be4bedb576b8920": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "99c53715a68b3284829cadb3100027370846b4fa7c8f79b8a515b1193caebb1c",
+  "key_798b5c4": "32b224f97acdda3cbb4b38eb0ec526695ec09891231fda7d57290915c5384859",
+  "line": "SB raise, BB raise, SB raise, BB call"
+ },
+ "3cadb2ad5b7de6a9": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "f7b13c9cc67a678f4e5e6d7c89b9d428cd96707423535585170dc0365dd66107",
+  "key_798b5c4": "908185542a42337e2cee9019fd005a964dba0511deda3dfce06157d0d8c5ec33",
+  "line": "CO raise, SB raise, CO raise, SB call"
+ },
+ "3cc704dbef59c3b0": {
+  "accuracy": 1.0,
+  "board": "AcKcQd",
+  "key": "5c613e56742f4c413ae9bcbfaa79567d285fa266cce30f91cb1afad3f50b2e4b",
+  "line": "BTN call, BB check"
+ },
+ "415c5e1b0e6f8276": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "f429210f1fcee5da92fe5d03412f9464bba6b35c068cb2cb76653773f111b6fa",
+  "line": "HJ raise, CO raise, BB call"
+ },
+ "43ab6b4948e10e66": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "a1b71c2b44aa57d4a898ef2eae67bc18a82ddd448bbc40be7743b81e2c8338a9",
+  "line": "LJ call, BTN raise, LJ call"
+ },
+ "449e05f459d24def": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "3eb48af9fc17fbb34e6c9770db2882c81e86337f46b06500ed0963995480970e",
+  "line": "LJ raise, BB call"
+ },
+ "4584675b5bf4086a": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "7db505b3ab73922e728957c707060e8c37778eb0b584505b2837edc99b551647",
+  "line": "LJ raise, CO raise, BB call"
+ },
+ "463abc61351a7332": {
+  "accuracy": 1.0,
+  "board": "AcKcQd",
+  "key": "857793f0b19c7cf0be9bccdcc85992ccc9312ab2c20d3c9104a12d1d6c7c2522",
+  "line": "HJ call, BB check"
+ },
+ "496eae643cccda9f": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "2608108416c8980b4d24581639fb314be2d26fa88087922793c62b8a7cdf1243",
+  "line": "SB call, BB raise, SB call"
+ },
+ "49d05cfc68a4e9d8": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "c6b822582a206bcc9ce7244e21cdfec3beedcb83810baad7d0be0f6dfe0dd21f",
+  "key_798b5c4": "7606b43555d02a8c732cb0fd72e51b2873d4d7832435524ff8ccb231c795bbda",
+  "line": "LJ raise, HJ raise, LJ raise, HJ call"
+ },
+ "4bfba5f4d4bf77af": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "2df5501251814d8431455d6c21312c35fa7cb003f8df54d1241756933709bddc",
+  "line": "CO raise, BTN raise, BB call"
+ },
+ "4fb99d7f36c25103": {
+  "accuracy": 1.0,
+  "board": "AcKcQd",
+  "key": "54212d5ddb5a22ef796f039a7ecb047faf0fcc657c48de04331d4be41760f179",
+  "line": "LJ call, BB check"
+ },
+ "501dbb7100b47c80": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "e8788698cd6c4f622644a0c2419dc9dd74395a9ad0ab44884d83780acea3d624",
+  "line": "CO call, SB raise, CO call"
+ },
+ "522d91c11d8fa318": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "f6da659c926a9e12f0ef019c6f458d735373edfe009409f42a22b1a8f8154b30",
+  "line": "BTN raise, BB raise, BTN call"
+ },
+ "5bbc4ae6df8b27af": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "7726502d69b8d3ed31dc744583760047cfc11a7b5d62d33c2866894ceb4acc99",
+  "line": "BTN raise, SB raise, BB call"
+ },
+ "5bbf334bb5cbace9": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "4fbd78cd9a543043b8e8262b4848a6f1cc49a282bcf965fe8d9f2ebd057b6296",
+  "key_798b5c4": "999aaf25fb40e29f8754900d55f5b3c394b62758fc49a25522585fdbc4297872",
+  "line": "LJ raise, BTN raise, LJ raise, BTN call"
+ },
+ "5c2a4025b13a9218": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "4b545f973defe311b5f54750c155aa046491d3aa5e8c4df2dc4b40769d87f6eb",
+  "line": "BTN raise, SB raise, BTN call"
+ },
+ "5c6ccda638bd209c": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "45fbf76481b7c4447c1e0aa75500eeb87c9f7464e4ec1adcbafae9aa0e2471ce",
+  "line": "LJ raise, SB call"
+ },
+ "5db817356893d672": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "5d175f0f746dadece87851904344d446bfcdcca121e6a79b8dc1c9dcce065c61",
+  "line": "LJ call, HJ raise, LJ call"
+ },
+ "6047a0236facd814": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "c3e44824da0c1b4f53c10ddc2955a0ff26b98ae6267436f8bfd4d40df29f19a5",
+  "line": "BTN raise, BB call"
+ },
+ "622163ae5e06104b": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "ce0c6c36e148e81c439ea0779727505879cd65c66066a555a4e72eed3c4af19f",
+  "line": "LJ raise, HJ call"
+ },
+ "65a92c49b5675f34": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "f104a6093cf74f37859792e832f4c78ec40e8a0d1ca6fe8b7b735d229ec8d776",
+  "line": "LJ raise, BB raise, LJ call"
+ },
+ "699e608f663a4d22": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "fb75cb3c62fdd929a685ae080aa74fdc443123796c15603113ab9fb1a3f0ae90",
+  "line": "CO raise, BTN call"
+ },
+ "70d7b7c63d1fa6c1": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "7f1e356a3dc87443d287edcf62b795737c968878a5e4e7cca4c066c5c1e193c2",
+  "key_798b5c4": "569cd6cd9960d48081ccb715603cc8f4ae205ba13ef3c6d278ae6628e022c825",
+  "line": "BTN raise, BB raise, BTN raise, BB call"
+ },
+ "733f05c36512a065": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "8f9020973ad9464245b42f9d2684c790fa8a6a28f4cfe31936035540f4d3be0c",
+  "line": "HJ raise, BTN call"
+ },
+ "73efe6ebc0be31ba": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "0382591246a80e65a2b3d071e848c3b52babe97cd01291ff1587f4ffed159d32",
+  "line": "BTN raise, SB call"
+ },
+ "7824207d09d70e4c": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "cd9819c4e9622884e53eb06f1701af2cec6f74842ec0c394008c5e5d8524b402",
+  "line": "HJ raise, BB call"
+ },
+ "7d529075705262d4": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "c3a996dbc0d58a4e8830d7226b83906ed42085b0d43df084ce0a48cc174fa2e3",
+  "line": "LJ raise, SB raise, LJ call"
+ },
+ "7ea332966bcd10c9": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "e1adf63709b641090dd9085cf7f3f6bf213d31e2f858b8152f6d60fde1839499",
+  "line": "LJ raise, CO raise, SB call"
+ },
+ "8234b5720353d161": {
+  "accuracy": 1.0,
+  "board": "AcKcQd",
+  "key": "16a1b81d399133341821b499abd37a8515334cba06087591fd4a95b3b46a3fac",
+  "line": "CO call, BB check"
+ },
+ "85d4a3cc94f917d4": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "9c13f73cf6ac87eb2d974b876a32bebaa4230b796609dc1f120d393f5857877a",
+  "line": "HJ raise, CO raise, SB call"
+ },
+ "85dd438a62465325": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "7313890f466d41076fa2d0147b1dfc37845c4a549c30b3116d6cc76953bd88d0",
+  "line": "HJ call, BB raise, HJ call"
+ },
+ "88ca5a02390603e8": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "9700fe4035afc29d7cd132404055d8a7ba74b33641d8ca1a8bb8dbb8a9cbd8f5",
+  "line": "CO raise, SB call"
+ },
+ "89ccff25b66f920d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "c4aefd45d37de24d4ff6390629ba88dcf6de540614b69a0a9c9731df43bd6541",
+  "line": "LJ raise, HJ raise, BTN call"
+ },
+ "9123562d7bc650b2": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "b902a7a7c9be30a2993c563e93698ad1cd7b94d3292490130b54c145e5904d7d",
+  "key_798b5c4": "7d03cde350c482e5e168049f4e54460b6f47acbd7d0e9fb79e1d92344dfd617b",
+  "line": "LJ raise, SB raise, LJ raise, SB call"
+ },
+ "92d8191d7e7c729a": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "4ec46738199f34cb0bf0849f693b3879d96409d3a31a75fd7ffdddb47387ccb2",
+  "line": "HJ raise, BTN raise, BB call"
+ },
+ "964b6f7a691e10f9": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "82e2165b37df0cf401e18005ccad8afd0d566f6e91a7caebb77bc60f6c2aa217",
+  "key_798b5c4": "12e663379ab976d4b35140adb2171393818a54b56f1fce351cbd46eb0aa370c2",
+  "line": "HJ raise, BTN raise, HJ raise, BTN call"
+ },
+ "987088daedd719e4": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "9057a1adc56a49e6e4a61bdc05986597eefbfec4655120664e462444f7757f1f",
+  "key_798b5c4": "24c4908389a8b263b883c578354164026ca26afbe5df869863ed9285de433871",
+  "line": "BTN raise, SB raise, BTN raise, SB call"
+ },
+ "9f5330d343e79512": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "1ce14a829e7dbd7db239069aa3ed7b367a19d47232bc252f753e5c1ebd35b84c",
+  "line": "HJ raise, SB raise, BB call"
+ },
+ "9fe678975e2f0569": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "99165e82f7bfe8338994f308aa76ee06cb7a105713726156d5d582bbc1213946",
+  "key_798b5c4": "e843a5d53d8722f688a0c13ffa7a37b929b2dd3f0762edf186bee1679c6a26d9",
+  "line": "LJ raise, CO raise, LJ raise, CO call"
+ },
+ "a9f72092ef112972": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "2ef5ec337b495f1683d7a78dd6016256aebb3ac5e670cb50e9c5a6c46393e35f",
+  "line": "HJ call, SB raise, HJ call"
+ },
+ "ad7e79fc9f0c3801": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "c0c042e409460f59c7f6e0c1dc9605cc73e2e9bf3f23f720cb269481f4a4136b",
+  "line": "CO raise, BTN raise, CO call"
+ },
+ "af1aa2549bc60c42": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "906a80c30845e4fa87642f626c98bb1955ad975dbaea87287bf88d86f28c075d",
+  "line": "HJ raise, CO raise, BTN call"
+ },
+ "b17987442831f5fa": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "640229c3998fc5bab38ca7c6072fcfce651aecf28a798de20ce5d4e5e3d6dcd6",
+  "line": "HJ raise, SB raise, HJ call"
+ },
+ "b375744cb95a8ec7": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "3cfa5ac4cbd8a79b1d5902d4b709fa3e338b49aecbf03eb7f0d0f06513ad0cbf",
+  "line": "CO raise, SB raise, BB call"
+ },
+ "b5b2687f2d92584f": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "43859eba553ead5a0b28866d57b6f0f9db6cf3d4672961b89228bb77c9452c80",
+  "line": "CO call, BTN raise, CO call"
+ },
+ "ba12528ef695c6f1": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "d9963863ca63cd8c8d5c3fc4ec6d8bb419df1d94314476174510830062443e3b",
+  "line": "CO raise, SB raise, CO call"
+ },
+ "bb049c2574b4d59f": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "82f7689206df793e36af67821695619cba6d35fe87dac6ff6053b883b84ef2f2",
+  "line": "LJ raise, BTN raise, SB call"
+ },
+ "bc722a9ded836b1a": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "b2eda8b7ef0cdd893702782fedc5d7c20ba471209101e40b9f0b0075329fd120",
+  "key_798b5c4": "65d956a15f6cd78567f209133264c90c8e07d3d018f1e917ce92d88bd994ed22",
+  "line": "HJ raise, CO raise, HJ raise, CO call"
+ },
+ "c30927a9e998a454": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "caa4f773ab05633a9772772aef43e66d29d0bd95ecad38d68481b3d8d57bb856",
+  "line": "HJ raise, CO raise, HJ call"
+ },
+ "c442c12bef0e6fd8": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "05545702d409cd2b0c39beab69059d77c0f8ce12c44364b3c5a567a5e946132a",
+  "line": "LJ raise, HJ raise, SB call"
+ },
+ "caf4dec061b35c20": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "d72ee697acd5cb8c6042b90fe2cbe19f9374a682c55f16a962221960ae2de913",
+  "line": "CO raise, BB raise, CO call"
+ },
+ "d01d381bb0d0a1a5": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "23d01e342bced830481dd07bb6e4a5b7a2e31aff4d9d254758d003438338f0bb",
+  "line": "SB raise, BB call"
+ },
+ "d328051ec590afc3": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "035c611a24ffaba4703f2c25d331913a3c25cf6e58ed064e82d1d31be8326c5d",
+  "line": "CO raise, BB call"
+ },
+ "d61f9f5c91766260": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "b42f8fd87204f05f6d2b0e835cafb96f71fb3bd63d3aeacbc8a71b2090d4ac7f",
+  "line": "LJ raise, BTN call"
+ },
+ "da1379faf0a98d3d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "4dbbd7d21e853f974aae24493bef4dec61a4a3c331ddf795b59d640495cfa5c2",
+  "line": "LJ raise, HJ raise, BB call"
+ },
+ "da406f1b5e247241": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "69f41a3eb17efe6062bcb3d298c30bde42ca48b7d16ec5448d387d5e9ccff059",
+  "line": "LJ raise, CO raise, BTN call"
+ },
+ "da43349eb3eedc2d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "8e2fad726a81f329d6c27c101642162b909c8152b850158d42dd176b68fc909d",
+  "line": "LJ raise, HJ raise, CO call"
+ },
+ "dbd4bb821675d1e6": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "e27fbc2b06a01490944d5687abf51492c63bcd96186773e5bc68836d02856ea1",
+  "line": "LJ raise, HJ raise, LJ call"
+ },
+ "e476f32ef4f258a4": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "f9b4b1e27e575cff1aa8aad0dd10408beb2fd2b90a4abb6260d291d7a2e0cef2",
+  "line": "HJ raise, BB raise, HJ call"
+ },
+ "edb418ee3c1cdb2b": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "ff252a4561d9aec926d9264d0c9dac03de032d3944149e5871202e125a7d5dac",
+  "line": "CO call, BB raise, CO call"
+ },
+ "f172417f27497a23": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "45b821ede026495a984e609e8bd4104c5adac2cd6fe7c911c76228fec8a9f30d",
+  "line": "SB raise, BB raise, SB call"
+ },
+ "f180ec006084040d": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "1375298b4b55546dea905a7230ef0de77d8cfd6bf891dc6e382e4a2593fa3168",
+  "line": "HJ raise, SB call"
+ },
+ "f4abe719e32c4ede": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "bef3ec620fcdb3d0c5c34e343cd281d554960cfac11dff9b8d8d6fa17b9ced7f",
+  "line": "HJ raise, BTN raise, SB call"
+ },
+ "f877fe7ef82de271": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "0c2fd5c33148f9dda06966632fdb30648a0df570ec76777bb2b2c40742ad17da",
+  "line": "CO raise, BTN raise, SB call"
+ },
+ "f914131b8945b348": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "75c46c383c02ac2e31a32cc6d693f82022f8106d5ea2123dd8ef4903ddef5720",
+  "line": "HJ call, CO raise, HJ call"
+ },
+ "fa8fbd7091884d97": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "19d2c7a34260efab8f6764b716a56410f0865d603892baf6c2f870c744078319",
+  "key_798b5c4": "75322419f64ad3c816e6fa72d241321b816ff1773be349b081782bc44cf626f1",
+  "line": "HJ raise, BB raise, HJ raise, BB call"
+ },
+ "fc9e4eeffa0956d6": {
+  "accuracy": 1.0,
+  "board": "AcKcQd",
+  "key": "5c675b439a959a7eb5e137aa00da83eacfc09af687e99f2dde72bf6b4b92a83a",
+  "key_798b5c4": "f822446addbaf7a4ebd34925aa30d56ecb4d76dc801944b1be48ec41203d3ee0",
+  "line": "SB call, BB check"
+ },
+ "fef1854f01a0be64": {
+  "accuracy": 1.0,
+  "board": "2c2d2h",
+  "key": "49fb0e21f6b211fff720d9d992dd1648af946beb04e8026d822d09e2b3fc4902",
+  "key_798b5c4": "36eae8626a0aa7eaf2b036f7237efcf538ddb4ab79611590e130c963c051fc1e",
+  "line": "CO raise, BB raise, CO raise, BB call"
+ }
+}

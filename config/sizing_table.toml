@@ -1,0 +1,64 @@
+# Flop sizing table: texture bucket (tree::texture::class_key) -> flop bet sizes (% pot).
+# Each entry: 1..=2 sizes from {25, 33, 50, 100}.
+#
+# PLACEHOLDER: hand-authored heuristics. The auto-derive job (stream H) will replace
+# this file with sizes chosen by solving each bucket with all 4 sizes and keeping the
+# top 2 by usage/EV. Bucket definitions: crates/tree/TEXTURES.md.
+# The tree crate embeds this file at compile time for `flop_bets = "auto"`.
+
+[default]
+flop_bets = [33, 100]
+
+[buckets.trips]
+flop_bets = [33]
+
+[buckets.paired_high]
+flop_bets = [33]
+
+[buckets.paired_low]
+flop_bets = [33, 100]
+
+[buckets.rainbow_ahigh]
+flop_bets = [33]
+
+[buckets.rainbow_bway]
+flop_bets = [33, 100]
+
+[buckets.rainbow_connected]
+flop_bets = [50, 100]
+
+[buckets.rainbow_high_dry]
+flop_bets = [33]
+
+[buckets.rainbow_low_dry]
+flop_bets = [33, 100]
+
+[buckets.twotone_ahigh]
+flop_bets = [33, 100]
+
+[buckets.twotone_bway]
+flop_bets = [33, 100]
+
+[buckets.twotone_connected]
+flop_bets = [50, 100]
+
+[buckets.twotone_high_dry]
+flop_bets = [33, 100]
+
+[buckets.twotone_low_dry]
+flop_bets = [33, 100]
+
+[buckets.mono_ahigh]
+flop_bets = [25, 50]
+
+[buckets.mono_bway]
+flop_bets = [25, 50]
+
+[buckets.mono_connected]
+flop_bets = [33]
+
+[buckets.mono_high_dry]
+flop_bets = [25, 50]
+
+[buckets.mono_low_dry]
+flop_bets = [33]
