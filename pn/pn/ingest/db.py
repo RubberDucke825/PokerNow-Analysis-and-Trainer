@@ -17,7 +17,9 @@ from pn.ingest.derive import annotate_actions, player_flags
 DEFAULT_DB = settings.DEFAULT_DB
 
 
-def connect(db_path: str | Path = DEFAULT_DB) -> sqlite3.Connection:
+def connect(db_path: str | Path | None = None) -> sqlite3.Connection:
+    if db_path is None:
+        db_path = settings.db()
     path = Path(db_path)
     if str(db_path) != ":memory:":
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -29,7 +31,7 @@ def connect(db_path: str | Path = DEFAULT_DB) -> sqlite3.Connection:
 
 
 @contextmanager
-def opened(db_path: str | Path = DEFAULT_DB) -> Iterator[sqlite3.Connection]:
+def opened(db_path: str | Path | None = None) -> Iterator[sqlite3.Connection]:
     conn = connect(db_path)
     try:
         with conn:
@@ -179,7 +181,7 @@ def _enrich(conn: sqlite3.Connection, stored: dict[str, Any], hand: dict[str, An
 
 
 def load(
-    hands: Iterable[dict[str, Any]], db_path: str | Path = DEFAULT_DB, url: str | None = None
+    hands: Iterable[dict[str, Any]], db_path: str | Path | None = None, url: str | None = None
 ) -> dict[str, int]:
     """Insert hands; hand_ids already present are skipped, except that
     - a stored 'incomplete' hand is replaced by a complete version (live fetch mid-hand), and
