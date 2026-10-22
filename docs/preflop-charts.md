@@ -151,14 +151,20 @@ and every flop spot built from the trainer's preflop differs (`has_freqs`, lines
 
 Note the mismatches:
 
-- The PokerCoaching ranges assume an ante and 9 players; the trainer has no ante and 6 or 8
-  players. TODO(confirm): is using ante charts in a no-ante game intended?
-- `pn solve new` opens to 3bb, the trainer to 2.5bb. A 3bb `srp` spot from `pn solve new`
-  therefore never matches a trainer flop. TODO(confirm): which open size should
-  `pn solve new` use?
-- PokerCoaching 4-bets are 2.5x / 2.75x; the trainer 4-bets 2.2x. TODO(confirm).
-- The heading of `config/preflop_charts/README.md` says "3x opens" and its table targets
-  "3x-open values", but no current source uses 3x opens. TODO(confirm): fix the README title.
+- The PokerCoaching ranges assume 2.5bb IP / 3.5bb OOP opens, an ante and 9 players. The
+  trainer uses them as published at 6 or 8 players with no ante.
+- GTO Wizard data is 6-max cEV with 2.5x opens (`data/gtowizard/cash6m_cev_2.5x_freqs.json`).
+- `pn solve new` opens to 3bb (`pn/pn/solve/request.py:131`), the trainer to 2.5bb. A 3bb `srp`
+  spot from `pn solve new` therefore never matches a trainer flop.
+- PokerCoaching 4-bets are 2.5x IP / 2.75x OOP; the trainer 4-bets 2.2x the 3-bet
+  (`pn/pn/train/preflop.py:26`), unless the line is an exact GTO Wizard spot.
+- The hand-written files (`6max.txt`, `8max.txt`, `hu.txt`) were written as 3x opens.
+  `config/preflop_charts/README.md` lists the open size of each source.
+
+Known issue: the GTO Wizard 100bb SB flat range against a CO open (`100|vs_open|CO|SB`,
+`gtowizard_100bb.txt:180`) is too wide. It was left as is because the library's srp SB-vs-CO
+documents were solved from it, and changing it would orphan them (see
+[flop-library.md](flop-library.md#provenance-caveat)).
 
 ## Commands
 
@@ -249,18 +255,9 @@ So the fallback works for open, call, 3-bet, 4-bet and 5-bet lookups. Three cave
   uses open / 3bet / 4bet / 5bet only (`pn/pn/train/preflop.py:249-256`), solve ranges go
   through `CHART_ACTION` (`pn/pn/adapter/spot_ranges.py:28-29`), and `prior_range` uses
   open / call / 3bet. The SB limp line simply has no PokerCoaching data to use.
-- `pn charts validate` exits 1 when a source file is missing. TODO(confirm): should a
-  missing optional source be a warning instead?
+- `pn charts validate` exits 1 when a source file is missing, including the optional
+  PokerCoaching and GTO Wizard files: each missing file is an error row
+  (`pn/pn/profile/charts.py:282-306`, `pn/pn/cli/profile_cmds.py:396-399`).
 - The GTO Wizard frequency file sits in `data/gtowizard/`, not `config/`. The test above
   left it in place. Removing it also changes the trainer's raise sizes, the leak model's
   frequencies, and every flop cache key (see above). That case was not run here.
-
-## TODO(confirm) list
-
-1. PokerCoaching charts assume an ante and 9 players; the trainer plays without ante at 6 or
-   8 players. Intended?
-2. `pn solve new` opens to 3bb (`pn/pn/solve/request.py:131`); the trainer opens to 2.5bb
-   (`pn/pn/train/preflop.py:23`). Which is right for `pn solve new`?
-3. PokerCoaching 4-bet sizes (2.5x / 2.75x) vs the trainer's 2.2x (`pn/pn/train/preflop.py:26`).
-4. `config/preflop_charts/README.md` title and RFI table say "3x opens"; no source uses 3x.
-5. `pn charts validate` fails (exit 1) when an optional third-party file is absent.

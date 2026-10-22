@@ -61,8 +61,17 @@ Reading the table:
   were skipped on purpose (`SKIPPED_POTS`, `library_alias.py:26`); the trainer runs those boards out
   with no betting. The 5 limped aliases at 8-max 200bb point at 6-max 200bb limped matchups that have
   no entry, so they deal nothing.
-- The 1,770 documents beyond the 187,514 indexed boards are other cached solves. TODO(confirm): what
-  they are (likely the 1 % documents replaced by finer passes, plus web UI solves).
+- The 1,770 documents beyond the 187,514 indexed boards are other cached solves, classified from
+  each document's spot TOML on 2026-10-22. All are heads-up.
+
+  | count | what |
+  |---|---|
+  | 1,350 | 6-max 100bb srp flops at 1 %, superseded by the 0.5 % / 0.3 % pass on the same spot |
+  | 183 | 6-max 100bb srp SB vs CO / BTN flops at 1 % (83) and 0.5 % (100), solved with earlier SB ranges; the index holds the same boards with the current ranges |
+  | 64 | 100bb flops at 1 % with an older library tree (sizing-table sizes, 3 bets per street) |
+  | 151 | `trainer` preset solves (76 turns, 71 rivers, 4 flops) |
+  | 18 | `review` preset solves (4 flops, 7 turns, 7 rivers) at various depths |
+  | 4 | default-budget solves (1000 iterations, 2 bets per street: 2 flops, 2 rivers) |
 
 The counting script is small: load the JSON, walk `matchups`, group by `table`, `depth`, `pot` and
 each board's `accuracy`.
@@ -116,7 +125,7 @@ thread count.
 4. Turn and river are solved live from the flop document's leaf (`pn.solve.subgame`,
    [computational-limits.md](computational-limits.md)).
 5. No board for the matchup: the hand runs out with no postflop betting
-   (`solve.note = "no_library_solve"`, [trainer.md](../contracts/trainer.md) line 139).
+   (`solve.note = "no_library_solve"`, [trainer.md](../contracts/trainer.md) line 150).
 
 So with an empty library the trainer is preflop only.
 
@@ -200,13 +209,10 @@ charts first, then GTO Wizard frequencies, then hand-written charts
 ([solve_service.md](../contracts/solve_service.md) line 13). Preflop bet sizes come from the GTO
 Wizard data (`data/gtowizard/`). The library is therefore the equilibrium of the postflop game
 **given those ranges**. If a chart is wrong, every board of its lines is solved correctly for the wrong
-ranges. Licensing of the chart sources is an open question for the release (`tasks/todo.md` lines
-32-36). TODO(confirm): the pre-release notes record one known bad input, the 100bb CO open vs SB flat
-range (SB calls too wide), which feeds the srp SB-CO solves; confirm and decide whether to state it
-here.
+ranges. Where the chart sources come from is in the README's data provenance paragraph
+([README.md](../README.md#licence)).
 
-## TODO(confirm)
-
-1. What the 1,770 cached documents outside the index are.
-2. Download URL of the full library parts.
-3. The known too-wide SB flat range in the srp SB-CO lines.
+Known issue: the GTO Wizard 100bb SB flat range against a CO open (`100|vs_open|CO|SB` in
+`data/gtowizard/cash6m_cev_2.5x_freqs.json`, `config/preflop_charts/gtowizard_100bb.txt:180`) is
+too wide. The srp SB-vs-CO library documents were solved from it, so it was left as is: changing it
+would orphan those documents.

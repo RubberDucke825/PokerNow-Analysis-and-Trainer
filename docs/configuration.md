@@ -69,7 +69,7 @@ budget is used ([tree_config.md](../contracts/tree_config.md)).
 thread count (8, `request.py:21`), every previously cached document under that preset stops matching.
 For the `library` preset this makes the whole downloaded library invisible to the trainer. The thread
 count is in the key even though it does not change the result, so a 4-core machine must still use 8
-threads to hit the shared library (the cloud fill did, `contracts/trainer.md` line 143).
+threads to hit the shared library (the cloud fill did, `contracts/trainer.md` line 154).
 
 ## Files in `config/`
 
@@ -83,13 +83,17 @@ threads to hit the shared library (the cloud fill did, `contracts/trainer.md` li
 | `sizing_table.toml` | flop bet sizes per board texture (`flop_bets = "auto"`) | `pn/pn/solve/texas.py:122-127` |
 | `gto_baselines.json` | reference stats (VPIP, RFI, 3-bet...) for profiles; part GTO Wizard, part seed values | `pn/pn/profile/baselines.py` |
 | `population_priors.json` | seed priors for player profiles (shrinkage toward a typical live pool) | `pn/pn/profile/priors.py` |
-| `realization.toml` | leaf realization factors from the old depth-limited engine; validated but not used by TexasSolver | `pn/pn/adapter/validate.py:94-106` |
+| `realization.toml` | leaf realization factors from the old depth-limited engine; validated when a spot names it, never read by TexasSolver | `pn/pn/adapter/validate.py:94-122` |
 | `GTO_BASELINES.md` | notes on `gto_baselines.json` | people |
 
 The preflop charts and `data/gtowizard/*_freqs.json` feed every flop solve's ranges and preflop bet
 sizes, so they are also part of every library key. Editing them makes the library miss. More in
-[flop-library.md](flop-library.md). TODO(confirm): whether `realization.toml` should stay in the
-public tree.
+[flop-library.md](flop-library.md).
+
+`realization.toml` stays in the tree. TexasSolver never reads it. The spot validator checks it
+only when a spot TOML names it under `[leaf_model] realization` (`pn/pn/adapter/validate.py:114-122`),
+which no spot built by `pn` does (`pn/pn/solve/build.py:60`); a test covers it
+(`pn/tests/test_adapter_validate_plan5.py`).
 
 ## `poker.sh` verbs
 
@@ -133,7 +137,3 @@ on the network start solves.
 | `pn/.venv`, `third_party/texassolver/build/` | build outputs | yes; `./poker.sh setup` rebuilds them |
 
 `data/solves/`, `*.sqlite` and `data/*.log` are git-ignored (`.gitignore`).
-
-## TODO(confirm)
-
-1. Whether `config/realization.toml` stays (only validated, unused by TexasSolver).

@@ -128,8 +128,9 @@ This repository's own code is MIT-licensed ([LICENSE](LICENSE)). TexasSolver, ve
 `third_party/texassolver/` with one small local patch, is AGPL-3.0; `pn` runs it as a separate
 process. Details and the other bundled components are in [THIRD_PARTY.md](THIRD_PARTY.md).
 
-**Data provenance.** The preflop charts in `config/preflop_charts/`, the frequencies in
-`data/gtowizard/` and the GTO baselines derived from them come from PokerCoaching and GTO Wizard
-material. They are not covered by the MIT licence, and their licensing is the maintainers'
-responsibility; the flop library's ranges are built from them.
-TODO(confirm): final wording of this paragraph.
+**Data provenance.** The preflop charts in `config/preflop_charts/` and the frequencies in
+`data/gtowizard/` were transcribed by the maintainer in 2026-10 from PokerCoaching's preflop chart PDF
+and GTO Wizard's free tier. They are included so that the trainer and the published flop library
+reproduce exactly. They are not covered by the MIT licence. If you need different ranges, replace
+the files ([Customising](docs/preflop-charts.md#customising)); every flop that uses them must then be
+re-solved.

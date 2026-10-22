@@ -106,9 +106,9 @@ and the `rolling` block of every trainer state (`session.py:561-574`).
 `GET /api/train/leaks` (`train_routes.py:160-165`) also returns `priority`, `score`,
 `pot_bb`; `GET /api/train/importance` adds formation and texture rows.
 
-TODO(confirm): the command's help says "Spots ranked by expected blunders per 100 hands"
-(`train_cmds.py:75`), but the rows are sorted by priority (`importance.py:125-129`). The
-example below shows the two orders differ.
+Rows are sorted by `priority`, highest first (`importance.py:125-129`), not by
+`blunders/100`; the command's help says so (`train_cmds.py:75`). The example below shows the
+two orders differ.
 
 ## Worked example
 
@@ -292,8 +292,3 @@ Web: `GET /api/hands/{hand_id}/ev`, `GET /api/review/{hero}/ev`
 
 `data/*.log` files are plain shell redirects (e.g. `nohup pn library fill > data/fill.log
 2>&1 &`), git-ignored, with no fixed format. The trainer writes only to SQLite and `logging`.
-
-## TODO(confirm) list
-
-1. `pn train leaks` help says rows are ranked by expected blunders per 100 hands; they are
-   sorted by importance priority.

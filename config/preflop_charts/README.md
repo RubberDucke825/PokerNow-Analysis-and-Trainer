@@ -1,6 +1,9 @@
-# Preflop charts (100bb cash, NLHE, 3x opens)
+# Preflop charts (100bb and 200bb cash, NLHE)
 
-TODO(confirm): the title says 3x opens, but the PokerCoaching charts below use 2.5bb IP / 3.5bb OOP opens and the GTO Wizard files 2.5x; confirm the intended open size.
+Open sizes differ by source. PokerCoaching assumes 2.5bb IP / 3.5bb OOP opens with an ante at 9
+players. GTO Wizard is 6-max cEV with 2.5x opens. The hand-written files were written as 3x opens.
+The trainer opens 2.5bb (`pn/pn/train/preflop.py:23`); `pn solve new` builds 3bb opens
+(`pn/pn/solve/request.py:131`).
 
 ## Three kinds of chart file
 
@@ -33,7 +36,8 @@ hard-coded in the tool, since the PDF text layer does not carry them).
 **2. Real GTO Wizard solutions** (`gtowizard_100bb.txt`, `gtowizard_200bb.txt`).
 These were scraped on 2026-10-01 from the user's own **GTO Wizard free-tier** account. They are
 6-max cash, chip-EV (cEV), with **2.5x opens**. The free tier caps solutions at 100 spots per
-day, and the 3x-open solutions are paywalled, so these are 2.5x and not our 3x default.
+day, and the 3x-open solutions are paywalled, so these are 2.5x, not the 3x of the hand-written
+files.
 - `gtowizard_100bb.txt` has 71 spots: RFI for every position, 3bet/call vs every open,
   4bet/call vs every 3bet, 5bet/call vs every 4bet, cold-4bet/cold-call spots, and BB vs an
   SB limp.
@@ -106,7 +110,8 @@ Keys:
 - A key that exists in several files (e.g. `open BTN` in 6max, 8max and hu) needs `--file`
   on import.
 
-RFI widths (targets are typical published 3x-open values):
+RFI widths of the hand-written files (the targets are approximate 3x-open widths written down
+with the files; no single source is recorded for them):
 
 | seat | width here | target |
 |---|---|---|

@@ -13,7 +13,7 @@ Related contracts: [texas_backend.md](../contracts/texas_backend.md),
 |---|---|---|
 | preflop | never solved; charts only | none |
 | heads-up flop | once per canonical flop per matchup, offline, into the flop library | ~3-6 min wall per 100bb SRP board at 1 %; 3-bet pots ~9x faster, 4-bet pots ~25x faster (table below) |
-| heads-up turn / river in the trainer | solved live from the flop (or turn) document's leaf, `trainer` preset | ~2.6 s solver startup plus the solve; TODO(confirm) typical seconds |
+| heads-up turn / river in the trainer | solved live from the flop (or turn) document's leaf, `trainer` preset | ~5 s per 100bb SRP turn (measured below) |
 | heads-up flop / turn / river, ad hoc | `pn solve run` or the web Strategy page, any preset | 100bb SRP flop with the library tree: 763 s, 2.9 GB to 0.3 % on an 8 GB M3 |
 | 3+ players postflop | refused (`multiway_unsolvable`) | none |
 
@@ -37,8 +37,8 @@ Default sizes (`DEFAULT_SIZES`, `pn/pn/solve/texas.py:38-40`):
 Flop sizes by texture (`config/sizing_table.toml`, read by `texas.py:122-127`): 33 % alone on trips,
 high paired, A-high rainbow, high dry rainbow and mono low boards; 33 and 100 on most others; 50 and
 100 on connected boards; 25 and 50 on most monotone boards; default 33 and 100. The file says it is a
-hand-authored placeholder (lines 4-7). TODO(confirm): its header still refers to a removed Rust crate
-and an "auto-derive job" that does not exist.
+hand-authored table (lines 1-6). Its header says how it is read: `_auto_flop_bets` looks up the
+board's texture bucket when `flop_bets = "auto"`, and the `library` preset keeps the first size.
 
 Preset caps (`pn/pn/solve/request.py:45-52`, applied in `apply_preset`, lines 61-77):
 
@@ -97,11 +97,11 @@ When a turn card is dealt, `pn.solve.subgame` (`pn/pn/solve/subgame.py:118-164`)
 | who was the last aggressor on the flop | |
 
 The trainer adds each live player's actual combo to its range at a small weight
-([trainer.md](../contracts/trainer.md) line 140). The river is lifted from the turn the same way.
+([trainer.md](../contracts/trainer.md) line 151). The river is lifted from the turn the same way.
 
 This is plain re-solving with fixed ranges. Nothing ties the turn solve back to the flop solve, so
-the flop and turn strategies together are not one equilibrium. TODO(confirm): no measurement of how
-far the turn re-solve drifts from the flop tree's own turn strategy.
+the flop and turn strategies together are not one equilibrium. How far the turn re-solve drifts from
+the flop tree's own turn strategy was never measured; this is a known, unquantified limitation.
 
 ## What is exact
 
@@ -138,8 +138,17 @@ Cloud VMs), so treat them as rough:
 | 6-max 200bb 3bp | 2 % | 38 | 66 |
 | 8-max 100bb srp | 1 % | 162 | 259 |
 
-TODO(confirm): the brief cites "~2 core-min per library board at 1 %" from tools/cloud_runbook.md; that
-file has no such figure.
+Live turn solve with the `trainer` preset, measured 2026-10-22 on an 8-core M3 with 8 GB: a 100bb
+BTN vs BB single-raised turn on 6c4c2d plus Kh, Js or 8h, built by `pn solve new --line srp` (chart
+ranges, not a lifted leaf) and solved with `pn solve run --preset trainer` into a scratch cache. All
+three stopped at 131 iterations, 0.44-0.50 % pot.
+
+| measure | min s | median s | max s |
+|---|---|---|---|
+| solver (`meta.wall_sec`) | 4.7 | 5.3 | 5.9 |
+| whole `pn solve run` command | 5.5 | 6.3 | 6.8 |
+
+Turns lifted from a flop leaf, as the trainer plays them, and rivers were not timed separately.
 
 Other memory caps:
 
@@ -165,16 +174,17 @@ gzipped, a 26.9 MB index.
 | heads-up table | trainer tables are 6 and 8 only (`TABLE_SEATS`, `request.py:124-127`) | parked |
 | EV per action | TexasSolver dumps strategies only | frequency grading |
 
-TODO(confirm): the heads-up table blockers (the engine posts blinds by position name, so in a 2-seat
-game the BTN would post no small blind, `pn/pn/train/engine.py:93`; no heads-up flop library) are
-recorded only in pre-release notes.
+Heads-up (a 2-player table) is parked. The code blocks it in these places:
 
-## TODO(confirm)
+- The engine posts blinds by position name (`pn/pn/train/engine.py:93`), so a 2-seat BTN posts no
+  small blind.
+- `Config.table_kind` returns `"2max"` (`pn/pn/train/model.py:88-89`), while the chart loader knows
+  `"hu"` (`pn/pn/profile/charts.py:11-14,44-47`); `f"{table}max"` is hard-coded in 11 places in
+  `pn/pn`.
+- 6-max GTO Wizard keys would leak into heads-up play: `situation()` (`pn/pn/train/preflop.py:44`)
+  and `gtow_line_range` (`pn/pn/solve/sources.py:47`) are not gated by table.
+- `new_request` adds the SB as dead money when no seat is the SB (`pn/pn/solve/request.py:215`), and
+  `ROOT_KNOBS` has no entry for 2 players (`request.py:135-138`).
+- There is no heads-up flop library, and the trainer never solves a flop live.
 
-1. `config/sizing_table.toml` header refers to a removed Rust crate and an auto-derive job.
-2. Typical wall time of a live turn or river solve with the `trainer` preset is not measured for
-   TexasSolver.
-3. No measurement of drift between the lifted turn solve and the flop tree's own turn strategy.
-4. "~2 core-min per library board at 1 %" is not in tools/cloud_runbook.md; the table above is from
-   document metadata instead.
-5. Heads-up table blockers live only in pre-release notes.
+The only heads-up preflop source is `config/preflop_charts/hu.txt`.

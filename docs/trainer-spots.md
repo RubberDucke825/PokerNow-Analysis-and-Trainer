@@ -259,10 +259,3 @@ All in `pn/pn/web/train_routes.py`. Amounts are in cents.
 | `GET /api/train/dealable` | which spot pins can be dealt | 202 |
 
 Sessions live in memory (at most 32, `session.py:79`) and are lost on restart.
-
-## TODO(confirm) list
-
-1. `contracts/trainer.md` "Trainer" section (lines 8-54) still describes the pre-Plan 7
-   feedback (`grade: "ev"|"freq"`, totals with `loss_bb`); the code uses best / mixed /
-   blunder / none. Later sections of the contract supersede it, but the first section was
-   not updated.
