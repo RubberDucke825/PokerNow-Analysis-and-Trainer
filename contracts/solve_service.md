@@ -28,7 +28,7 @@ forwards both to the runner when given. `should_stop()` true -> process killed, 
 `progress(dict)` gets `{iterations, exploitability_pct_pot, elapsed_sec}` per measured iteration (exceptions
 logged and ignored). `cache.is_stale`: a heads-up postflop document whose `meta.backend != "texas"` is stale once
 `texas_available()`. Presets stop by iterations/accuracy: trainer 300 it / 0.5% pot, review 600 / 0.3% (cap 2),
-library 1000 / 0.3% (cap 3); `time_limit_sec` only sizes the watchdog. Documents have no `ev`/`action_ev`/`equity`
+library 400 / 0.3% (cap 2, the first flop size only; `pn/pn/solve/request.py:50-51`); `time_limit_sec` only sizes the watchdog. Documents have no `ev`/`action_ev`/`equity`
 (`meta.ev_available = false`).
 
 ## Python API (`pn/pn/solve/`)
@@ -100,7 +100,7 @@ Plan 7 adds `grade`, `freq_chosen`, `best_freq` (contracts/trainer.md "Plan 7 ad
 ## Additions 2026-10-02 (stream S, round 2)
 
 - `Seat.folded`: a BB that folded before the decision stays listed (the tree requires a BB preflop) with the automatic fold lock `FOLD_LOCK` (`"preflop:*:*" = { fold = 1.0, order = "uniform" }`; checks when fold is illegal); its blind stays in the pot. This is the only lock a spot can carry.
-- Presets: `SOLVE_PRESETS`, `Budget.preset(name)`, `apply_preset(spot, name) -> (spot, backend)`. `apply_preset` returns the backend from `choose_backend` (SolveError for spots no backend solves). `trainer` = 300 it / 0.5% pot; `review` = 600 it / 0.3%, `max_bets_per_street = 2`; `library` = 1000 it / 0.3%, cap 3. `time_limit_sec` (10 / 120 / 3600) only sizes the watchdog. Cap and budget are written into the TOML so `spot_key` differs per preset. `pn solve run --preset`; `pn library fill` uses `library`. Texas emits one street (`set_dump_rounds 1`); later streets are lifted with `subgame`.
+- Presets: `SOLVE_PRESETS`, `Budget.preset(name)`, `apply_preset(spot, name) -> (spot, backend)`. `apply_preset` returns the backend from `choose_backend` (SolveError for spots no backend solves). `trainer` = 300 it / 0.5% pot; `review` = 600 it / 0.3%, `max_bets_per_street = 2`; `library` = 400 it / 0.3%, `max_bets_per_street = 2`, one flop size (the first of the sizing table entry). `time_limit_sec` (10 / 120 / 3600) only sizes the watchdog. Cap and budget are written into the TOML so `spot_key` differs per preset. `pn solve run --preset`; `pn library fill` uses `library`. Texas emits one street (`set_dump_rounds 1`); later streets are lifted with `subgame`.
 - Preflop knobs: every preflop-start spot with more than 3 players gets `limp = "sb_only"`, `cold_call_3bet = false`, plus `max_callers = 2` above 6 players. Hand-based spots relax a knob when the real line needs it (limp -> `limp = "all"`; cold call of a 3-bet -> `cold_call_3bet = true`; third caller -> `max_callers = 8`), recorded in the TOML header comment.
 - Registry persistence: generated solves (New spot, subgames) are indexed in `<cache root>/registry_names.json` with their cache key, so names survive eviction and restarts; trainer street solves stay memory-only.
 

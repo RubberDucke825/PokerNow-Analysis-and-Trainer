@@ -6,50 +6,61 @@ and `pn/pn/web/solves.py` for details. Python side: `pn/pn/train/` (engine, pref
 sessions, showdown).
 
 ## Trainer (`pn/pn/web/train_routes.py`)
+
+Current shape (2026-10-22). The dated sections below record how each part was added.
+
 - `GET  /api/train/players` -> `[{player_id, name, hands, archetype}]` for the opponent picker (`[]` without a DB).
-- `POST /api/train/new` body `{table: 6|8, depth: 100|200, hero_seat: position|null (null = random), opponents: [player_id|null ...] (<= table-1; missing = GTO bot), source: "gto" (Plan 7: anything else is a 400), seed?: int}` -> state. 400 on a bad config.
+- `POST /api/train/new` body `{table: 6|8, depth: 100|200, hero_seat: position|null (null = random), opponents: [player_id|null ...] (<= table-1; missing = GTO bot), source: "gto" (anything else is a 400), seed?: int, rng_enabled: bool = true, window: int = 1000, drill_share: float = 0.8, drill_spot|drill_texture|drill_formation: str|null, p_form: int = 3, p_tex: int = 1, pot_mode: "start"|"avg"}` -> state (`NewSession`, `train_routes.py:65-80`). 400 on a bad config.
 - `GET  /api/train/{sid}` -> state (also advances villains once a pending solve finished; poll while `solving`). 404 unknown sid.
 - `POST /api/train/{sid}/act` body `{token}` (one of `legal_actions[].token`) -> state. 400 when not hero's turn, while solving, or for an illegal token.
-- `POST /api/train/{sid}/next` -> state of the next hand; the button moves one seat (hero's position moves BTN -> CO -> HJ ...). 400 while the hand runs. Stacks reset to `depth` every hand.
+- `POST /api/train/{sid}/next` -> state of the next hand; the button moves one seat. 400 while the hand runs. Stacks reset to `depth` every hand.
+- `POST /api/train/{sid}/drill` body `{spot?, texture?, formation?}`, `POST /api/train/{sid}/params` body `{p_form?, p_tex?, pot_mode?}`, `POST /api/train/{sid}/retry`: Plan 13 / 14 below.
+- `GET /api/train/{sid}/preflop_line`, `/api/train/stats`, `/leaks`, `/importance`, `/performance`, `/performance/recent`, `/dealable`: later sections.
 
-State (hero view):
+State (hero view, `Trainer._view`, `pn/pn/train/session.py:577-622`):
 ```
-{sid, hand_no, table, depth, bb (=100), source, opponents: [player_id|null] (villain seats 1..),
+{sid, hand_no, table, depth, bb (=100), source ("gto"), opponents: [player_id|null] (villain seats 1..),
  board: [cards], pot, street, button: "BTN",
  hero: {position, cards: [2], stack},
  seats: [{position, name, player_id|null, stack, in_hand, is_hero, committed (this street), last_action: token|null, allin}]
         -- physical order: hero first, then clockwise; villain hole cards only via result.showdown,
  history: [{street, position, token, amount (street commitment after a raise/call, else null), added, allin, origin}]
-        -- origin (villains): "gtow:<depth>|<key>" | "chart" | "profile(<alpha>)" | "solve:<token>" | "fallback"; null for hero,
+        -- origin (villains): "pc:<chart key>" | "gtow:<depth>|<key>" | "chart" | "solve:<token>" | "fallback"; null for hero,
  to_act: position|null,
  legal_actions: [{token, kind: fold|check|call|raise|allin, amount|null (street commitment after the action; null for fold/check), label}]
         -- empty unless hero is due and no solve is running. Preflop tokens: fold|check|call|raise|allin;
            postflop: the solved node's tokens (check|call|fold|bet<pct>|raise<pct>|allin), or the fallback set
            (bet33, bet75 / raise100, allin) when the street has no usable solve,
  solving: bool,
- solve: {status: none|solving|ready|failed|fallback, backend|null, note|null, name|null (Registry solve name)},
- feedback: null | {street, node_id|null, chosen, best|null, loss_bb|null, grade: "ev"|"freq", freq_error|null,
-           origin: "gtow:<key>"|"chart"|"solve"|"none", situation?, class?, hand, position, board, pot,
-           options: [{token, amount|null, freq|null, ev_bb|null}],
-           grid_ref: {kind: "gtow", key: "<depth>|<spot>"} (GET /api/gtow/spot?key=) |
-                     {kind: "solve", name, node_id} (GET /api/solves/{name}/nodes/{node_id}) | null},
- totals: {decisions, loss_bb, blunders (loss > 1 bb), hands, ev_decisions, preflop_decisions,
-          avg_freq_error|null, hero_net (cents, informational)},
+ solve: {status: none|solving|ready|failed|fallback, backend|null, note|null, name|null (Registry solve name), detail|null},
+ solve_error: note|null (set when solve.status = failed),
+ feedback: null | {street, chosen, origin: "pc:<key>"|"gtow:<key>"|"chart"|"solve"|"none", preflop_source|null,
+           grade: "best"|"mixed"|"blunder"|"none", freq|null, best|null, best_freq|null, freq_error|null,
+           loss_bb (null for texas documents), note|null, situation?, class? (preflop),
+           options: [{token, amount|null, freq|null, ev_bb|null}], node_id|null, hand, position, board, pot,
+           rng|null, buckets, rng_action|null, matched_rng|null, pure,
+           grid_ref: {kind: "gtow", key} | {kind: "solve", name, node_id} | {kind: "pc", key, table, situation, position, other} | null, retry},
+ hand_feedback: [feedback ...] (this hand), replay: bool,
+ totals: {decisions, best, mixed, blunders, blunder_rate|null, hands, preflop_decisions, avg_freq_error|null, hero_net (cents)},
+ rolling: null | {window, hands, rng_match_rate|null, blunder_rate|null, mixed_rate|null, best_rate|null, leaks_top},
+ rng|null, rng_enabled, drill|null, drill_share, pinned_drill, params: {p_form, p_tex, pot_mode},
  hand_over: bool,
  result: null | {winner: position|null (largest gross win), amount (total pot), board (run out), hero_folded,
                  showdown: [{position, cards}], won: {position: cents}, net: {position: cents}}}
 ```
 
-Grading: preflop = GTO Wizard frequencies of hero's hand class at the situation key (`grade: "freq"`,
-`freq_error = 1 - freq[chosen]`, no EV); without a GTO Wizard spot the pure chart (`origin: "chart"`).
-Postflop = the street solve's `action_ev` row for hero's combo (`grade: "ev"`, `loss_bb = max - chosen`).
-Hero folding ends the hand. Showdown uses pn.profile.handeval.evaluate with side pots.
+Grading (`pn/pn/train/grading.py`): frequencies only, no EVs. `grade = "best"` when the chosen action's frequency is at least
+0.5 x the most frequent action's, `"mixed"` at least 0.1 x, else `"blunder"`; `"none"` when there are no frequencies (`note`:
+`solver_unavailable`, `multiway_unsolvable`, `off_tree`, `combo_outside_range`). Preflop: the frequencies of hero's hand class
+from PokerCoaching, then GTO Wizard, then the pure chart (origin `pc:` / `gtow:` / `chart`). Postflop: hero's exact combo row at
+the solved node (origin `solve`). `totals.decisions` counts graded decisions only. Hero folding ends the hand. Showdown uses
+pn.profile.handeval.evaluate with side pots.
 
-Villain policy: preflop GTO Wizard frequencies (situation keys rfi / vs_limp / vs_open / cold / vs_3bet /
-vs_4bet / vs_5bet / vs_6bet; depth nearest of 100/200; callers or limpers map to the closest key with formula
-sizes) -> pure chart fallback (Plan 7: every villain, named or not, plays these; source order in "Plan 7 additions"). Sizes: GTO Wizard `raise_to_bb` on exact lines, else 2.5bb open (+1bb per limper), 3-bet
-3x IP / 3.5x OOP (+1x per caller), 4-bet 2.2x, then all-in. Postflop: flops come from the solved library (2026-10-07 below); turn and
-river are solved when dealt with the `trainer` preset, lifting the previous street's leaf via pn.solve.subgame. Every live player's actual combo is kept in its range at weight
+Villain policy: preflop PokerCoaching, then GTO Wizard frequencies, then the pure chart, for every villain, named or not
+(source order in "Plan 7 additions" below). Sizes: GTO Wizard `raise_to_bb` on exact lines, else 2.5bb open (+1bb per
+limper), 3-bet 3x IP / 3.5x OOP (+1x per caller), 4-bet 2.2x, then all-in (`pn/pn/train/preflop.py:23-26`). Postflop:
+flops come from the solved library (2026-10-07 below); turn and river are solved when dealt with the `trainer` preset,
+lifting the previous street's leaf via pn.solve.subgame. Every live player's actual combo is kept in its range at weight
 >= 0.02. A failed solve switches the street to the fallback policy (`solve.status = failed`, not graded).
 
 ## Root solves and subgames (`pn/pn/web/solves.py`; routes in `train_routes.py`)
