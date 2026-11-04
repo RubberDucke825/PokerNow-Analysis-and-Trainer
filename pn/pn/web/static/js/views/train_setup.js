@@ -34,7 +34,7 @@ export async function setupView(onStart, notice) {
 
   let opps = (saved.opponents || []).map((v) => v || "");
   const tableSeg = seg("tr-table", "Table", [[6, "6-max"], [8, "8-max"]], saved.table || 6, () => { drawHero(); drawOpps(); summarize(); });
-  const depthSeg = seg("tr-depth", "Depth", [[100, "100 bb"], [200, "200 bb"]], saved.depth || 100, summarize);
+  const depthSeg = seg("tr-depth", "Depth", [[100, "100 bb"]], 100, summarize); // 200bb parked 2026-11-04
   const heroHolder = h("div", { class: "hero-seat-holder" });
   let heroSeg = null;
   function drawHero() {

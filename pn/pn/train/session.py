@@ -304,9 +304,10 @@ class Trainer(DrillPlanner):
         if h.drill is not None and not h.drill.landed and self._forced(s, i):
             return
         if st.street == "preflop":
+            hero_bb = h.players[st.seat_of("BB")].hero
             kind, to, origin = pre.villain_action(st, i, p.combo, rng=s.rng,
                                                   table=s.cfg.table_kind, depth=s.cfg.depth,
-                                                  freqs=self.freqs)  # fmt: skip
+                                                  freqs=self.freqs, hero_bb=hero_bb)  # fmt: skip
             self._apply(s, kind, to, origin, None, kind)
             return
         opts = post.tree_actions(h.tree, st) if h.tree else None
@@ -517,8 +518,7 @@ class Trainer(DrillPlanner):
             s.totals = s.totals.add(grade)
         row = stats.decision_row(_hand_uid(s), len(h.decisions), grade, stats.situation_kind(st, i),
                                  ranges.combo_class(combo), spot, imp.state_formation(st))  # fmt: skip
-        ref = (pre.pc_ref(st, i, s.cfg.table_kind) if str(grade["origin"]).startswith("pc:")
-               else _grid_ref(grade, h))  # fmt: skip
+        ref = pre.grid_ref(st, i, s.cfg.table_kind, str(grade["origin"])) or _grid_ref(grade, h)
         fb = {**grade, "grid_ref": ref, "retry": h.replay}
         s.hand = replace(s.hand, feedback=fb, rng=None, hand_feedback=(*h.hand_feedback, fb),
                          decisions=h.decisions if h.replay else (*h.decisions, row))  # fmt: skip

@@ -319,7 +319,7 @@ LIB_RE = re.compile(r"^(\d+)x(\d+)$")
 
 def parse_depth_accuracy(items: Sequence[str]) -> dict[int, float]:
     """`["200=2"]` -> {200: 2.0}: accuracy in % of pot per depth; ValueError on a bad item."""
-    from pn.train.model import DEPTHS
+    from pn.train.model import LIB_DEPTHS
 
     out: dict[int, float] = {}
     for x in items:
@@ -328,20 +328,20 @@ def parse_depth_accuracy(items: Sequence[str]) -> dict[int, float]:
             depth, acc = int(d), float(a)
         except ValueError:
             raise ValueError(f"bad depth accuracy {x!r}: want DEPTH=PCT, e.g. 200=2") from None
-        if not sep or depth not in DEPTHS or acc <= 0:
-            raise ValueError(f"bad depth accuracy {x!r}: depth in {list(DEPTHS)}, accuracy > 0")
+        if not sep or depth not in LIB_DEPTHS or acc <= 0:
+            raise ValueError(f"bad depth accuracy {x!r}: depth in {list(LIB_DEPTHS)}, accuracy > 0")
         out[depth] = acc
     return out
 
 
 def parse_lib(text: str) -> tuple[int, int]:
-    """`8x200` -> (8, 200): table size x depth in bb; ValueError unless the trainer deals it."""
-    from pn.train.model import DEPTHS
+    """`8x200` -> (8, 200): table size x depth in bb; ValueError unless LIB_DEPTHS has the depth."""
+    from pn.train.model import LIB_DEPTHS
 
     m = LIB_RE.match(text.strip())
-    if m is None or int(m[1]) not in TABLE_SEATS or int(m[2]) not in DEPTHS:
+    if m is None or int(m[1]) not in TABLE_SEATS or int(m[2]) not in LIB_DEPTHS:
         raise ValueError(f"bad library {text!r}: want TABLExDEPTH with table in "
-                         f"{sorted(TABLE_SEATS)} and depth in {list(DEPTHS)}, e.g. 8x200")  # fmt: skip
+                         f"{sorted(TABLE_SEATS)} and depth in {list(LIB_DEPTHS)}, e.g. 8x200")  # fmt: skip
     return int(m[1]), int(m[2])
 
 
@@ -369,12 +369,16 @@ def new_lines(table: int, depth: int, ms: Sequence[Matchup]) -> tuple[list[Match
 
 def missing_inputs(libs: Sequence[tuple[int, int]]) -> list[str]:
     """Inputs every flop key of these libraries hashes (Plan 11 lesson: a machine without one
-    plans other keys and solves boards nobody looks up): GTO Wizard frequencies at each depth,
+    plans other keys and solves boards nobody looks up): the Upswing frequencies (the preflop
+    policy's first source: seat ranges and raise sizes), GTO Wizard frequencies at each depth,
     the preflop chart files, the library preset. Empty when all are present."""
-    from pn.profile import charts
+    from pn.profile import charts, upswing
+    from pn.profile.paths import repo_root
     from pn.train import preflop as pre
 
     out: list[str] = []
+    if not upswing.has_freqs():
+        out.append(f"Upswing frequencies ({upswing.freqs_path().relative_to(repo_root())})")
     freqs = pre._freqs()  # the loader the preflop engine sizes raises from
     if not freqs:
         out.append("GTO Wizard frequencies (data/gtowizard)")
@@ -392,15 +396,14 @@ def missing_inputs(libs: Sequence[tuple[int, int]]) -> list[str]:
 def trainer_key(m: Matchup, board: tuple[str, ...], accuracy: float | None = None) -> tuple[str, str]:
     """(matchup id, flop key) the trainer computes for a hand that plays `m`'s preflop line:
     a fresh hand at the trainer's blinds and table config, the line's actions applied by the
-    engine, the flop dealt, then pn.train.session's lookup (matchup_of with Config.table_kind)."""
-    from pn.train.model import Config
-
-    cfg = Config(table=len(m.state.positions), depth=m.depth)
-    st = start(TABLE_SEATS[cfg.table], cfg.depth * BB, SB, BB)
+    engine, the flop dealt, then pn.train.session's lookup (matchup_of with Config.table_kind).
+    No trainer Config: it would reject the parked 200bb depth (LIB_DEPTHS)."""
+    table = len(m.state.positions)
+    st = start(TABLE_SEATS[table], m.depth * BB, SB, BB)
     for a in m.state.history:
         if a.street == "preflop":
             st = apply(st, a.kind, a.to)
-    tm = matchup_of(next_street(st, board), cfg.table_kind, cfg.depth)
+    tm = matchup_of(next_street(st, board), f"{table}max", m.depth)
     if tm is None:
         raise ValueError(f"{m.label}: the trainer's hand is not heads-up at the flop")
     return tm.mid, flop_spot(tm, board, accuracy)[2]

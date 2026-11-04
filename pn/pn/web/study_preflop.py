@@ -1,6 +1,6 @@
 """Preflop study navigator (contracts/study_preflop.md): replay a preflop line with trainer
 sizing and return every seat's options, the actor's class strategy by the trainer's source order
-(PokerCoaching -> GTO Wizard -> formula chart) and, once preflop is over, the heads-up matchup
+(Upswing -> PokerCoaching -> GTO Wizard -> formula chart) and, once preflop is over, the heads-up matchup
 with its solved flops."""
 
 from __future__ import annotations
@@ -10,17 +10,19 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, Query, Request
 
 from pn import ranges
+from pn.profile import upswing
 from pn.solve.cache import cache_dir
 from pn.solve.request import TABLE_SEATS
 from pn.train import flop_library as flib
 from pn.train import preflop as pre
 from pn.train.engine import IllegalAction, State, apply, hand_decided, start
+from pn.train.model import DEPTHS
 from pn.web.solves import CACHE_PREFIX
 
 router = APIRouter()
 BB = 100
 TOKENS = ("fold", "check", "call", "raise", "allin")
-SOURCE_LABEL = {pre.PC: "PokerCoaching", pre.GTOW: "GTO Wizard"}
+SOURCE_LABEL = {pre.UPSWING: "Upswing", pre.PC: "PokerCoaching", pre.GTOW: "GTO Wizard"}
 
 
 def _bb(cents: int) -> str:
@@ -53,6 +55,12 @@ def _class_codes(st: State, i: int, table: str, depth: int) -> tuple[dict, dict]
     pos = st.positions[i]
     found = pre.gtow_spot(sit.key, depth)
     base = {"kind": sit.kind, "key": sit.key}
+    up = pre.upswing_chart(sit, table, st.n)
+    if up is not None:
+        cid, ch = up
+        cells = {c: upswing.class_dist(ch, c) for c in ranges.all_classes()}
+        return cells, {**base, "source": pre.UPSWING, "origin": f"{pre.UPSWING}:{cid}",
+                       "label": f"Upswing 100bb · {ch['title']}", "labels": upswing.labels(ch)}  # fmt: skip
     if pre._pc_line(sit):
         pc = pre.pc_class_dists(table, sit.kind, pos, pre.pc_other(sit.kind, sit.seats))
         if pc is not None:
@@ -174,8 +182,8 @@ def _end(st: State, table: str, depth: int, root: Any) -> dict[str, Any]:
 @router.get("/api/study/preflop")
 def study_preflop(request: Request, table: int = Query(6), depth: int = Query(100),
                   line: str = "") -> dict[str, Any]:  # fmt: skip
-    if table not in TABLE_SEATS or depth not in (100, 200):
-        raise HTTPException(400, "table must be 6 or 8 and depth 100 or 200")
+    if table not in TABLE_SEATS or depth not in DEPTHS:
+        raise HTTPException(400, "table must be 6 or 8 and depth 100")
     order = TABLE_SEATS[table]
     kind = f"{table}max"
     steps = _parse(line, order)

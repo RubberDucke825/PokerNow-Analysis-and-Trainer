@@ -6,9 +6,10 @@ with that player as hero, heads-up only, with the `review` preset; every decisio
 on the street is read off it by walking the real actions and graded from the solver's frequency
 of the chosen action for the actual combo. EV columns (ev_chosen / ev_best / loss) are filled
 only from documents with `meta.ev_available` true; TexasSolver documents leave them NULL.
-Preflop: chart-based, never solved: the PokerCoaching chart action (pure: frequency 1 or 0)
-where those charts cover the situation, else the GTO Wizard frequencies of the combo's hand
-class; the row's `backend` names the source (`pokercoaching` | `gtowizard`).
+Preflop: chart-based, never solved: the Upswing frequencies of the combo's hand class where
+Upswing charts the situation, else the PokerCoaching chart action (pure: frequency 1 or 0), else
+the GTO Wizard frequencies of the class; the row's `backend` names the source (`upswing` |
+`pokercoaching` | `gtowizard`).
 Postflop in a hand that saw the flop with 3+ players is not solved on any street (2026-10-07:
 2-player only): those rows carry note "multiway_unsolvable".
 A row that cannot be graded keeps NULL grade fields and a `note` saying why.
@@ -25,7 +26,7 @@ from pn.adapter.spot import ProfileSource, Spot, SpotError, build_spot_from_hand
 from pn.adapter.state import replay
 from pn.ev.decisions import GradableDecision
 from pn.live.assist import LIVE_GAME, LiveError, _match_token, walk_to_hero
-from pn.profile import charts, gtowizard
+from pn.profile import charts, gtowizard, upswing
 from pn.solve import EvUnavailable, SolveCache, SolveError, action_ev_loss, spot_key
 from pn.solve.backend import MULTIWAY_UNSOLVABLE
 from pn.solve.ev import combo_position
@@ -39,7 +40,8 @@ GTOW_DEPTHS = (100, 200)
 ADDED_COMBO_WEIGHT = 0.001
 DEFAULT_GAME: Mapping[str, Any] = dict(LIVE_GAME)
 NO_PREFLOP_FREQ = "no_preflop_frequencies"  # no PokerCoaching chart / GTO Wizard cell
-PC_SOURCE, GTOW_SOURCE = train_preflop.PC, train_preflop.GTOW  # preflop rows' `backend`
+# preflop rows' `backend`
+UPSWING_SOURCE, PC_SOURCE, GTOW_SOURCE = train_preflop.UPSWING, train_preflop.PC, train_preflop.GTOW
 # GTO Wizard cell codes -> the action kind they grade (bets and raises are one kind)
 GTOW_KINDS = {"R": "raise", "A": "raise", "C": "call", "F": "fold", "X": "check"}
 KIND_OF = {"bet": "raise"}  # hand action kind -> graded kind
@@ -115,6 +117,24 @@ def gto_kinds(freqs: Mapping | None, hand: Mapping[str, Any],
             out[GTOW_KINDS[code]] = out.get(GTOW_KINDS[code], 0.0) + float(v)
     total = sum(out.values())
     return {k: v / total for k, v in out.items()} if total > 0 else None
+
+
+def upswing_kinds(hand: Mapping[str, Any], dec: GradableDecision) -> dict[str, float] | None:
+    """Upswing frequencies of the combo's hand class at the decision by action kind, or None when
+    Upswing does not chart the situation (limp lines, heads-up, ...). The review has no caller /
+    jam detail: a squeeze reads as no situation (decisions emit none) and a jam 4-bet as the
+    regular 4-bet chart."""
+    if dec.situ is None or dec.situ[0] not in train_preflop.UPSWING_KINDS:
+        return None
+    kind, *seats = dec.situ
+    n = len(hand["players"])
+    ch = upswing.chart(upswing.chart_id(kind, tuple(seats), charts.table_kind(n), players=n))
+    if ch is None:
+        return None
+    out: dict[str, float] = {}
+    for code, v in upswing.class_dist(ch, ranges.combo_class(dec.combo)).items():
+        out[GTOW_KINDS[code]] = out.get(GTOW_KINDS[code], 0.0) + v
+    return out
 
 
 def pc_kinds(hand: Mapping[str, Any], dec: GradableDecision) -> dict[str, float] | None:
@@ -264,9 +284,11 @@ class Grader:
         return sorted(out, key=lambda g: g.seq)
 
     def _preflop(self, hand: Mapping[str, Any], dec: GradableDecision) -> Grade:
-        """Chart-based, never solved: PokerCoaching chart action, else GTO Wizard class
-        frequencies, by action kind. `backend` = the source used."""
-        kinds, source = pc_kinds(hand, dec), PC_SOURCE
+        """Chart-based, never solved: Upswing class frequencies, else the PokerCoaching chart
+        action, else GTO Wizard class frequencies, by action kind. `backend` = the source used."""
+        kinds, source = upswing_kinds(hand, dec), UPSWING_SOURCE
+        if kinds is None:
+            kinds, source = pc_kinds(hand, dec), PC_SOURCE
         if kinds is None:
             kinds, source = gto_kinds(self.freqs, hand, dec), GTOW_SOURCE
         chosen = KIND_OF.get(dec.action["kind"], dec.action["kind"])

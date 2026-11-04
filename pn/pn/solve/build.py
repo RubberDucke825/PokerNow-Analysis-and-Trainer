@@ -11,7 +11,7 @@ from pn.adapter import spot_ranges as sr
 from pn.adapter.state import Line, order_key
 from pn.adapter.validate import FOLD_LOCK, validate_config
 from pn.solve.request import Seat, SpotRequest, preflop_knobs
-from pn.solve.sources import ProfileSource, profile_hands, seat_range
+from pn.solve.sources import ProfileSource, lone_limper, profile_hands, seat_range
 
 DEFAULT_SIZES: dict[str, Any] = {
     "flop_bets": "auto", "turn_bets": [75], "river_bets": [150], "raise": [100],
@@ -76,8 +76,7 @@ def build(req: SpotRequest, profiles: ProfileSource | None = None) -> BuiltSpot:
         raise SpotError(f"need 2..8 seats, got {len(seats)}")
     depth_bb = _depth_bb(req)
     three_bettor = next((s.position for s in seats if s.line == "3bet"), None)
-    limpers = [s.position for s in seats if s.line == "limp"]
-    limper = limpers[0] if len(limpers) == 1 else None
+    limper = lone_limper((s.position, s.line, s.vs) for s in seats)
     players: list[dict[str, Any]] = []
     results: list[SeatResult] = []
     for seat in seats:

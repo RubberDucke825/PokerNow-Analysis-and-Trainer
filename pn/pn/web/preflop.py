@@ -1,5 +1,6 @@
 """Preflop chart data for the web UI: pure chart files (config/preflop_charts) and the
-GTO Wizard mixed-frequency JSON (data/gtowizard/cash6m_cev_2.5x_freqs.json)."""
+GTO Wizard mixed-frequency JSON (data/gtowizard/cash6m_cev_2.5x_freqs.json) and the Upswing
+Preflop Prodigy charts (data/upswing/9m_live_cash_free_freqs.json)."""
 
 from __future__ import annotations
 
@@ -7,7 +8,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from pn import ranges
-from pn.profile import charts, gtowizard
+from pn.profile import charts, gtowizard, upswing
 from pn.train import preflop as pre
 
 ACTION_CODES = ("F", "C", "X", "R", "A")  # fold, call, check, raise, all-in
@@ -136,3 +137,54 @@ def gtow_spot(key: str, path: Path | None = None) -> dict:
     return {"key": key, "depth": int(depth), "kind": kind, "positions": positions,
             "actor": spot.get("actor"), "actions": spot.get("actions", []),
             "raise_to_bb": spot.get("raise_to_bb"), "cells": cells, "summary": summary}  # fmt: skip
+
+
+# ------------------------------------------------------------------ Upswing charts
+# Chart id prefix (text before the first '_') -> situation kind; other prefixes keep their text.
+UPSWING_KINDS = {
+    "RFI": "rfi", "vs RFI": "vs_open", "Squeeze": "squeeze", "vs 3Bet (cold)": "cold",
+    "vs 3Bet": "vs_3bet", "vs 4Bet": "vs_4bet", "vs 5Bet": "vs_5bet",
+}  # fmt: skip
+
+
+def _upswing_head(key: str, ch: dict) -> dict:
+    """{kind, positions (seat tokens in id order, actor last), actor} of an Upswing chart id;
+    the actor is the first word of the chart title ('MP vs UTG 3bb raise and EP call')."""
+    prefix = key.split("_", 1)[0]
+    actor = ch["title"].split()[0]
+    seats = []
+    for tok in key.replace("_", " ").split():
+        if tok in upswing.SEATS and tok not in seats and tok != actor:
+            seats.append(tok)
+    return {"kind": UPSWING_KINDS.get(prefix, prefix), "positions": [*seats, actor], "actor": actor}
+
+
+def upswing_spots() -> list[dict]:
+    """Every Upswing chart: {key, kind, positions, actor, size_bb, title}."""
+    return [{"key": key, **_upswing_head(key, ch), "size_bb": ch.get("size_bb"), "title": ch["title"]}
+            for key, ch in upswing.load_freqs().items()]  # fmt: skip
+
+
+def upswing_spot(key: str) -> dict:
+    """An Upswing chart in the `gtow_spot` shape: cells = conditional {code: share} per class,
+    reach = class -> 0..1 share of the class reaching the node, summary = reach-weighted shares."""
+    if not upswing.has_freqs():
+        raise ChartNotFound(f"missing {upswing.freqs_path()}")
+    ch = upswing.chart(key)
+    if ch is None:
+        raise ChartNotFound(f"no Upswing chart {key!r}")
+    cells, reach = {}, {}
+    totals = dict.fromkeys(ACTION_CODES, 0.0)
+    n = 0.0
+    for cls in ranges.all_classes():
+        dist = upswing.class_dist(ch, cls)
+        cells[cls] = {a: round(dist[a], 4) for a in ACTION_CODES if dist.get(a)}
+        reach[cls] = round(upswing.reach(ch, cls), 4)
+        w = ranges.class_n_combos(cls) * reach[cls]
+        n += w
+        for a, v in dist.items():
+            totals[a] += w * v
+    summary = {a: round(v / n, 4) for a, v in totals.items() if v > 0} if n else {}
+    return {"key": key, "depth": 100, **_upswing_head(key, ch), "actions": list(ch["labels"]),
+            "labels": upswing.labels(ch), "raise_to_bb": upswing.raise_to_bb(ch), "cells": cells,
+            "reach": reach, "summary": summary, "source": "upswing", "title": ch["title"]}  # fmt: skip

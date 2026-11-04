@@ -1,6 +1,8 @@
-"""Preflop for the trainer: map a betting state to a GTO Wizard situation, villain action
-sampling and hero grading (PokerCoaching charts -> GTO Wizard frequencies -> hand-written chart
-fallback), GTO Wizard raise sizes with [sizes.preflop]-style fallbacks.
+"""Preflop for the trainer: map a betting state to a situation, villain action sampling and hero
+grading (Upswing charts -> PokerCoaching charts -> GTO Wizard frequencies -> hand-written chart
+fallback); raise sizes from the Upswing chart label, the GTO Wizard size on the exact (SB limp)
+lines, else a formula. Hero in the SB first in is graded raise/fold from Upswing (a limp grades 0);
+an SB bot first in limps only when hero is the BB, at the PokerCoaching `limp SB` share.
 
 Action codes follow the GTO Wizard file: R raise, A all-in, C call, F fold, X check.
 """
@@ -15,7 +17,7 @@ from typing import Any
 
 from pn import ranges
 from pn.adapter.state import order_key
-from pn.profile import charts, gtowizard
+from pn.profile import charts, gtowizard, upswing
 from pn.train import grading
 from pn.train.engine import State, raise_cap
 
@@ -34,6 +36,8 @@ class Situation:
     limpers: int
     callers: int  # callers of the last raise (squeeze when > 0)
     key: str | None  # GTO Wizard spot key without the depth prefix
+    caller: str | None = None  # position of the lone caller of the last raise (callers == 1)
+    jam: bool = False  # the last raise was all-in
 
     @property
     def exact(self) -> bool:
@@ -48,15 +52,18 @@ def situation(st: State, actor: int) -> Situation:
     pos = st.positions
     raisers: list[str] = []
     limpers = callers = 0
+    caller: str | None = None
+    jam = False
     for a in st.history:
         if a.street != "preflop":
             break
         if a.kind == "raise":
             raisers.append(pos[a.seat])
-            callers = 0
+            callers, caller, jam = 0, None, a.allin
         elif a.kind == "call":
             if raisers:
                 callers += 1
+                caller = pos[a.seat]
             else:
                 limpers += 1
     me = pos[actor]
@@ -90,7 +97,8 @@ def situation(st: State, actor: int) -> Situation:
         # SB limp, BB raise, SB 3-bet, ...: the scraped SB limp line (BB facing the limp-3-bet
         # reads limp_3bet|SB|BB, the SB facing the 4-bet limp_4bet|SB|BB, ...; 2026-11-04)
         key = f"limp_{n + 1}bet|SB|BB"
-    return Situation(kind, seats, tuple(raisers), limpers, callers, key)
+    return Situation(kind, seats, tuple(raisers), limpers, callers, key,
+                     caller if callers == 1 else None, jam)  # fmt: skip
 
 
 def _limper(st: State) -> str | None:
@@ -132,6 +140,37 @@ def cell_dist(spot: Mapping, cls: str) -> dict[str, float]:
     known = {k: float(v) for k, v in cell.items() if k in CODES and float(v) > 0}
     tot = sum(known.values())
     return {k: v / tot for k, v in known.items()} if tot else {}
+
+
+# ------------------------------------------------------------------ Upswing
+
+UPSWING_KINDS = ("rfi", "vs_open", "vs_3bet", "cold", "vs_4bet", "vs_5bet")
+
+
+def _upswing_line(sit: Situation) -> bool:
+    """Upswing charts clean lines: no limpers, no callers except one caller of the open (squeeze)."""
+    if sit.kind not in UPSWING_KINDS or sit.limpers:
+        return False
+    return sit.callers == 0 or (sit.kind == "vs_open" and sit.callers == 1)
+
+
+def upswing_chart(sit: Situation, table: str, players: int | None = None) -> tuple[str, dict] | None:
+    """(chart id, chart) of the situation, or None when Upswing does not chart it."""
+    if not _upswing_line(sit):
+        return None
+    cid = upswing.chart_id(sit.kind, sit.seats, table, players=players, caller=sit.caller,
+                           jam=sit.jam)  # fmt: skip
+    ch = upswing.chart(cid)
+    return (cid, ch) if cid and ch else None
+
+
+def upswing_decision(st: State, i: int, sit: Situation, combo: str,
+                     table: str) -> tuple[dict[str, float], str] | None:  # fmt: skip
+    """(code -> frequency, chart id) from the Upswing charts (mixed frequencies kept), or None."""
+    found = upswing_chart(sit, table, st.n)
+    if found is None:
+        return None
+    return upswing.class_dist(found[1], ranges.combo_class(combo)), found[0]
 
 
 # ------------------------------------------------------------------ PokerCoaching
@@ -235,6 +274,16 @@ def pc_ref(st: State, i: int, table: str) -> dict[str, str | None] | None:
             "other": other}  # fmt: skip
 
 
+def grid_ref(st: State, i: int, table: str, origin: str) -> dict[str, str | None] | None:
+    """feedback.grid_ref of a chart-graded decision: {kind: "upswing", key: chart id} for an
+    Upswing origin, pc_ref for a PokerCoaching one, else None (GTO Wizard / solves: the caller)."""
+    if origin.startswith(f"{UPSWING}:"):
+        return {"kind": "upswing", "key": origin[len(UPSWING) + 1 :]}
+    if origin.startswith("pc:"):
+        return pc_ref(st, i, table)
+    return None
+
+
 # ------------------------------------------------------------------ chart fallback
 
 
@@ -284,10 +333,15 @@ def class_percentile(cls: str) -> float:
 
 
 def raise_to(st: State, actor: int, sit: Situation, spot: Mapping | None) -> int:
-    """Raise-to in cents: the GTO Wizard size when the line is exact (the SB limp line
-    included), else 2.5bb open
-    (+1bb per limper), 3-bet 3x IP / 3.5x OOP (+1x per caller), 4-bet 2.2x, 5-bet all-in."""
+    """Raise-to in cents: the Upswing chart's 'Raise Nbb' size (open 3bb, 3-bet 9 / 12bb,
+    squeeze 12 / 15bb, 4-bet 27 / 26.4bb, ...), else the GTO Wizard size when the line is exact
+    (the SB limp line), else 2.5bb open (+1bb per limper), 3-bet 3x IP / 3.5x OOP (+1x per
+    caller), 4-bet 2.2x, 5-bet all-in."""
     bb = st.bb
+    up = upswing_chart(sit, charts.table_kind(st.n), st.n)
+    size_bb = upswing.raise_to_bb(up[1]) if up else None
+    if size_bb:
+        return round(size_bb * bb)
     if sit.exact and spot is not None and spot.get("raise_to_bb"):
         return round(float(spot["raise_to_bb"]) * bb)
     n = len(sit.raisers)
@@ -333,24 +387,27 @@ def legal_actions(st: State, i: int, size_to: int) -> list[dict[str, Any]]:
 # ------------------------------------------------------------------ decisions
 
 
-PC, GTOW, CHART = "pokercoaching", "gtowizard", "chart"  # feedback.preflop_source
+UPSWING, PC, GTOW, CHART = "upswing", "pokercoaching", "gtowizard", "chart"  # feedback.preflop_source
 
 
 @dataclass(frozen=True)
 class Decision:
     dist: dict[str, float]  # code -> frequency
-    origin: str  # pc:<chart key> | gtow:<key> | chart
-    spot: dict | None  # GTO Wizard spot used for the size (None: formula)
-    source: str = CHART  # pokercoaching | gtowizard | chart
+    origin: str  # upswing:<chart id> | pc:<chart key> | gtow:<key> | chart
+    spot: dict | None  # GTO Wizard spot (raise_to's exact-line size; None: none)
+    source: str = CHART  # upswing | pokercoaching | gtowizard | chart
 
 
 def gto_decision(st: State, i: int, combo: str, table: str, depth: int,
                  freqs: Mapping | None = None) -> Decision:  # fmt: skip
-    """PokerCoaching charts first (pure), then GTO Wizard class frequencies, then the
-    hand-written charts. The GTO Wizard spot still sets the raise size when the line is exact."""
+    """Upswing charts first (class frequencies, mixed), then PokerCoaching (pure), then GTO
+    Wizard class frequencies, then the hand-written charts."""
     sit = situation(st, i)
     found = gtow_spot(sit.key, depth, freqs)
     size_spot = found[1] if found else None
+    up = upswing_decision(st, i, sit, combo, table)
+    if up is not None:
+        return Decision(up[0], f"{UPSWING}:{up[1]}", size_spot, UPSWING)
     pc = pc_decision(st, i, sit, combo, table)
     if pc is not None:
         return Decision(pc[0], f"pc:{pc[1]}", size_spot, PC)
@@ -369,26 +426,53 @@ def sample(dist: Mapping[str, float], rng: random.Random) -> str:
 
 
 def villain_action(st: State, i: int, combo: str, *, rng: random.Random, table: str,
-                   depth: int,
-                   freqs: Mapping | None = None) -> tuple[str, int | None, str]:  # fmt: skip
-    """(kind, to, origin) for villain seat `i`: the PokerCoaching / GTO Wizard / chart action
-    (Plan 7: no profile blend, every villain plays the chart / GTO strategy), kept heads-up
-    by heads_up_dist."""
+                   depth: int, freqs: Mapping | None = None,
+                   hero_bb: bool = False) -> tuple[str, int | None, str]:  # fmt: skip
+    """(kind, to, origin) for villain seat `i`: the Upswing / PokerCoaching / GTO Wizard / chart
+    action (Plan 7: no profile blend, every villain plays the chart / GTO strategy), kept
+    heads-up by heads_up_dist. `hero_bb`: hero sits in the BB (an SB bot first in may limp)."""
     sit = situation(st, i)
     gto = gto_decision(st, i, combo, table, depth, freqs)
     size = raise_to(st, i, sit, gto.spot)
-    dist = sb_limp_as_raise(gto.dist, st, i, sit, combo, table)
-    code = sample(heads_up_dist(st, i, dist, size), rng)
+    dist = sb_bot_first_in(gto.dist, st, i, sit, combo, table, hero_bb, depth=depth, freqs=freqs)
+    code = sample(heads_up_dist(st, i, dist, size, allow_limp=sb_may_limp(st, i, sit, hero_bb)), rng)
     kind, to = code_action(st, i, code, size)
     return kind, to, gto.origin
 
 
-def sb_limp_as_raise(dist: Mapping[str, float], st: State, i: int, sit: Situation, combo: str,
-                     table: str) -> Mapping[str, float]:  # fmt: skip
-    """Bots never limp: the SB's chart limps become an open raise for the hands PokerCoaching
-    continues with after a BB raise (value re-raises and calls), a fold for the rest."""
+def sb_may_limp(st: State, i: int, sit: Situation, hero_bb: bool) -> bool:
+    """An SB bot first in limps only against a BB hero (user 2026-11-04)."""
+    return hero_bb and sit.kind == "rfi" and st.positions[i] == "SB"
+
+
+def sb_limp_share(combo: str, table: str, depth: int = 100,
+                  freqs: Mapping | None = None) -> float:  # fmt: skip
+    """Share of `combo` the SB limps first in: the PokerCoaching `limp SB` weight, else (no
+    PokerCoaching chart) the GTO Wizard rfi|SB call share of its class, else 0."""
+    rng = charts.pc_range(table, "limp", "SB")
+    if rng is not None:
+        return float(rng.get(ranges.canonical_combo(combo), 0.0))
+    found = gtow_spot(gtowizard.situation_key(("rfi", "SB")), depth, freqs)
+    return cell_dist(found[1], ranges.combo_class(combo)).get("C", 0.0) if found else 0.0
+
+
+def sb_bot_first_in(dist: Mapping[str, float], st: State, i: int, sit: Situation, combo: str,
+                    table: str, hero_bb: bool, *, depth: int = 100,
+                    freqs: Mapping | None = None) -> Mapping[str, float]:  # fmt: skip
+    """The SB bot's first-in distribution. Against a BB hero it limps with the share of
+    sb_limp_share and plays the rest of `dist` without its limps scaled by (1 - share). Otherwise
+    it never limps: chart limps (PokerCoaching / GTO Wizard fallback; Upswing has none) become an
+    open raise for the hands PokerCoaching continues with after a BB raise, a fold for the rest."""
+    if sit.kind != "rfi" or st.positions[i] != "SB":
+        return dist
+    if hero_bb:
+        limp = sb_limp_share(combo, table, depth, freqs)
+        rest = {k: v for k, v in dist.items() if k != "C" and v > 0}
+        tot = sum(rest.values())
+        out = {k: v / tot * (1 - limp) for k, v in rest.items()} if tot else {"F": 1 - limp}
+        return {**out, "C": limp} if limp > 0 else out
     limp = dist.get("C", 0.0)
-    if not limp or sit.kind != "rfi" or st.positions[i] != "SB":
+    if not limp:
         return dist
     c = ranges.canonical_combo(combo)
     keep = max(float((charts.pc_range(table, action, "SB", "BB") or {}).get(c, 0.0))
@@ -399,11 +483,13 @@ def sb_limp_as_raise(dist: Mapping[str, float], st: State, i: int, sit: Situatio
     return out
 
 
-def heads_up_dist(st: State, i: int, dist: Mapping[str, float], size_to: int) -> dict[str, float]:
+def heads_up_dist(st: State, i: int, dist: Mapping[str, float], size_to: int, *,
+                  allow_limp: bool = False) -> dict[str, float]:  # fmt: skip
     """`dist` without the actions that would make a limped or 3+ player pot (bots only; the
-    trainer grades heads-up pots, user 2026-10-16): no limp (the SB included), a call only
-    against a lone raiser, a raise only with at most one other player in. Dropped weight goes
-    to the kept actions in proportion, all of it to fold (check when free) when none is kept."""
+    trainer grades heads-up pots, user 2026-10-16): no limp (except the SB first in when
+    `allow_limp`: everyone else folded, so the pot stays heads-up), a call only against a lone
+    raiser, a raise only with at most one other player in. Dropped weight goes to the kept
+    actions in proportion, all of it to fold (check when free) when none is kept."""
     seats = {a.seat for a in st.history if a.kind in ("call", "raise")}
     others = sum(1 for j in seats if j != i and not st.folded[j])
     raised = any(a.kind == "raise" for a in st.history)
@@ -411,7 +497,7 @@ def heads_up_dist(st: State, i: int, dist: Mapping[str, float], size_to: int) ->
     def ok(code: str) -> bool:
         kind, _ = code_action(st, i, code, size_to)
         if kind == "call":
-            return raised and others == 1
+            return (raised and others == 1) or (allow_limp and not raised and others == 0)
         if kind in ("raise", "allin"):
             return others <= 1
         return True
@@ -425,8 +511,8 @@ def heads_up_dist(st: State, i: int, dist: Mapping[str, float], size_to: int) ->
 
 def hero_grade(st: State, i: int, combo: str, chosen: str, table: str, depth: int,
                freqs: Mapping | None = None) -> dict[str, Any]:  # fmt: skip
-    """Frequency of each legal option for hero's hand class (PokerCoaching: 1 or 0; EV not
-    available preflop), graded like postflop decisions (pn.train.grading)."""
+    """Frequency of each legal option for hero's hand class (Upswing / GTO Wizard mixed,
+    PokerCoaching 1 or 0; EV not available preflop), graded like postflop decisions (pn.train.grading)."""
     gto = gto_decision(st, i, combo, table, depth, freqs)
     sit = situation(st, i)
     size = raise_to(st, i, sit, gto.spot)

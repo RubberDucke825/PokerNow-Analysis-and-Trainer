@@ -137,7 +137,7 @@ function drillTable(filters, row) {
   return loadSetup().table === 8 ? 8 : 6;
 }
 
-const drillDepth = (filters) => (filters.depth ? +filters.depth : loadSetup().depth === 200 ? 200 : 100);
+const drillDepth = () => 100; // the trainer deals 100bb only (200bb parked 2026-11-04)
 
 /** Plan 16: the spots a drill can deal (GET /api/train/dealable per table x depth): {`${table}|${depth}|${spot}`: bool}.
  *  A failed check answers null, and the buttons stay (a click then explains why it cannot deal). */

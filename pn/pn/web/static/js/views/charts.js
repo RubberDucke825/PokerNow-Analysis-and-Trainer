@@ -13,15 +13,16 @@ function codeLabel(spot, code) {
   return spot.actions.find((a) => a.toLowerCase().replace("-", "").startsWith(want)) || CODE_NAME[code];
 }
 
-/** 13x13 grid + legend for a GTO Wizard spot or a PokerCoaching chart spot (same shape:
- *  GET /api/gtow/spot, GET /api/charts/pc); the trainer feedback reuses it. */
+/** 13x13 grid + legend for a GTO Wizard spot, a PokerCoaching or an Upswing chart spot (same shape:
+ *  GET /api/gtow/spot, /api/charts/pc, /api/charts/upswing; Upswing adds `reach`, drawn as bar
+ *  height); the trainer feedback reuses it. */
 export function spotGrid(spot, caption) {
   const codes = CODE_ORDER.filter((c) => Object.values(spot.cells).some((cell) => cell[c] > 0) || spot.summary[c]);
   const colors = actionColors(codes.map((c) => CODE_TOKEN[c]));
   const colorOf = Object.fromEntries(codes.map((c, k) => [c, colors[k]]));
   const cells = {};
   for (const [cls, sh] of Object.entries(spot.cells)) {
-    cells[cls] = { weight: 1, segments: codes.map((c) => ({ freq: sh[c] || 0, color: colorOf[c] })),
+    cells[cls] = { weight: spot.reach ? spot.reach[cls] || 0 : 1, segments: codes.map((c) => ({ freq: sh[c] || 0, color: colorOf[c] })),
       label: codes.filter((c) => sh[c]).map((c) => `${codeLabel(spot, c)} ${pct(sh[c])}`).join(", ") };
   }
   const tipFor = (cls) => {

@@ -6,7 +6,7 @@ import { aggregate } from "./strategy.js";
 import { spotGrid } from "./charts.js";
 import { tokenName, optLabel, streetAbbr } from "./train_util.js";
 
-const PREFLOP_SOURCE = { pokercoaching: "PokerCoaching charts", gtowizard: "GTO Wizard frequencies", chart: "the hand-written charts" };
+const PREFLOP_SOURCE = { upswing: "Upswing charts", pokercoaching: "PokerCoaching charts", gtowizard: "GTO Wizard frequencies", chart: "the hand-written charts" };
 // Backend notes for ungraded hero decisions shown as a quiet state (no verdict colour, buckets or RNG note).
 const QUIET_NOTES = {
   multiway_unsolvable: ["Multiway, not graded", "the trainer grades 2-player streets only", "3+ players on this street: not solved, not graded."],
@@ -94,8 +94,12 @@ const cellTip = (cells) => (cls, el) => {
     : h("span", {}, " ", c ? c.label : "not in range")));
 };
 
-/** Preflop chart grid (charts view renderer): GTO Wizard spot or PokerCoaching chart spot. */
+/** Preflop chart grid (charts view renderer): Upswing chart, GTO Wizard spot or PokerCoaching chart spot. */
 async function chartGrid(ref) {
+  if (ref.kind === "upswing") {
+    const spot = await cachedApi(`/api/charts/upswing?key=${encodeURIComponent(ref.key)}`);
+    return { ...spotGrid(spot, `Upswing ${spot.key}`), note: `Upswing Preflop Prodigy 9-max live cash · ${spot.title}` };
+  }
   if (ref.kind === "gtow") {
     const spot = await cachedApi(`/api/gtow/spot?key=${encodeURIComponent(ref.key)}`);
     return { ...spotGrid(spot, `GTO Wizard ${ref.key}`), note: `GTO Wizard ${ref.key.replaceAll("|", " · ")}` };
@@ -147,7 +151,7 @@ function gridSection(fb, heroCls, open, onToggle) {
   }
   const btn = h("button", { type: "button", class: "btn ghost btn-row", "aria-expanded": "false", "aria-keyshortcuts": "G",
     onclick: () => { const want = out.hidden; set(want); onToggle(want); } },
-    h("span", {}, `${ref.kind === "pc" ? "PokerCoaching chart" : "Range grid"} · ${heroCls} outlined`),
+    h("span", {}, `${{ pc: "PokerCoaching chart", upswing: "Upswing chart" }[ref.kind] || "Range grid"} · ${heroCls} outlined`),
     h("span", { class: "fb-grid-keys" }, h("kbd", { class: "kbd-soft", "aria-hidden": "true" }, "G"), sign));
   set(open);
   return { el: h("div", { class: "fb-grid-wrap" }, btn, out), set };

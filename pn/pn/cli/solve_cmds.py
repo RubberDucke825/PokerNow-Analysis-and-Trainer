@@ -244,10 +244,10 @@ def library_alias(
     from pn.solve.request import TABLE_SEATS
     from pn.train import flop_library as flib
     from pn.train import library_alias as la
-    from pn.train.model import DEPTHS
+    from pn.train.model import LIB_DEPTHS
 
-    if table not in TABLE_SEATS or table == 6 or depth not in DEPTHS:
-        raise _fail(f"--table must be one of {sorted(set(TABLE_SEATS) - {6})}, --depth one of {DEPTHS}")
+    if table not in TABLE_SEATS or table == 6 or depth not in LIB_DEPTHS:
+        raise _fail(f"--table must be one of {sorted(set(TABLE_SEATS) - {6})}, --depth one of {LIB_DEPTHS}")
     if not dry_run:
         _no_running_fill(cache_dir())
     index = flib.FlopIndex(cache_dir())
@@ -362,6 +362,7 @@ def library_fill(
     checked against the trainer's lookup; `--cached-only` indexes pulled documents (one index
     write); `--reverse` walks the order backwards, so a forward and a reverse shard set share one
     pool without overlap. Fails before planning when an input the keys hash is missing."""
+    from pn.profile import upswing
     from pn.solve import SolveCache
     from pn.solve.cache import cache_dir
     from pn.train import flop_library as flib
@@ -373,6 +374,9 @@ def library_fill(
     if not pre.has_freqs():
         raise _fail("GTO Wizard frequencies missing (data/gtowizard): the plan would hash default "
                     "preflop sizes and solve boards no machine with the file can use")
+    if not upswing.has_freqs():
+        raise _fail("Upswing frequencies missing (data/upswing): the plan would hash other preflop "
+                    "ranges and sizes and solve boards no machine with the file can use")
     if missing := lf.missing_inputs(libs):
         raise _fail(f"missing inputs the flop keys hash: {', '.join(missing)}")
     if preset != flib.LIBRARY_PRESET or backend != flib.LIBRARY_BACKEND:

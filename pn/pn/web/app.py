@@ -112,6 +112,15 @@ def create_app(db_path: str | Path | None = None, solves_dir: str | Path | None 
         except preflop.ChartNotFound as e:
             raise _404(e) from e
 
+    @app.get("/api/charts/upswing")
+    def upswing_spot(key: str | None = None) -> dict | list[dict]:
+        if key is None:
+            return preflop.upswing_spots()
+        try:
+            return preflop.upswing_spot(key)
+        except preflop.ChartNotFound as e:
+            raise _404(e) from e
+
     @app.get("/api/gtow/spots")
     def gtow_spots() -> list[dict]:
         return preflop.gtow_spots()

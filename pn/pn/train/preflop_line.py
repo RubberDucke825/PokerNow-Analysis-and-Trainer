@@ -5,9 +5,10 @@ entering the decision (product of its own earlier taken-action frequencies) and 
 action frequencies.
 
 Frequencies come from the trainer's own preflop policy (pn.train.preflop.gto_decision:
-PokerCoaching first, GTO Wizard, then the hand-written charts). Villain steps go through the
-bot adjustments (sb_limp_as_raise, heads_up_dist) as in villain_action; hero steps use the
-plain distribution hero is graded against (hero_grade).
+Upswing first, PokerCoaching, GTO Wizard, then the hand-written charts). Villain steps go through
+the bot adjustments (sb_bot_first_in, heads_up_dist) as in villain_action, so an SB bot limps
+first in only when hero is the BB; hero steps use the plain distribution hero is graded against
+(hero_grade).
 """
 
 from __future__ import annotations
@@ -36,16 +37,16 @@ def preflop_line(st: State, tokens: Sequence[str], hero: int | None, table: str,
 
 
 def policy_depth(table: str, plan: tuple[tuple[str, str], ...], behind_bb: float) -> int | None:
-    """The trainer depth (pn.train.model.DEPTHS) whose replay of `plan` leaves the stack behind
+    """The library depth (pn.train.model.LIB_DEPTHS) whose replay of `plan` leaves the stack behind
     (second-largest of the two players, as pn.solve.build's depth) closest to `behind_bb`: a flop
     request only knows the stacks left (150bb after a 200bb 4-bet pot). None: no depth reaches it."""
-    from pn.train.model import DEPTHS
+    from pn.train.model import LIB_DEPTHS
 
-    left = {d: b for d in DEPTHS if (b := _behind(table, d, plan)) is not None}
+    left = {d: b for d in LIB_DEPTHS if (b := _behind(table, d, plan)) is not None}
     return min(left, key=lambda d: abs(left[d] - behind_bb)) if left else None
 
 
-@lru_cache(maxsize=512)
+@lru_cache(maxsize=4096)
 def _behind(table: str, depth: int, plan: tuple[tuple[str, str], ...]) -> float | None:
     st = _replay(table, depth, plan)
     return sorted(st.stacks[i] for i in st.in_hand())[-2] / BB if st is not None else None
@@ -56,7 +57,7 @@ def _replay(table: str, depth: int, plan: tuple[tuple[str, str], ...]) -> State 
     return replay(order, depth, plan, sb=SB, bb=BB, fold_others=True) if order else None
 
 
-@lru_cache(maxsize=512)
+@lru_cache(maxsize=4096)
 def policy_reach(table: str, depth: int, plan: tuple[tuple[str, str], ...], seat: str,
                  hero: str | None = None) -> dict[str, float] | None:  # fmt: skip
     """Combo -> reach (rounded to ROUND, zeros dropped) of `seat` along `plan` ((position, kind)
@@ -89,11 +90,13 @@ def _walk(st: State, tokens: Sequence[str], hero: int | None, table: str, depth:
     cur = start(st.positions, stack, st.sb, st.bb)
     combos = ranges.all_combos()
     reach = {i: [1.0] * len(combos) for i in live}
+    hero_bb = hero is not None and st.positions[hero] == "BB"
     steps = []
     for a, tok in pf:
         if a.seat in reach:
             is_hero = a.seat == hero
-            step, taken = _step(cur, a.seat, tok, reach[a.seat], is_hero, table, depth, freqs)
+            step, taken = _step(cur, a.seat, tok, reach[a.seat], is_hero, table, depth, freqs,
+                                hero_bb)  # fmt: skip
             steps.append(step)
             reach[a.seat] = [r * f for r, f in zip(reach[a.seat], taken, strict=True)]
         cur = apply(cur, a.kind, a.to if a.kind == "raise" else None)
@@ -101,7 +104,8 @@ def _walk(st: State, tokens: Sequence[str], hero: int | None, table: str, depth:
 
 
 def _step(st: State, i: int, taken: str, reach: list[float], is_hero: bool, table: str,
-          depth: int, freqs: Mapping | None) -> tuple[dict[str, Any], list[float]]:  # fmt: skip
+          depth: int, freqs: Mapping | None,
+          hero_bb: bool = False) -> tuple[dict[str, Any], list[float]]:  # fmt: skip
     """(step, per-combo frequency of the taken action) for seat `i` deciding in `st`."""
     sit = pre.situation(st, i)
     found = pre.gtow_spot(sit.key, depth, freqs)
@@ -110,7 +114,7 @@ def _step(st: State, i: int, taken: str, reach: list[float], is_hero: bool, tabl
     if taken not in tokens:  # e.g. a raise the engine capped to an all-in
         taken = "allin" if taken == "raise" and "allin" in tokens else taken
     combos = ranges.all_combos()
-    per_combo = [_combo_freq(st, i, c, sit, size, is_hero, table, depth, freqs) if r > 0 else {}
+    per_combo = [_combo_freq(st, i, c, sit, size, is_hero, table, depth, freqs, hero_bb) if r > 0 else {}
                  for c, r in zip(combos, reach, strict=True)]  # fmt: skip
     used = {t for f in per_combo for t, v in f.items() if v > 0}
     actions = [t for t in tokens if t != "allin" or t in used or t == taken]
@@ -128,11 +132,16 @@ def _step(st: State, i: int, taken: str, reach: list[float], is_hero: bool, tabl
 
 
 def _combo_freq(st: State, i: int, combo: str, sit: pre.Situation, size: int, is_hero: bool,
-                table: str, depth: int, freqs: Mapping | None) -> dict[str, float]:  # fmt: skip
-    """Action token -> frequency of one combo (codes mapped like hero_grade / villain_action)."""
+                table: str, depth: int, freqs: Mapping | None,
+                hero_bb: bool = False) -> dict[str, float]:  # fmt: skip
+    """Action token -> frequency of one combo (codes mapped like hero_grade / villain_action);
+    `hero_bb`: hero sits in the BB (bot steps: an SB bot first in may limp)."""
     dist: Mapping[str, float] = pre.gto_decision(st, i, combo, table, depth, freqs).dist
     if not is_hero:
-        dist = pre.heads_up_dist(st, i, pre.sb_limp_as_raise(dist, st, i, sit, combo, table), size)
+        dist = pre.sb_bot_first_in(dist, st, i, sit, combo, table, hero_bb, depth=depth,
+                                   freqs=freqs)  # fmt: skip
+        dist = pre.heads_up_dist(st, i, dist, size,
+                                 allow_limp=pre.sb_may_limp(st, i, sit, hero_bb))  # fmt: skip
     out: dict[str, float] = {}
     for code, f in dist.items():
         kind, _ = pre.code_action(st, i, code, size)

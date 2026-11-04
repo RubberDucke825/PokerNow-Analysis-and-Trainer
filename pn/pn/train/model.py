@@ -20,7 +20,8 @@ from pn.train.drills import Drill
 from pn.train.engine import State
 from pn.train.postflop import Player, Tree
 
-DEPTHS = (100, 200)
+DEPTHS = (100,)  # trainer depths
+LIB_DEPTHS = (100, 200)  # library tables x depths the tooling still addresses; 200bb parked in the trainer 2026-11-04
 TRAIN_SOURCES = ("gto",)  # Plan 7: no opponent-specific (locked) solves
 
 
