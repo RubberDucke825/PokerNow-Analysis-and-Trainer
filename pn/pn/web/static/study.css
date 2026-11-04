@@ -1,0 +1,78 @@
+/* pn study — preflop navigator (/charts and /strategy preflop). Reuses the tree browser's strip cards, gw grid and
+   action tiles (strategy.css); this file adds the setup row, seat states, source tag and the end panel.
+   Direction 3 "Graphite". */
+
+.study { gap: var(--s4); }
+.study .strat-surface { background: var(--bg-0); }
+.study .main-col { gap: var(--s4); }
+
+/* setup row */
+.study-setup { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--s3) var(--s5); }
+.study-setup .seg-opt { text-transform: none; letter-spacing: 0; }
+.study-links { display: flex; align-items: center; gap: var(--s3); margin-left: auto; }
+.study-links .btn { min-height: 36px; }
+
+/* seat strip */
+.study-strip .ln-card { min-width: 8.5rem; }
+.st-seat .ln-act .mono { color: var(--ink-3); }
+.st-seat .ln-act.is-taken .mono, .st-seat.is-current .ln-act .mono { color: var(--ink-2); }
+.st-seat.is-current button.ln-act:hover { background: var(--accent-soft); }
+.st-seat.is-folded { opacity: 0.5; }
+.st-seat.is-folded:hover, .st-seat.is-folded:focus-within { opacity: 1; }
+.st-in { font: 600 var(--text-2xs) var(--font-label); letter-spacing: 0.04em; color: var(--accent); }
+.st-wait { font: 500 var(--text-md) var(--font-mono); padding: 2px 0; color: var(--ink-3); }
+
+/* left: heading with the source tag */
+.study-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); padding-bottom: var(--s3); border-bottom: 0; box-shadow: inset 0 -1px 0 var(--line); }
+.study-head h2 { font-size: 1.125rem; letter-spacing: -0.02em; }
+.study-head .tab-count { padding-bottom: 0; }
+.src-tag {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border: 0; border-radius: 999px;
+  background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent-line); color: var(--accent);
+  font: 600 var(--text-2xs) var(--font-label); letter-spacing: 0.04em;
+}
+.src-tag.src-gtowizard, .src-tag.src-chart { background: var(--bg-3); box-shadow: inset 0 0 0 1px var(--hair); color: var(--ink-2); }
+
+/* end of preflop */
+.end-card {
+  display: flex; flex-direction: column; gap: var(--s4); padding: var(--s5); max-width: 600px;
+  background: var(--bg-2); border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow-2), inset 0 2px 0 var(--accent);
+}
+.end-line { margin: 0; font-size: var(--text-md); font-weight: 600; letter-spacing: -0.01em; }
+.end-stacks { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); }
+.end-stacks > span { display: flex; flex-direction: column; gap: 4px; }
+.end-stacks b { font: 500 var(--text-sm) var(--font-mono); }
+.board-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.board-row-link {
+  display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 48px; padding: 6px 12px;
+  background: var(--bg-1); border-radius: var(--radius); box-shadow: inset 0 0 0 1px var(--hair); text-decoration: none; color: var(--ink);
+  transition: background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.board-row-link:hover { background: var(--bg-3); box-shadow: inset 0 0 0 1px var(--hair), inset 3px 0 0 var(--accent); }
+.board-row-link:focus-visible { outline: none; box-shadow: var(--focus); }
+.board-row-link .cards { gap: 3px; }
+.board-row-link .card { width: 26px; height: 36px; font-size: 0.8125rem; border-radius: 4px; }
+
+@media (max-width: 1100px) {
+  .study .two-col > .main-col { box-shadow: inset 0 -1px 0 var(--hair); }
+}
+@media (max-width: 700px) {
+  .study-setup > .field { flex: 1 1 40%; }
+  .study-links { margin-left: 0; width: 100%; justify-content: space-between; }
+  .study-strip .ln-card { min-width: 7rem; }
+}
+
+/* Board picker: the Actions column at the end of preflop (same tile grammar as the action tiles). */
+.board-filter { display: flex; flex-direction: column; gap: 8px; }
+.board-q { width: 100%; min-height: 36px; padding: 0 12px; font: 500 var(--text-sm) var(--font-mono); color: var(--ink);
+  background: var(--bg-1); border: 0; border-radius: var(--radius); box-shadow: inset 0 0 0 1px var(--line-2); }
+.board-q:focus-visible { outline: none; box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 3px var(--accent-soft); }
+.board-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.board-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.board-tile { --act: var(--bg-2); color: var(--ink); text-shadow: none; min-height: 0; padding: 10px 8px 8px; gap: 6px;
+  grid-template-columns: 1fr; grid-template-areas: "cards" "w"; justify-items: center; box-shadow: var(--shadow-1); }
+.board-tile:hover { filter: none; background: var(--bg-3); }
+.board-tile .cards { grid-area: cards; gap: 2px; }
+.board-tile .card { width: 24px; height: 33px; font-size: 0.78rem; border-radius: 4px; }
+.board-tile .board-w { grid-area: w; font: 400 var(--text-2xs) var(--font-mono); color: var(--ink-3); }
+@media (max-width: 480px) { .board-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
