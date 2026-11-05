@@ -34,6 +34,7 @@ from pn.ingest import db as ingest_db
 from pn.solve import SolveCache
 from pn.solve import flops as fl
 from pn.solve.backend import Preempted, SolveError, run_backend
+from pn.solve.build import SpotError
 from pn.solve.lock import POLL_SEC, priority_waiting
 from pn.solve.request import SOLVE_PRESETS, TABLE_SEATS
 from pn.train import spots
@@ -513,7 +514,14 @@ def _fill(items: Sequence[FillItem], cache: SolveCache, index: FlopIndex, backen
             if on_result:
                 on_result(res)
             continue
-        _, spot, key = flop_spot(it.matchup, board, target)
+        try:
+            _, spot, key = flop_spot(it.matchup, board, target)
+        except SpotError as e:  # a seat's whole range is on the board: the line cannot reach it
+            res = FillResult(it.matchup.label, it.flop.flop, "", "failed", str(e)[:300])
+            out.append(res)
+            if on_result:
+                on_result(res)
+            continue
         acc = float(spot["game"]["target_exploitability"])  # recorded even on the preset's pass
         cached = cache.get(key)
         res = None
