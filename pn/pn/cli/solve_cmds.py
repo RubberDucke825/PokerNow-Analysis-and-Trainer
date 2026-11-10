@@ -310,6 +310,12 @@ def _libs(lib: list[str] | None, table: int, depth: int) -> list[tuple[int, int]
         raise _fail(str(e)) from None
 
 
+def _non_sb_limp(line: str) -> bool:
+    """A preflop line whose first action is a limp (`LJ call, ...`) by a seat other than the SB."""
+    seat, _, action = line.split(",")[0].partition(" ")
+    return action == "call" and seat != "SB"
+
+
 @library_app.command("fill")
 def library_fill(
     flops: Annotated[str | None, typer.Option(
@@ -339,6 +345,9 @@ def library_fill(
     matchup: Annotated[list[str] | None, typer.Option(
         help="only matchups whose label contains this text (e.g. `limped SB-BB`), repeatable; "
              "default all")] = None,
+    sb_limps_only: Annotated[bool, typer.Option(
+        "--sb-limps-only", help="skip lines opened by a non-SB limp (the trainer deals SB limps "
+                                "only; the others serve hand review)")] = False,
     db: DbOpt = DEFAULT_DB,
     shard: Annotated[str | None, typer.Option(
         help="solve only every n-th item of the order starting at i, as `i/n` (0 <= i < n); "
@@ -407,6 +416,8 @@ def library_fill(
             part = [m for m in part if m.pot in pots]
         if matchup:
             part = [m for m in part if any(text in m.label for text in matchup)]
+        if sb_limps_only:
+            part = [m for m in part if not _non_sb_limp(m.line)]
         burn.update(lf.load_burns(part, t, d, db))
         ms += part
         notes.append(f"{t}max/{d}: {len(part)} of {n_all} matchups{skipped} x {len(flop_list)} boards")

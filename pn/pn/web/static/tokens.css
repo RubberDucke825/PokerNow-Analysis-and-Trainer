@@ -42,7 +42,8 @@
   --hi: oklch(72% 0.150 27);  --hi-bg: oklch(72% 0.150 27 / 0.12);    /* above GTO */
   --lo: oklch(75% 0.110 250); --lo-bg: oklch(75% 0.110 250 / 0.12);   /* below GTO */
 
-  /* action colours — GTO Wizard mapping, do not change (grid.js ACTION_COLORS owns the JS copy) */
+  /* action colours — GTO Wizard mapping, do not change (grid.js reads these; ACTION_COLORS = fallbacks).
+     The high-contrast set at the end of this file is the opt-in alternative. */
   --act-fold: #4a86d9;
   --act-check: #3fa66a;
   --act-call: #3fa66a;
@@ -164,3 +165,20 @@
   --suit-d: var(--suit-h); --suit-c: var(--suit-s);
   --suit-d-ink: var(--suit-h-ink); --suit-c-ink: var(--suit-s-ink);
 }
+
+/* High-contrast action colours (header toggle, html[data-palette="contrast"]): same hues as the GTO Wizard
+   mapping, spaced by lightness so they stay apart in greyscale. CIE L*: fold 97, call 65, raises 48 -> 27
+   (one raise size = 40), all-in 2. */
+:root[data-palette="contrast"] {
+  --act-fold: #eef6ff;
+  --act-check: #52b07a;
+  --act-call: #52b07a;
+  --act-raise-1: #c24a37;
+  --act-raise-2: #a63b2d;
+  --act-raise-3: #8c3025;
+  --act-raise-4: #74271e;
+  --act-allin: #140404;
+}
+/* white text over a near-white fold colour (grid cells, action tiles) needs a full outline */
+:root[data-palette="contrast"] .cell-name { text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px rgb(0 0 0 / 0.8); }
+:root[data-palette="contrast"] .act-tile { text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px rgb(0 0 0 / 0.8); }

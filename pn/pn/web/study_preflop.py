@@ -183,7 +183,7 @@ def _end(st: State, table: str, depth: int, root: Any) -> dict[str, Any]:
 def study_preflop(request: Request, table: int = Query(6), depth: int = Query(100),
                   line: str = "") -> dict[str, Any]:  # fmt: skip
     if table not in TABLE_SEATS or depth not in DEPTHS:
-        raise HTTPException(400, "table must be 6 or 8 and depth 100")
+        raise HTTPException(400, "table must be 6 or 8 and depth 100 or 200")
     order = TABLE_SEATS[table]
     kind = f"{table}max"
     steps = _parse(line, order)

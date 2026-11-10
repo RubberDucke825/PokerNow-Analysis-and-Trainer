@@ -8,6 +8,7 @@ import { h, api, num, pct, cards, setQuery, navigate, errorBox, showTip, hideTip
 import { renderGrid, actionColors, ALL_CLASSES } from "../grid.js";
 import { actionsBlock } from "./strategy_hands.js";
 import { seatStrip, bbText } from "./study_strip.js";
+import { studyMttView, formatField } from "./study_mtt.js";
 
 const COMBOS = 1326;
 const MAX_KEY_OPTION = 9;
@@ -22,9 +23,10 @@ const boardCards = (b) => b.match(/../g) || [];
 const RANKS = "AKQJT98765432";
 
 export async function studyView(_params, q) {
+  if (q.get("mode") === "mtt") return studyMttView(q);  // tournament charts: preflop only
   const st = {
     table: q.get("table") === "8" ? 8 : 6,
-    depth: 100, // 200bb parked 2026-11-04
+    depth: q.get("depth") === "200" ? 200 : 100,
     steps: (q.get("line") || "").split(",").filter(Boolean),
     sel: -1,
   };
@@ -52,11 +54,11 @@ export async function studyView(_params, q) {
   };
 
   function drawSetup() {
-    setupBox.replaceChildren(
+    setupBox.replaceChildren(formatField("cash"),
       h("div", { class: "field" }, h("span", {}, "Table"),
         seg("Table", [[6, "6-max"], [8, "8-max"]], st.table, (v) => { if (v !== st.table) { st.table = v; reset(); } })),
       h("div", { class: "field" }, h("span", {}, "Depth"),
-        seg("Depth", [[100, "100 bb"]], st.depth, (v) => { if (v !== st.depth) { st.depth = v; reset(); } })),
+        seg("Depth", [[100, "100 bb"], [200, "200 bb"]], st.depth, (v) => { if (v !== st.depth) { st.depth = v; reset(); } })),
       h("div", { class: "study-links" },
         h("button", { type: "button", class: "btn ghost", onclick: reset, disabled: !st.steps.length }, "Reset line"),
         h("a", { href: "/strategy/library", "data-link": true, class: "back-link" }, "Library →")));

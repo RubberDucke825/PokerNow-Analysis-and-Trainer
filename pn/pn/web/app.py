@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any
 
 from fastapi import FastAPI, HTTPException, Query, UploadFile
 from fastapi.middleware.gzip import GZipMiddleware
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from pn.profile.paths import repo_root
@@ -19,10 +20,34 @@ from pn.web.ev_routes import router as ev_router
 from pn.web.solve_routes import router as solve_router
 from pn.web.solves import Registry, SolveError, SolveNotFound
 from pn.web.store import NotFound, Store
+from pn.web.study_mtt import router as study_mtt_router
 from pn.web.study_preflop import router as study_preflop_router
 from pn.web.train_routes import router as train_router
 
 STATIC = Path(__file__).resolve().parent / "static"
+
+
+def asset_version(root: Path = STATIC) -> str:
+    """Short content hash of every static file but the page itself: the page links its assets under
+    /assets/<version>/, so any change gives new URLs and no browser can keep running an old copy."""
+    digest = hashlib.sha1()
+    for path in sorted(root.rglob("*")):
+        if path.is_file() and path.name != "index.html":
+            digest.update(path.relative_to(root).as_posix().encode())
+            digest.update(path.read_bytes())
+    return digest.hexdigest()[:12]
+
+
+class RevalidatedStatic(StaticFiles):
+    """Static files with `Cache-Control: no-cache`: browsers keep them but check the ETag on every load
+    (a 304 when unchanged), so an updated script is never run stale (phones cache aggressively)."""
+
+    def file_response(self, *args: Any, **kwargs: Any) -> Response:
+        response = super().file_response(*args, **kwargs)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
+
+
 MAX_UPLOAD_BYTES = 512 * 1024 * 1024
 PAGES = ("/", "/players", "/players/{pid}", "/review", "/review/{hero}", "/hands",
          "/hands/{hand_id}", "/charts", "/strategy", "/strategy/new", "/strategy/{name}",
@@ -43,6 +68,7 @@ def create_app(db_path: str | Path | None = None, solves_dir: str | Path | None 
     app.include_router(ev_router)
     app.include_router(train_router)
     app.include_router(study_preflop_router)
+    app.include_router(study_mtt_router)
 
     def db_call(fn, *args, **kwargs):
         try:
@@ -171,12 +197,16 @@ def create_app(db_path: str | Path | None = None, solves_dir: str | Path | None 
         return raw_json(solve_call(registry.walk, name, tokens))
 
     # ------------------------------------------------------------ pages (SPA shell)
-    index = STATIC / "index.html"
+    version = asset_version()
+    shell = (STATIC / "index.html").read_text().replace('"/static/', f'"/assets/{version}/')
 
-    def page() -> FileResponse:
-        return FileResponse(index, media_type="text/html")
+    def page() -> HTMLResponse:
+        return HTMLResponse(shell, headers={"Cache-Control": "no-cache"})
 
     for route in PAGES:
         app.add_api_route(route, page, methods=["GET"], include_in_schema=False)
-    app.mount("/static", StaticFiles(directory=STATIC), name="static")
+    app.mount(f"/assets/{version}", RevalidatedStatic(directory=STATIC), name="assets")
+    app.mount(
+        "/static", RevalidatedStatic(directory=STATIC), name="static"
+    )  # pages cached before /assets
     return app

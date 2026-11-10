@@ -4,6 +4,14 @@
 
 /* ------------------------------------------------------------ shell: phone nav drawer */
 .topbar { position: sticky; }
+.topbar nav .palette-btn {
+  display: flex; align-items: center; height: 32px; padding: 0 12px; margin-left: var(--s2); border-radius: var(--radius);
+  color: var(--ink-3); font: 500 var(--text-sm) var(--font-body); cursor: pointer; background: none;
+  box-shadow: inset 0 0 0 1px var(--hair); transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.topbar nav .palette-btn:hover { color: var(--ink); background: var(--bg-2); }
+.topbar nav .palette-btn[aria-pressed="true"] { color: var(--ink); background: var(--bg-3); box-shadow: inset 0 0 0 1px var(--accent); }
+.topbar nav .palette-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (max-width: 700px) {
   .topbar .menu-btn { margin-left: auto; cursor: pointer; font-size: 1.25rem; }
   .topbar.nav-open nav {
@@ -12,6 +20,7 @@
   }
   .topbar.nav-open nav a { height: auto; min-height: 44px; padding: 0 var(--s4); font-size: var(--text-base); }
   .topbar.nav-open nav a[aria-current] { box-shadow: inset 3px 0 0 var(--accent); background: var(--bg-3); }
+  .topbar.nav-open nav .palette-btn { min-height: 44px; height: auto; margin: var(--s2) 0 0; padding: 0 var(--s4); font-size: var(--text-base); }
 }
 
 /* ------------------------------------------------------------ page scaffolding */

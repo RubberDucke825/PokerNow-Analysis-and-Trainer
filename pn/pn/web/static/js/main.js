@@ -1,5 +1,5 @@
 // Entry point: registers every page route (pn/web/app.py PAGES) and starts the router.
-import { route, startRouter } from "./core.js";
+import { route, startRouter, dispatch } from "./core.js";
 import { homeView, playersView } from "./views/players.js";
 import { profileView } from "./views/profile.js";
 import { reviewPickView, reviewView } from "./views/review.js";
@@ -35,6 +35,22 @@ menu.addEventListener("click", () => setMenu(!bar.classList.contains("nav-open")
 bar.querySelector("nav").addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && bar.classList.contains("nav-open")) { setMenu(false); menu.focus(); }
+});
+
+// High-contrast action colours (tokens.css [data-palette="contrast"]), remembered on this device.
+const PALETTE_KEY = "pn.palette";
+const paletteBtn = bar.querySelector(".palette-btn");
+const setPalette = (on) => {
+  if (on) document.documentElement.dataset.palette = "contrast";
+  else delete document.documentElement.dataset.palette;
+  paletteBtn.setAttribute("aria-pressed", String(on));
+};
+try { setPalette(localStorage.getItem(PALETTE_KEY) === "contrast"); } catch { /* storage blocked: default colours */ }
+paletteBtn.addEventListener("click", () => {
+  const on = paletteBtn.getAttribute("aria-pressed") !== "true";
+  setPalette(on);
+  try { localStorage.setItem(PALETTE_KEY, on ? "contrast" : "default"); } catch { /* not remembered */ }
+  dispatch();  // grids paint colours inline: redraw the page
 });
 
 startRouter();

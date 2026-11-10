@@ -2,8 +2,16 @@
 import { h, gridClass, RANKS } from "./core.js";
 
 // GTO Wizard conventions: fold blue, check/call green, bets/raises red (bigger = darker), all-in deepest.
+// The live values come from tokens.css (--act-*), so the high-contrast palette applies here too; these
+// are the fallbacks when the stylesheet is not loaded.
 const RAISE_SHADES = ["#e8705f", "#d4483f", "#b3302f", "#922326"];
 export const ACTION_COLORS = { fold: "#4a86d9", check: "#3fa66a", call: "#3fa66a", allin: "#6e1220" };
+const cssVar = (name, fallback) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+/** Current action colours: {fold, check, call, allin, raises: [lightest .. darkest]}. */
+function palette() {
+  return { ...Object.fromEntries(Object.entries(ACTION_COLORS).map(([k, v]) => [k, cssVar(`--act-${k}`, v)])),
+    raises: RAISE_SHADES.map((v, i) => cssVar(`--act-raise-${i + 1}`, v)) };
+}
 
 export function actionKind(token) {
   const t = token.toLowerCase();
@@ -16,15 +24,16 @@ export function actionKind(token) {
 
 /** Colours for an ordered action list; aggressive actions get darker shades as size grows. */
 export function actionColors(tokens) {
+  const pal = palette();
   const aggr = tokens.filter((t) => actionKind(t) === "raise");
   const sizes = aggr.map((t) => parseFloat(t.replace(/[^\d.]/g, "")) || 0);
   const order = [...aggr].sort((a, b) => sizes[aggr.indexOf(a)] - sizes[aggr.indexOf(b)]);
   return tokens.map((t) => {
     const k = actionKind(t);
-    if (k !== "raise") return ACTION_COLORS[k];
+    if (k !== "raise") return pal[k];
     const rank = order.indexOf(t);
-    const step = order.length <= 1 ? 1 : Math.round((rank * (RAISE_SHADES.length - 1)) / (order.length - 1));
-    return RAISE_SHADES[Math.min(step, RAISE_SHADES.length - 1)];
+    const step = order.length <= 1 ? 1 : Math.round((rank * (pal.raises.length - 1)) / (order.length - 1));
+    return pal.raises[Math.min(step, pal.raises.length - 1)];
   });
 }
 
